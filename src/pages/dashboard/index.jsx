@@ -5,5 +5,5 @@ export default function Dashboard() {
     <Layout>
       <h1>Projects Page</h1>
     </Layout>
-  )
+  );
 }

@@ -5,5 +5,5 @@ export default function Tasks() {
     <Layout>
       <h1>Tasks Page</h1>
     </Layout>
-  )
+  );
 }
