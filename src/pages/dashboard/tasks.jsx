@@ -1,9 +1,11 @@
 import Layout from "@/components/dashboard/Layout";
 
 export default function Tasks() {
-  return(
+  return (
     <Layout>
-      <h1>Tasks Page</h1>
+      <main className="flex justify-center items-center h-full">
+        <h1>Tasks Page</h1>
+      </main>
     </Layout>
   );
 }
