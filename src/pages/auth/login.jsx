@@ -6,8 +6,8 @@ import { useRouter } from "next/router";
 export default function Login() {
   const router = useRouter();
   return (
-    <main className="flex flex-col justify-center items-center min-h-screen">
-      <section className="p-10 px-12 bg-yellow rounded-[20px] outline flex flex-col gap-4 justify-center items-center">
+    <main className="flex flex-col justify-center items-center min-h-screen" style = {{ backgroundColor: "#1B2430" }}>
+      <section className="p-10 px-12 bg-yellow rounded-[20px]  w-[350px] h-[490px] flex flex-col gap-4 justify-center items-center">
         <div className="p-2 bg-navy rounded-[10px] grid place-items-center">
           <Image src={InTaskLogo} alt="InTask Logo" className="w-[150px]" />
         </div>
