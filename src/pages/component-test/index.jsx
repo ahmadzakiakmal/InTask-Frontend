@@ -1,4 +1,6 @@
 import MenuComponent from "@/components/Menu";
+import ProjectCardComponent from "@/components/ProjectCard";
+import projectCardComponent from "@/components/ProjectCard";
 
 export default function ComponentTestPage() {
   return(
@@ -8,6 +10,11 @@ export default function ComponentTestPage() {
       <div>
         <h2>Menu Component</h2>
         <MenuComponent />
+      </div>
+
+      <div>
+        <h2> Project Card</h2>
+        <ProjectCardComponent/>
       </div>
     </main>
   );
