@@ -1,7 +1,7 @@
 import AddProjectButton from "@/components/AddProject";
 import MenuComponent from "@/components/Menu";
 import ProjectCardComponent from "@/components/ProjectCard";
-import projectCardComponent from "@/components/ProjectCard";
+import ToDoItem from "@/components/ToDo";
 
 export default function ComponentTestPage() {
   return(
@@ -23,6 +23,11 @@ export default function ComponentTestPage() {
         <AddProjectButton/>
       </div>
       
+      <div>
+        <h2> To Do Item</h2>
+        <ToDoItem/>
+      </div>
+
     </main>
   );
 }
