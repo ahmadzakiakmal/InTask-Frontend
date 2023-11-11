@@ -1,3 +1,4 @@
+import AddProjectButton from "@/components/AddProject";
 import MenuComponent from "@/components/Menu";
 import ProjectCardComponent from "@/components/ProjectCard";
 import projectCardComponent from "@/components/ProjectCard";
@@ -16,6 +17,12 @@ export default function ComponentTestPage() {
         <h2> Project Card</h2>
         <ProjectCardComponent/>
       </div>
+
+      <div>
+        <h2> Add Project Button</h2>
+        <AddProjectButton/>
+      </div>
+      
     </main>
   );
 }
