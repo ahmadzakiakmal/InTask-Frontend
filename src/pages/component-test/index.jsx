@@ -7,7 +7,7 @@ import ToDoItemRow from "@/components/ToDoItemRow";
 
 export default function ComponentTestPage() {
   return(
-    <main className="flex flex-col justify-center items-center h-full gap-10 min-h-screen py-10">
+    <main className="flex flex-col justify-center items-center h-full gap-10 min-h-screen py-10 bg-neutral">
       <h1 className="font-bold">Component Test Page</h1>
 
       <div className="flex flex-col justify-center items-center">
@@ -35,12 +35,19 @@ export default function ComponentTestPage() {
         <Button text="Click Me"/>
       </div>
 
-      <div className="flex flex-col justify-center items-center">
-        <h2 className="text-center">Table & ToDoItemRow</h2>
-        <table>
-          <th>
-            <td></td>
-          </th>
+      <div className="flex flex-col justify-center items-center w-full">
+        <h2 className="text-center">Table & ToDoItemRow & StatusBadge</h2>
+        <table className="w-[90%] bg-navy text-yellow">
+          <tr className="border-b border-yellow">
+            <th className="text-center py-2 border-r border-yellow">No</th>
+            <th className="border-r border-yellow">Title</th>
+            <th className="border-r border-yellow">Assignees</th>
+            <th>Status</th>
+          </tr>
+          <ToDoItemRow />
+          <ToDoItemRow />
+          <ToDoItemRow />
+          <ToDoItemRow />
         </table>
       </div>
 
