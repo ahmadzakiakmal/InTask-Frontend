@@ -4,6 +4,7 @@ import ProjectCardComponent from "@/components/ProjectCard";
 import ToDoItem from "@/components/ToDo";
 import Button from "@/components/Button";
 import ToDoItemRow from "@/components/ToDoItemRow";
+import ProjectNavbar from "@/components/ProjectNavbar";
 
 export default function ComponentTestPage() {
   return(
@@ -49,6 +50,11 @@ export default function ComponentTestPage() {
           <ToDoItemRow status="ongoing"/>
           <ToDoItemRow />
         </table>
+      </div>
+
+      <div className="flex flex-col justify-center items-center w-[70%]">
+        <h2 className="text-center"> Project Navigation Bar</h2>
+       <ProjectNavbar/>
       </div>
 
     </main>

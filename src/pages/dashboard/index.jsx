@@ -5,7 +5,7 @@ export default function Dashboard() {
   return(
     <Layout>
       <main className="flex  flex-col items-center h-full">
-        <ProjectNavbar className/>
+        <ProjectNavbar/>
         <h1>Projects Page</h1>
       </main>
     </Layout>
