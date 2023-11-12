@@ -14,7 +14,8 @@ module.exports = {
           200: "#816797",
         },
         yellow: "#D6D5A8",
-        neutral: "#E3E3ED"
+        neutral: "#E3E3ED",
+        green: "#94F49C"
       },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"]
@@ -22,4 +23,4 @@ module.exports = {
     },
   },
   plugins: [],
-}
+};

@@ -44,9 +44,9 @@ export default function ComponentTestPage() {
             <th className="border-r border-yellow">Assignees</th>
             <th>Status</th>
           </tr>
+          <ToDoItemRow status="done" />
           <ToDoItemRow />
-          <ToDoItemRow />
-          <ToDoItemRow />
+          <ToDoItemRow status="ongoing"/>
           <ToDoItemRow />
         </table>
       </div>
