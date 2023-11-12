@@ -39,22 +39,24 @@ export default function ComponentTestPage() {
       <div className="flex flex-col justify-center items-center w-full">
         <h2 className="text-center">Table & ToDoItemRow & StatusBadge</h2>
         <table className="w-[90%] bg-navy text-yellow">
-          <tr className="border-b border-yellow">
-            <th className="text-center py-2 border-r border-yellow">No</th>
-            <th className="border-r border-yellow">Title</th>
-            <th className="border-r border-yellow">Assignees</th>
-            <th>Status</th>
-          </tr>
-          <ToDoItemRow status="done" />
-          <ToDoItemRow />
-          <ToDoItemRow status="ongoing"/>
-          <ToDoItemRow />
+          <tbody>
+            <tr className="border-b border-yellow">
+              <th className="text-center py-2 border-r border-yellow">No</th>
+              <th className="border-r border-yellow">Title</th>
+              <th className="border-r border-yellow">Assignees</th>
+              <th>Status</th>
+            </tr>
+            <ToDoItemRow status="done" />
+            <ToDoItemRow />
+            <ToDoItemRow status="ongoing"/>
+            <ToDoItemRow />
+          </tbody>
         </table>
       </div>
 
       <div className="flex flex-col justify-center items-center w-[70%]">
         <h2 className="text-center"> Project Navigation Bar</h2>
-       <ProjectNavbar/>
+        <ProjectNavbar/>
       </div>
 
     </main>
