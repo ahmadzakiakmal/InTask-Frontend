@@ -44,9 +44,10 @@ export default function ComponentTestPage() {
               <th className="text-center py-2 border-r border-yellow">No</th>
               <th className="border-r border-yellow">Title</th>
               <th className="border-r border-yellow">Assignees</th>
-              <th>Status</th>
+              <th className="border-r border-yellow">Status</th>
+              <th className="w-24"></th>
             </tr>
-            <ToDoItemRow status="done" />
+            <ToDoItemRow status="done"/>
             <ToDoItemRow />
             <ToDoItemRow status="ongoing"/>
             <ToDoItemRow />
