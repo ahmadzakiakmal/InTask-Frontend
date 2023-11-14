@@ -5,6 +5,7 @@ import ToDoItem from "@/components/ToDo";
 import Button from "@/components/Button";
 import ToDoItemRow from "@/components/ToDoItemRow";
 import ProjectNavbar from "@/components/ProjectNavbar";
+import TextInput from "@/components/TextInput";
 
 export default function ComponentTestPage() {
   return(
@@ -60,6 +61,7 @@ export default function ComponentTestPage() {
         <ProjectNavbar/>
       </div>
 
+      <TextInput label="Nama" />
     </main>
   );
 }
