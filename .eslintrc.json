@@ -17,6 +17,9 @@
     "semi": [
       "warn",
       "always"
+    ],
+    "no-unused-vars": [
+      "error"
     ]
   }
 }
