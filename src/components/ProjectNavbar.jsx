@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserPlus, faUserXmark, faListUl } from "@fortawesome/free-solid-svg-icons";
+import { faUserPlus, faUserXmark, faListUl, faBars } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import AddContributorModal from "./modals/AddContributorModal";
 
@@ -17,27 +17,31 @@ export default function ProjectNavbar() {
 
 
   return (
-    <section className="p-4 font-semibold rounded-[20px] w-full border border-2 border-gray-300 gap-4 flex items-center">
+    <section className="p-4 font-semibold rounded-[20px] w-full border-2 border-gray-300 gap-4 flex items-center">
       <div className="float-left">
         <Link href="/dashboard">
           <span className="text-3xl">Task</span>
         </Link>
       </div>
-      <ul className="font-extralight text-[#a2a9b3] flex ml-auto">
-        <li className="mx-6">
+      <ul className="font-extralight ml-auto flex gap-5 xl:gap-6 text-[#5F5858]">
+        <li className="hidden lg:block cursor-pointer">
           <button type="button" onClick={handleOpenAddFriendModal}>
-            <FontAwesomeIcon icon={faUserPlus} style={{ color: "#a2a9b3" }} />
+            <FontAwesomeIcon icon={faUserPlus} />
             <span className="ml-2">Add Friend</span>
           </button>
           <AddContributorModal isOpen={isAddFriendOpen} onClose={handleCloseAddFriendModal} />
         </li>
-        <li className="mx-6">
-          <FontAwesomeIcon icon={faUserXmark} style={{ color: "#a2a9b3" }} />
+        <li className="hidden lg:block cursor-pointer">
+          <FontAwesomeIcon icon={faUserXmark} />
           <span className="ml-2">Remove Friend</span>
         </li>
-        <li className="mx-6">
-          <FontAwesomeIcon icon={faListUl} style={{ color: "#a2a9b3" }} />
+        <li className="hidden lg:block cursor-pointer">
+          <FontAwesomeIcon icon={faListUl} />
           <span className="ml-2">Add another list</span>
+        </li>
+        <li className="lg:hidden cursor-pointer text-[18px]">
+          <FontAwesomeIcon icon={faBars} />
+          <span className="ml-2">Menu</span>
         </li>
       </ul>
     </section>
