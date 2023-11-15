@@ -1,18 +1,25 @@
-import Link from "next/link";
-import Image from "next/image";
-import { useRouter } from "next/router";
-
-export default function ProjectCardComponent() {
-  const router = useRouter();
-  const { pathname } = router;
+export default function ProjectCardComponent({ title, color }) {
+  const colors = {
+    yellow: "bg-yellow",
+    purple: "bg-[#C9A2EA]",
+    peach: "bg-[#FFC5C5]",
+    blue: "bg-[#A8C5D6]",
+    violet: "bg-[#C9CAF4]",
+    pink: "bg-[#D6A8CC]",
+    green: "bg-[#ACC9A2]",
+    cream: "bg-[#D6A8A8]",
+    orange: "bg-[#FFC5A8]",
+  };
   return (
-    <div className="relative w-[276px] h-[120px]">
-        <button className="w-full h-full bg-navy py-8 px-5 rounded-[15px] ">
-        </button>
-        <button className="w-full h-[54px] bg-yellow absolute top-0 left-0 py-5 px-5 rounded-tl-[15px] rounded-tr-[15px]"
-        style={{top:'0px',left:'0px', alignItems:'center', justifyContent:'flex-start', display:'flex'}}>
-            <span style = {{fontSize:'22px', fontWeight:'bold', color: "#1B2430"}}>Project 1</span>
-        </button>
+    <div className="relative w-full rounded-[15px] bg-navy cursor-pointer transition duration-200 hover:shadow-[0_0_8px_rgb(27,36,48,.9)]">
+      <div
+        className={
+          "w-full py-3 px-8 text-center rounded-t-[15px] " + colors[color]
+        }
+      >
+        <span>{title}</span>
+      </div>
+      <div className="w-full h-full px-3 py-4 text-white">isi ap yh ❓</div>
     </div>
   );
 }
