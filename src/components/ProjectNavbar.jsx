@@ -40,8 +40,8 @@ export default function ProjectNavbar() {
           <span className="ml-2">Add another list</span>
         </li>
         <li className="lg:hidden cursor-pointer text-[18px]">
-          <FontAwesomeIcon icon={faBars} />
-          <span className="ml-2">Menu</span>
+          <FontAwesomeIcon icon={faBars} className="text-[22px] xs:text-[16px]"/>
+          <span className="ml-2 hidden xs:inline">Menu</span>
         </li>
       </ul>
     </section>

@@ -17,9 +17,9 @@ export default function ProjectCardComponent({ title, color }) {
           "w-full py-3 px-8 text-center rounded-t-[15px] mt-[-2px] " + (colors[color]? colors[color] : colors["orange"])
         }
       >
-        <span>{title}</span>
+        <span className="font-semibold">{title}</span>
       </div>
-      <div className="w-full h-full px-3 py-4 text-white">isi ap yh ❓</div>
+      <div className="w-full h-fit px-3 py-4 text-white">isi ap yh ❓</div>
     </div>
   );
 }
