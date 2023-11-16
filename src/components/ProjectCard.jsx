@@ -14,7 +14,7 @@ export default function ProjectCardComponent({ title, color }) {
     <div className="relative w-full rounded-[15px] bg-navy cursor-pointer transition duration-200 hover:shadow-[0_0_8px_rgb(27,36,48,.9)]">
       <div
         className={
-          "w-full py-3 px-8 text-center rounded-t-[15px] " + colors[color]
+          "w-full py-3 px-8 text-center rounded-t-[15px] mt-[-2px] " + (colors[color]? colors[color] : colors["orange"])
         }
       >
         <span>{title}</span>

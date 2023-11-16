@@ -52,7 +52,7 @@ export default function Dashboard() {
   ];
   return(
     <Layout>
-      <main className="flex  flex-col items-center h-full">
+      <main className="flex flex-col items-center h-full">
         <ProjectNavbar/>
         <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 w-full gap-8 mt-8" >
           {
