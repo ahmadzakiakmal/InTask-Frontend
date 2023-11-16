@@ -7,7 +7,7 @@ export default function MenuComponent() {
   const router = useRouter();
   const { pathname } = router;
   return (
-    <div className="w-fit min-h-[75vh] bg-navy sm:py-8 py-4 md:px-5 px-2 rounded-[15px] my-10">
+    <div className="w-fit h-full bg-navy sm:py-8 py-4 md:px-5 px-2 rounded-[15px]">
       <Link href="/">
         <Image
           src={InTaskLogo}
