@@ -31,7 +31,8 @@ export default function Login() {
               toast.success("Logged in successfully!");
               router.replace("/dashboard");
             }).catch((err) => {
-              toast.error(err.response.data.message);
+              if(err.response) return toast.error(err.response.data.message);
+              toast.error("An error occurred while logging in!");
               // router.replace("/dashboard");
             });
           }}
