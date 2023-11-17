@@ -101,7 +101,7 @@ export default function RemoveFriendModal({ isOpen, onClose}) {
         </form>
       </body>
       <div className="mt-6 flex justify-end">
-            <Button onClick={handleRemove} className="text-white mr-2" text="Delete"/>
+            <Button onClick={handleRemove} className="mr-2" text="Delete"/>
         </div>
     </Modal>
   );
