@@ -24,18 +24,18 @@ export default function ProjectNavbar() {
         </Link>
       </div>
       <ul className="font-extralight ml-auto flex gap-5 xl:gap-6 text-[#5F5858]">
-        <li className="hidden lg:block cursor-pointer">
+        <li className="hidden lg:block cursor-pointer hover:text-blue-500">
           <button type="button" onClick={handleOpenAddFriendModal}>
             <FontAwesomeIcon icon={faUserPlus} />
             <span className="ml-2">Add Friend</span>
           </button>
           <AddContributorModal isOpen={isAddFriendOpen} onClose={handleCloseAddFriendModal} />
         </li>
-        <li className="hidden lg:block cursor-pointer">
+        <li className="hidden lg:block cursor-pointer hover:text-blue-500">
           <FontAwesomeIcon icon={faUserXmark} />
           <span className="ml-2">Remove Friend</span>
         </li>
-        <li className="hidden lg:block cursor-pointer">
+        <li className="hidden lg:block cursor-pointer hover:text-blue-500">
           <FontAwesomeIcon icon={faListUl} />
           <span className="ml-2">Add another list</span>
         </li>
