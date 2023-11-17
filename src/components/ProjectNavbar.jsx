@@ -3,9 +3,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserPlus, faUserXmark, faListUl, faBars } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import AddFriendModal from "./modals/AddFriendModal";
+import RemoveFriendModal from "./modals/RemoveFriendModal";
 
 export default function ProjectNavbar() {
   const [isAddFriendOpen, setIsAddFriendOpen] = useState(false);
+  const [isRemoveFriendOpen, setIsRemoveFriendOpen] = useState(false);
 
   const handleOpenAddFriendModal = () => {
     setIsAddFriendOpen(true);
@@ -14,6 +16,15 @@ export default function ProjectNavbar() {
   const handleCloseAddFriendModal = () => {
     setIsAddFriendOpen(false);
   };
+
+  const handleOpenRemoveFriendModal = () => {
+    setIsRemoveFriendOpen(true);
+  };
+
+  const handleCloseRemoveFriendModal = () => {
+    setIsRemoveFriendOpen(false);
+  };
+
 
 
   return (
@@ -32,8 +43,11 @@ export default function ProjectNavbar() {
           <AddFriendModal isOpen={isAddFriendOpen} onClose={handleCloseAddFriendModal} />
         </li>
         <li className="hidden lg:block cursor-pointer hover:text-blue-500">
-          <FontAwesomeIcon icon={faUserXmark} />
-          <span className="ml-2">Remove Friend</span>
+          <button type="button" onClick={handleOpenRemoveFriendModal}>
+            <FontAwesomeIcon icon={faUserXmark} />
+            <span className="ml-2">Remove Friend</span>
+          </button>
+          <RemoveFriendModal isOpen={isRemoveFriendOpen} onClose={handleCloseRemoveFriendModal} />
         </li>
         <li className="hidden lg:block cursor-pointer hover:text-blue-500">
           <FontAwesomeIcon icon={faListUl} />
