@@ -2,8 +2,8 @@ import MenuComponent from "../Menu";
 
 export default function Layout({ children }) {
   return (
-    <main className="flex flex-row-reverse sm:flex-row bg-neutral gap-5 sm:gap-8 lg:gap-10 px-[5%] xs:px-5 sm:px-8 lg:px-10">
-      <aside className="flex-shrink-0 min-h-screen bg-transparent py-10">
+    <main className="flex flex-col-reverse xs:flex-row bg-neutral gap-5 sm:gap-8 lg:gap-10 px-[5%] xs:px-5 sm:px-8 lg:px-10">
+      <aside className="absolute sm:relative flex-shrink-0 h-fit sm:h-screen bg-transparent py-10">
         <MenuComponent />
       </aside>
 

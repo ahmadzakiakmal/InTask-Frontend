@@ -7,16 +7,16 @@ export default function MenuComponent() {
   const router = useRouter();
   const { pathname } = router;
   return (
-    <div className="w-fit h-full bg-navy sm:py-8 py-4 md:px-5 px-2 rounded-[15px]">
+    <div className="w-full sm:w-fit h-fit sm:min-h-full shadow-[0_-1px_5px_#D6D5A8] sm:shadow-none bg-navy py-1 sm:py-8 md:py-4 md:px-5 px-2 rounded-t-[15px] sm:rounded-[15px] fixed flex items-center justify-center sm:block bottom-0 left-0 z-[10] sm:relative">
       <Link href="/">
         <Image
           src={InTaskLogo}
           alt="InTask Logo"
-          className="w-[60px] md:w-[216px] p-2 md:p-5 mb-4"
+          className="w-[60px] md:w-[170px] lg:w-[216px] p-2 md:p-5 sm:mb-4"
         />
       </Link>
 
-      <ul className="text-yellow text-[18px] flex flex-col gap-1 px-1 md:px-0">
+      <ul className="text-yellow text-[18px] flex flex-row sm:flex-col gap-1 px-1 md:px-0">
         <li>
           <Link
             href="/dashboard"
