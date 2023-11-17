@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 import Button from "../Button";
 
-export default function AddContributorModal ({ isOpen, onClose }) {
+export default function AddFriendModal ({ isOpen, onClose }) {
   const [email, setEmail] = useState("");
 
   return (

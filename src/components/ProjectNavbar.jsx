@@ -2,7 +2,7 @@ import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserPlus, faUserXmark, faListUl, faBars } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
-import AddContributorModal from "./modals/AddContributorModal";
+import AddFriendModal from "./modals/AddFriendModal";
 
 export default function ProjectNavbar() {
   const [isAddFriendOpen, setIsAddFriendOpen] = useState(false);
@@ -29,7 +29,7 @@ export default function ProjectNavbar() {
             <FontAwesomeIcon icon={faUserPlus} />
             <span className="ml-2">Add Friend</span>
           </button>
-          <AddContributorModal isOpen={isAddFriendOpen} onClose={handleCloseAddFriendModal} />
+          <AddFriendModal isOpen={isAddFriendOpen} onClose={handleCloseAddFriendModal} />
         </li>
         <li className="hidden lg:block cursor-pointer hover:text-blue-500">
           <FontAwesomeIcon icon={faUserXmark} />
