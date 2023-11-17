@@ -36,17 +36,17 @@ export default function Dashboard() {
     },
     {
       title: "Project 6",
-      id: 6,
+      id: 7,
       color: "violet"
     },
     {
       title: "Project 6",
-      id: 6,
+      id: 8,
       color: "pink"
     },
     {
       title: "Project 6",
-      id: 6,
+      id: 9,
       color: "cream"
     },
   ];
@@ -54,7 +54,7 @@ export default function Dashboard() {
     <Layout>
       <main className="flex flex-col items-center h-full">
         <ProjectNavbar/>
-        <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 w-full gap-6 lg:gap-8 mt-8" >
+        <section className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 w-full gap-6 lg:gap-8 mt-8" >
           {
             projects.map((project) => {
               return(
