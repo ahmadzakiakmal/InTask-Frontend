@@ -6,6 +6,7 @@ import Button from "@/components/Button";
 import ToDoItemRow from "@/components/ToDoItemRow";
 import ProjectNavbar from "@/components/ProjectNavbar";
 import TextInput from "@/components/TextInput";
+import CreateNewProject from "@/components/CreateProject";
 
 export default function ComponentTestPage() {
   return(
@@ -61,7 +62,13 @@ export default function ComponentTestPage() {
         <ProjectNavbar/>
       </div>
 
+      <div className="flex flex-col justify-center items-center">
+        <h2 className="text-center"> Project Card</h2>
+        <CreateNewProject/>
+      </div>
+
       <TextInput label="Nama" />
     </main>
+
   );
 }
