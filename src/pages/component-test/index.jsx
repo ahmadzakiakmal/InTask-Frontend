@@ -6,7 +6,7 @@ import Button from "@/components/Button";
 import ToDoItemRow from "@/components/ToDoItemRow";
 import ProjectNavbar from "@/components/ProjectNavbar";
 import TextInput from "@/components/TextInput";
-import CreateNewProject from "@/components/CreateProject";
+import CreateNewProject from "@/components/modals/CreateProject";
 
 export default function ComponentTestPage() {
   return(

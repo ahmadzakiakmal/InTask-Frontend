@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Modal from "react-modal";
 import { useRouter } from "next/router";
-import Button from "./Button";
+import Button from "../Button";
 
 export default function CreateNewProject() {
   const router = useRouter();
