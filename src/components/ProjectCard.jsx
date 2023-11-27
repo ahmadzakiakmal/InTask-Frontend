@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function ProjectCardComponent({ title, color }) {
   const colors = {
     yellow: "bg-yellow",
@@ -11,6 +13,7 @@ export default function ProjectCardComponent({ title, color }) {
     orange: "bg-[#FFC5A8]",
   };
   return (
+    <Link href={`/dashboard/project/${title}`}>
     <div className="relative w-full rounded-[15px] bg-navy cursor-pointer transition duration-200 hover:shadow-[0_0_8px_rgb(27,36,48,.9)]">
       <div
         className={
@@ -21,5 +24,6 @@ export default function ProjectCardComponent({ title, color }) {
       </div>
       <div className="w-full h-fit px-3 py-4 text-white">isi ap yh ❓</div>
     </div>
+    </Link>
   );
 }
