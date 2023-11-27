@@ -17,7 +17,7 @@ export default function Dashboard() {
     .catch(e=>{toast.info('err ' + e.message)})
   }, [])
 
-  const colors = ['yellow', 'purple', 'orange']
+  const colors = ['yellow', 'purple', 'orange', 'peach', 'blue', 'green', 'violet', 'pink', 'cream']
   const getColor = (id) => {
     const idx = id % (colors.length)
     return colors[idx];
