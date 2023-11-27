@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Modal from "react-modal";
 import { useRouter } from "next/router";
-import Button from "./Button";
+import Button from "../Button";
 
 export default function NewTask() {
   const router = useRouter();
@@ -11,7 +11,7 @@ export default function NewTask() {
     fontWeight=500
   }
   return (
-    <form className="p-10 px-12 bg-navy  w-[350px] h-[460px] flex flex-col gap-4 justify-center items-center my-10">
+    <Modal className="p-10 px-12 bg-navy  w-[350px] h-[460px] flex flex-col gap-4 justify-center items-center my-10">
         <p className="text-[20px] font-semibold mt-0 text-center" 
             style={{ color: "#D6D5A8", marginTop : '-1rem'}}>Add Task</p>
 
@@ -41,6 +41,6 @@ export default function NewTask() {
                 </div>
             </section>
         </div>
-    </form>
+    </Modal>
   );
 }

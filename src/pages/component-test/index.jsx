@@ -7,7 +7,8 @@ import ToDoItemRow from "@/components/ToDoItemRow";
 import ProjectNavbar from "@/components/ProjectNavbar";
 import TextInput from "@/components/TextInput";
 import CreateNewProject from "@/components/modals/CreateProject";
-import NewTask from "@/components/AddNewTask";
+import NewTask from "@/components/modals/AddNewTask";
+import NewTable from "@/components/modals/CreateTable";
 
 export default function ComponentTestPage() {
   return(
@@ -71,6 +72,11 @@ export default function ComponentTestPage() {
       <div className="flex flex-col justify-center items-center">
         <h2 className="text-center"> Form New Task</h2>
         <NewTask/>
+      </div>
+
+      <div className="flex flex-col justify-center items-center">
+        <h2 className="text-center"> Form New Table</h2>
+        <NewTable/>
       </div>
 
       <TextInput label="Nama" />
