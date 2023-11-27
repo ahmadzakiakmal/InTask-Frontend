@@ -53,8 +53,11 @@ export default function RemoveFriendModal({ isOpen, onClose}) {
         top: "50%",
         left: "50%",
         transform: "translate(-50%, -50%)",
-        width: 600,
-        height: 275,
+        width: "85%", 
+        maxWidth: 600, 
+        height:"36%",
+        maxHeight: 265,
+        overflowY: "auto",
         backgroundColor:"#1B2430",
         borderRadius: 10,
         color: "#B6C2CF",
@@ -63,11 +66,11 @@ export default function RemoveFriendModal({ isOpen, onClose}) {
     }}
     >
     <header className="flex items-center m-0 mb-4">
-        <h2 className="float-left text-xl">Remove Friend from Project</h2>
+        <h2 className="float-left text-xl xs:text-lg">Remove Friend from Project</h2>
         <button className="ml-auto font-bold text-base hover:text-red-500" type="button" onClick={onClose}>╳</button>
     </header>
     <body className="border border-white focus:border-sky-300 px-4 py-2 outline-none w-full mb-2 mt-7 text-base rounded-[10px]">
-        <div className="flex justify-end mb-2">
+        <div className="flex justify-end">
           <input
             className="opacity-0 focus:outline-none"
             type="checkbox"
@@ -100,7 +103,7 @@ export default function RemoveFriendModal({ isOpen, onClose}) {
           )}
         </form>
       </body>
-      <div className="mt-6 flex justify-end">
+      <div className="mt-3 flex justify-end">
             <Button onClick={handleRemove} className="mr-2" text="Delete"/>
         </div>
     </Modal>
