@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default function ProjectCardComponent({ title, color }) {
+export default function ProjectCardComponent({ title, color, description }) {
   const colors = {
     yellow: "bg-yellow",
     purple: "bg-[#C9A2EA]",
@@ -22,7 +22,7 @@ export default function ProjectCardComponent({ title, color }) {
       >
         <span className="font-semibold">{title}</span>
       </div>
-      <div className="w-full h-fit px-3 py-4 text-white">isi ap yh ❓</div>
+      <div className="w-full h-fit px-3 py-4 text-white">{description}</div>
     </div>
     </Link>
   );

@@ -30,7 +30,11 @@ export default function Dashboard() {
         <section className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 w-full gap-6 lg:gap-8 mt-8" >
           {project.map((project, id) => {
             return(
-              <ProjectCardComponent key={project._id} title={project.title} color={getColor(id)}/>
+              <ProjectCardComponent 
+                key={project._id} 
+                title={project.title} 
+                description={project.description} 
+                color={getColor(id)}/>
             )
           })}
         </section>
