@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 
 export default function Dashboard() {
   const [project, setProject] = useState([])
-  const username = 'ncgalih'
+  const username = 'dutaramadhan2711'
 
   useEffect(()=>{
     axios.get(process.env.NEXT_PUBLIC_API_URL + '/project/' + username)
@@ -34,7 +34,8 @@ export default function Dashboard() {
                 key={project._id} 
                 title={project.title} 
                 description={project.description} 
-                color={getColor(id)}/>
+                color={getColor(id)}
+                projectId={project._id}/>
             )
           })}
         </section>
