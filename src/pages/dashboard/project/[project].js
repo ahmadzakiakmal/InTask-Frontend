@@ -33,6 +33,7 @@ export default function Project(){
             <NewTask 
                 isOpen={addTaskOpen}
                 projectId={projectId}
+                contributors={projectContributor}
                 onClose={()=>setTaskOpen(false)}
                 onSuccess={()=>loadTaskData()} />
             <div className="fixed right-10 bottom-10">

@@ -7,7 +7,7 @@ export default function ToDoItemRow({ task }) {
     <tr className="mb-2">
       <td className="text-center w-[60px] py-2 border-r border-yellow">1</td>
       <td className="px-2 border-r border-yellow">{task?.name ?? 'Discussion'}</td>
-      <td className="text-center border-r border-yellow">🤡 Zaki</td>
+      <td className="text-center border-r border-yellow">{task?.assignees?.map(as =>('🤡 ' + as + ' '))}</td>
       <td className="px-2 flex items-center justify-center">
         <StatusBadge status={task?.status} />
       </td>

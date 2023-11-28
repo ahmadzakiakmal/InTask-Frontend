@@ -7,7 +7,7 @@ import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-export default function NewTask({isOpen, onClose, projectId, onSuccess}) {
+export default function NewTask({isOpen, onClose, projectId, onSuccess, contributors}) {
   const router = useRouter();
   const { pathname } = router;
   const [newTask, setTask] = useState({name: "", description: "", assignees: "", status: "todo"})
@@ -52,7 +52,12 @@ export default function NewTask({isOpen, onClose, projectId, onSuccess}) {
 
                 <label className="flex flex-col gap-2.5 color" style={{color: '#1B2430', fontSize:'14px', marginTop:'8px'}}>
                     Assignees
-                    <input className="outline" style={{width:'225px', height:'25px', borderRadius:'4px'}}onChange={(e) => setTask({...newTask, assignees: e.target.value})}/>
+                    <select className="outline" style={{width:'225px', height:'25px', borderRadius:'4px'}}onChange={(e) => setTask({...newTask, assignees: e.target.value})}>
+                        <option value="">not set</option>
+                        {contributors?.map(cont => (
+                            <option value={cont}>{cont}</option>
+                        ))}
+                    </select>
                 </label>
 
                 <label className="flex flex-col gap-2.5 color" style={{color: '#1B2430', fontSize:'14px', marginTop:'8px'}}>
