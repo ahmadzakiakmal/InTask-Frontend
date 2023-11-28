@@ -15,7 +15,7 @@ export default function Project(){
     const [tasks, setTasks] = useState([])
     const [addTaskOpen, setTaskOpen] = useState(false)
 
-    useEffect(()=>{
+    const loadTaskData = () => {
         axios.get(process.env.NEXT_PUBLIC_API_URL + '/project/' + projectId + '/tasks', {
             
         })
@@ -23,7 +23,8 @@ export default function Project(){
             setTasks(res.data.tasks)
         })
         .catch(e=>{toast.info('error : ' + e.message)})  
-    }, [])
+    }
+    useEffect(loadTaskData, [])
 
     return (
         <Layout>
@@ -31,7 +32,9 @@ export default function Project(){
             <TaskTable tasks={tasks} />
             <NewTask 
                 isOpen={addTaskOpen}
-                onClose={()=>setTaskOpen(false)} />
+                projectId={projectId}
+                onClose={()=>setTaskOpen(false)}
+                onSuccess={()=>loadTaskData()} />
             <div className="fixed right-10 bottom-10">
                 <AddProjectButton onClick={()=>setTaskOpen(true)} />    
             </div>   

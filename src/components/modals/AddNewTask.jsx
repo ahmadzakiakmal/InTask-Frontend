@@ -3,12 +3,24 @@ import Image from "next/image";
 import Modal from "react-modal";
 import { useRouter } from "next/router";
 import Button from "../Button";
+import { useState } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
 
-export default function NewTask({isOpen, onClose}) {
+export default function NewTask({isOpen, onClose, projectId, onSuccess}) {
   const router = useRouter();
   const { pathname } = router;
-  function buatButton(){
-    fontWeight=500
+  const [newTask, setTask] = useState({name: "", description: "", assignees: "", status: "todo"})
+  function add(){
+    axios.post(process.env.NEXT_PUBLIC_API_URL + '/project/' + projectId + '/tasks', newTask)
+    .then(()=>{
+        toast.success("added new task")
+        onClose()
+        onSuccess()
+    })
+    .catch(e => {
+        toast.error('error '+ e.message)
+    })
   }
   return (
     <Modal 
@@ -30,25 +42,32 @@ export default function NewTask({isOpen, onClose}) {
             <section style={{marginLeft:'18px', marginTop:'20px', marginRight:'10px', marginBottom:'10px'}}>
                 <label className="flex flex-col gap-2.5 color" style={{color: '#1B2430', fontSize:'14px'}}>
                     Task's Name
-                    <input className="outline" style={{width:'225px', height:'25px', borderRadius:'4px'}}onChange={(e) => setProjectName(e.target.value)}/>
+                    <input className="outline" style={{width:'225px', height:'25px', borderRadius:'4px'}}onChange={(e) => setTask({...newTask, name: e.target.value})}/>
                 </label>
 
                 <label className="flex flex-col gap-2.5 color" style={{color: '#1B2430', fontSize:'14px', marginTop:'8px'}}>
                     Deadline Task
-                    <input className="outline" style={{width:'225px', height:'25px', borderRadius:'4px'}}onChange={(e) => setName(e.target.value)}/>
+                    <input className="outline" style={{width:'225px', height:'25px', borderRadius:'4px'}}onChange={(e) => setTask({...newTask, description: e.target.value})}/>
                 </label>
 
                 <label className="flex flex-col gap-2.5 color" style={{color: '#1B2430', fontSize:'14px', marginTop:'8px'}}>
                     Assignees
-                    <input className="outline" style={{width:'225px', height:'25px', borderRadius:'4px'}}onChange={(e) => setName(e.target.value)}/>
+                    <input className="outline" style={{width:'225px', height:'25px', borderRadius:'4px'}}onChange={(e) => setTask({...newTask, assignees: e.target.value})}/>
                 </label>
 
                 <label className="flex flex-col gap-2.5 color" style={{color: '#1B2430', fontSize:'14px', marginTop:'8px'}}>
                     Status
-                    <input className="outline" style={{width:'225px', height:'25px', borderRadius:'4px'}}onChange={(e) => setName(e.target.value)}/>
+                    <select className="outline" style={{width:'225px', height:'25px', borderRadius:'4px'}}onChange={(e) => setTask({...newTask, status: e.target.value})}>
+                        <option value="todo">todo</option>
+                        <option value="ongoing">ongoing</option>
+                        <option value="done">done</option>
+                    </select>
                 </label>
                 <div className="flex justify-end w-[95%]" style={{marginTop:'20px'}}>
-                    <Button className="mr-2" text="Add"/>
+                    <Button 
+                        className="mr-2" 
+                        text="Add"
+                        onClick={()=>add()}/>
                 </div>
             </section>
         </div>
