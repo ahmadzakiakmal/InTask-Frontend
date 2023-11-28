@@ -5,11 +5,13 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { useAuth } from "@/components/AuthProvider";
 
 export default function Login() {
   const router = useRouter();
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
+  const { login } = useAuth()
 
   return (
     <main className="flex flex-col justify-center items-center min-h-screen" style = {{ backgroundColor: "#1B2430" }}>
@@ -27,8 +29,9 @@ export default function Login() {
             axios.post(process.env.NEXT_PUBLIC_API_URL + "/user/login", {
               identifier,
               password,
-            }).then(() => {
+            }).then((res) => {
               toast.success("Logged in successfully!");
+              login(res.data.data);
               router.replace("/dashboard");
             }).catch((err) => {
               if(err.response) return toast.error(err.response.data.message);
