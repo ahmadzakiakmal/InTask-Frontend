@@ -1,6 +1,6 @@
 import ToDoItemRow from "./ToDoItemRow";
 
-export default function TaskTable({tasks}){
+export default function TaskTable({tasks, projectId, onEdit}){
     return (
         <div className="flex flex-col justify-center items-center w-full">
             <h2 className="text-center">Table & ToDoItemRow & StatusBadge</h2>
@@ -13,8 +13,7 @@ export default function TaskTable({tasks}){
                 <th className="border-r border-yellow">Status</th>
                 <th className="w-24"></th>
                 </tr>
-                <ToDoItemRow task={{status: 'done', name: 'Task 1'}}/>
-                {tasks?.map(task => (<ToDoItemRow task={task} />))}
+                {tasks?.map(task => (<ToDoItemRow task={task} projectId={projectId} onSuccess={onEdit} />))}
             </tbody>
             </table>
         </div>

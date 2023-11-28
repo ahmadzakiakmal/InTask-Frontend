@@ -29,7 +29,10 @@ export default function Project(){
     return (
         <Layout>
             <ProjectNavbar project={{ title: project, projectId, projectContributor}} />
-            <TaskTable tasks={tasks} />
+            <TaskTable 
+                tasks={tasks}
+                onEdit={()=>loadTaskData()}
+                projectId={projectId} />
             <NewTask 
                 isOpen={addTaskOpen}
                 projectId={projectId}
