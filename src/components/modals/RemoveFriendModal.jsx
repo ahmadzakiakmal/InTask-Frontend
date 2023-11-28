@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import Button from "../Button";
+import axios from "axios";
 
-export default function RemoveFriendModal({ isOpen, onClose}) {
+export default function RemoveFriendModal({ isOpen, onClose, projectContributor}) {
   const [selectedFriends, setSelectedFriends] = useState([]);
-  const [friends, setFriends] = useState([
-    { id: 1, name: "Duta" },
-    { id: 2, name: "Ramadhan" },
-  ]);
+  const [friends, setFriends] = useState([]);
+
+  useEffect(() => {
+    setFriends(projectContributor);
+  }, [projectContributor]);
 
   useEffect(() => {
     setSelectedFriends([]);
@@ -18,23 +20,23 @@ export default function RemoveFriendModal({ isOpen, onClose}) {
       if (selectedFriends.length === friends.length) {
         setSelectedFriends([]);
       } else {
-        setSelectedFriends(friends.map((friend) => friend.id));
+        setSelectedFriends([...friends]);
       }
     }
   };
-
-  const handleToggleFriend = (friendId) => {
+  
+  const handleToggleFriend = (friend) => {
     if (friends && friends.length > 0) {
-      if (selectedFriends.includes(friendId)) {
+      if (selectedFriends.includes(friend)) {
         setSelectedFriends((prevSelected) =>
-          prevSelected.filter((id) => id !== friendId)
+          prevSelected.filter((selectedFriend) => selectedFriend !== friend)
         );
       } else {
-        setSelectedFriends((prevSelected) => [...prevSelected, friendId]);
+        setSelectedFriends((prevSelected) => [...prevSelected, friend]);
       }
     }
   };
-
+  
   const handleRemove = () => {
 
   };
@@ -86,15 +88,15 @@ export default function RemoveFriendModal({ isOpen, onClose}) {
         <form>
           {friends && friends.length > 0 ? (
             friends.map((friend) => (
-              <div key={friend.id} className="mb-2">
+              <div key={friend} className="mb-2">
                 <input
                   type="checkbox"
-                  id={friend.id}
-                  checked={selectedFriends.includes(friend.id)}
-                  onChange={() => handleToggleFriend(friend.id)}
+                  id={friend}
+                  checked={selectedFriends.includes(friend)}
+                  onChange={() => handleToggleFriend(friend)}
                 />
-                <label htmlFor={friend.id} className="ml-2">
-                  {friend.name}
+                <label htmlFor={friend} className="ml-2">
+                  {friend}
                 </label>
               </div>
             ))

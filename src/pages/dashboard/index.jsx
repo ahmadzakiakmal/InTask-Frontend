@@ -41,7 +41,8 @@ export default function Dashboard() {
                 title={project.title} 
                 description={project.description} 
                 color={getColor(id)}
-                projectId={project._id}/>
+                projectId={project._id}
+                projectContributor = {project.contributors}/>
             )
           })}
         </section>

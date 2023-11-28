@@ -66,7 +66,7 @@ export default function ProjectNavbar({project}) {
             <FontAwesomeIcon icon={faUserXmark} />
             <span className="ml-2">Remove Friend</span>
           </button>
-          <RemoveFriendModal isOpen={isRemoveFriendOpen} onClose={handleCloseRemoveFriendModal} />
+          <RemoveFriendModal isOpen={isRemoveFriendOpen} onClose={handleCloseRemoveFriendModal} projectContributor={project?.projectContributor}/>
         </li>
         <li className="hidden lg:block cursor-pointer hover:text-blue-500">
           <FontAwesomeIcon icon={faListUl} />
