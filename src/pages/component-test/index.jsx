@@ -9,6 +9,7 @@ import TextInput from "@/components/TextInput";
 import CreateNewProject from "@/components/modals/CreateProject";
 import NewTask from "@/components/modals/AddNewTask";
 import NewTable from "@/components/modals/CreateTable";
+import TaskTable from "@/components/TaskTable";
 
 export default function ComponentTestPage() {
   return(
@@ -58,6 +59,8 @@ export default function ComponentTestPage() {
           </tbody>
         </table>
       </div>
+
+      <TaskTable />
 
       <div className="flex flex-col justify-center items-center w-[70%]">
         <h2 className="text-center"> Project Navigation Bar</h2>
