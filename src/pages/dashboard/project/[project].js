@@ -5,10 +5,11 @@ import { useRouter } from "next/router";
 
 export default function Project(){
     const router = useRouter()
-    const {project} = router.query
+    const {project, projectId} = router.query
+
     return (
         <Layout>
-            <ProjectNavbar project={{title: project}} />
+            <ProjectNavbar project={{ title: project, projectId}} />
         </Layout>
     )
 }

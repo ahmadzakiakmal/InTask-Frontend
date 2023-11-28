@@ -1,6 +1,13 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 
-export default function ProjectCardComponent({ title, color, description }) {
+export default function ProjectCardComponent({ title, color, description, projectId }) {
+  const router = useRouter();
+
+  const handleProjectClick = () => {
+    router.push(`/dashboard/project/${title}?projectId=${projectId}`);
+  };
+
   const colors = {
     yellow: "bg-yellow",
     purple: "bg-[#C9A2EA]",
@@ -13,8 +20,7 @@ export default function ProjectCardComponent({ title, color, description }) {
     orange: "bg-[#FFC5A8]",
   };
   return (
-    <Link href={`/dashboard/project/${title}`}>
-    <div className="relative w-full rounded-[15px] bg-navy cursor-pointer transition duration-200 hover:shadow-[0_0_8px_rgb(27,36,48,.9)]">
+    <div className="relative w-full rounded-[15px] bg-navy cursor-pointer transition duration-200 hover:shadow-[0_0_8px_rgb(27,36,48,.9)]" onClick={handleProjectClick}>
       <div
         className={
           "w-full py-3 px-8 text-center rounded-t-[15px] mt-[-2px] " + (colors[color]? colors[color] : colors["orange"])
@@ -24,6 +30,5 @@ export default function ProjectCardComponent({ title, color, description }) {
       </div>
       <div className="w-full h-fit px-3 py-4 text-white">{description}</div>
     </div>
-    </Link>
   );
 }
