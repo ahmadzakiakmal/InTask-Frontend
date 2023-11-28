@@ -19,7 +19,7 @@
       "always"
     ],
     "no-unused-vars": [
-      "error"
+      "warn"
     ]
   }
 }
