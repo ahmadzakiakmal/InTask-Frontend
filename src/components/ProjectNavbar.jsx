@@ -6,7 +6,7 @@ import AddFriendModal from "./modals/AddFriendModal";
 import RemoveFriendModal from "./modals/RemoveFriendModal";
 import { useEffect, useRef } from "react";
 
-export default function ProjectNavbar({project}) {
+export default function ProjectNavbar({ project }) {
   const [isAddFriendOpen, setIsAddFriendOpen] = useState(false);
   const [isRemoveFriendOpen, setIsRemoveFriendOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -50,7 +50,7 @@ export default function ProjectNavbar({project}) {
     <section className="shadow-md p-4 font-semibold rounded-[20px] w-full border-2 border-gray-300 gap-4 flex items-center">
       <div className="float-left">
         <Link href="/dashboard">
-          <span className="text-3xl">{project?.title ?? 'Task'}</span>
+          <span className="text-3xl">{project?.title ?? "Task"}</span>
         </Link>
       </div>
       <ul className="font-extralight ml-auto flex gap-5 xl:gap-6 text-[#5F5858]">

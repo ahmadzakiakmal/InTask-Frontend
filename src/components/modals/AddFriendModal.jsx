@@ -17,7 +17,7 @@ export default function AddFriendModal ({ isOpen, onClose, projectId }) {
       toast.success(response.data.message);
       onClose();
     } catch (error) {
-      console.error(error);
+      // console.error(error);
       if (error.response && error.response.data && error.response.data.message) {
         toast.error(error.response.data.message);
       } else {

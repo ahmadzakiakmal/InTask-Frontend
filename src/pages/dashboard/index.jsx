@@ -7,26 +7,26 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 export default function Dashboard() {
-  const [project, setProject] = useState([])
-  const { user } = useAuth()
+  const [project, setProject] = useState([]);
+  const { user } = useAuth();
 
   useEffect(()=>{
     if(user){
-      axios.get(process.env.NEXT_PUBLIC_API_URL + '/project/' + user.username)
-      .then(res=> {
-        setProject(res.data.projects)
-      })
-      .catch(e=>{toast.info('error : ' + e.message)})  
+      axios.get(process.env.NEXT_PUBLIC_API_URL + "/project/" + user.username)
+        .then(res=> {
+          setProject(res.data.projects);
+        })
+        .catch(e=>{toast.info("error : " + e.message);});  
     }
     else
-      toast.info("Please login")
-  }, [user])
+      toast.info("Please login");
+  }, [user]);
 
-  const colors = ['yellow', 'purple', 'orange', 'peach', 'blue', 'green', 'violet', 'pink', 'cream']
+  const colors = ["yellow", "purple", "orange", "peach", "blue", "green", "violet", "pink", "cream"];
   const getColor = (id) => {
-    const idx = id % (colors.length)
+    const idx = id % (colors.length);
     return colors[idx];
-  }
+  };
 
   return(
     <Layout>
@@ -43,7 +43,7 @@ export default function Dashboard() {
                 color={getColor(id)}
                 projectId={project._id}
                 projectContributor = {project.contributors}/>
-            )
+            );
           })}
         </section>
       </main>

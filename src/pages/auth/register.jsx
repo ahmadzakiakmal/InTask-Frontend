@@ -49,7 +49,7 @@ export default function Register() {
                 username,
                 password,
               })
-              .then((res) => {
+              .then(() => {
                 toast.success(
                   "Account created successfully! Verify your email to login."
                 );

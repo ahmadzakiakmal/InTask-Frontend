@@ -11,7 +11,7 @@ export default function Login() {
   const router = useRouter();
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
-  const { login } = useAuth()
+  const { login } = useAuth();
 
   return (
     <main className="flex flex-col justify-center items-center min-h-screen" style = {{ backgroundColor: "#1B2430" }}>

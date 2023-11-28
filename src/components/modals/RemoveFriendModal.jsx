@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import Button from "../Button";
-import axios from "axios";
 
-export default function RemoveFriendModal({ isOpen, onClose, projectContributor}) {
+export default function RemoveFriendModal({ isOpen, onClose, projectContributor }) {
   const [selectedFriends, setSelectedFriends] = useState([]);
   const [friends, setFriends] = useState([]);
 
@@ -43,35 +42,35 @@ export default function RemoveFriendModal({ isOpen, onClose, projectContributor}
 
   return (
     <Modal
-    isOpen={isOpen}
-    onRequestClose={onClose}
-    style={{
-      overlay: {
-        zIndex: 1000,
-        backgroundColor: "rgba(255, 255, 255, 0.4)",
-      },
-      content: {
-        position: "fixed",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-        width: "85%", 
-        maxWidth: 600, 
-        height:"36%",
-        maxHeight: 265,
-        overflowY: "auto",
-        backgroundColor:"#1B2430",
-        borderRadius: 10,
-        color: "#B6C2CF",
-        padding: "20px 40px",
-      },
-    }}
+      isOpen={isOpen}
+      onRequestClose={onClose}
+      style={{
+        overlay: {
+          zIndex: 1000,
+          backgroundColor: "rgba(255, 255, 255, 0.4)",
+        },
+        content: {
+          position: "fixed",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: "85%", 
+          maxWidth: 600, 
+          height:"36%",
+          maxHeight: 265,
+          overflowY: "auto",
+          backgroundColor:"#1B2430",
+          borderRadius: 10,
+          color: "#B6C2CF",
+          padding: "20px 40px",
+        },
+      }}
     >
-    <header className="flex items-center m-0 mb-4">
+      <header className="flex items-center m-0 mb-4">
         <h2 className="float-left text-xl xs:text-lg">Remove Friend from Project</h2>
         <button className="ml-auto font-bold text-base hover:text-red-500" type="button" onClick={onClose}>╳</button>
-    </header>
-    <body className="border border-white focus:border-sky-300 px-4 py-2 outline-none w-full mb-2 mt-7 text-base rounded-[10px]">
+      </header>
+      <body className="border border-white focus:border-sky-300 px-4 py-2 outline-none w-full mb-2 mt-7 text-base rounded-[10px]">
         <div className="flex justify-end">
           <input
             className="opacity-0 focus:outline-none"
@@ -106,8 +105,8 @@ export default function RemoveFriendModal({ isOpen, onClose, projectContributor}
         </form>
       </body>
       <div className="mt-3 flex justify-end">
-            <Button onClick={handleRemove} className="mr-2" text="Delete"/>
-        </div>
+        <Button onClick={handleRemove} className="mr-2" text="Delete"/>
+      </div>
     </Modal>
   );
 }

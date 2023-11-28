@@ -1,10 +1,8 @@
 import Image from "next/image";
 import InTaskLogo from "@/../public/InTaskLogo.png";
 import Link from "next/link";
-import { useRouter } from "next/router";
 
 export default function Home() {
-  const router = useRouter();
   return (
     <main className="flex flex-col justify-center items-center min-h-screen">
       <section className="p-10 px-12 bg-yellow rounded-[20px] outline flex flex-col gap-4 justify-center items-center">

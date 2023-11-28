@@ -5,12 +5,12 @@ import EditTaskStatus from "./modals/EditTaskStatus";
 import { useState } from "react";
 
 export default function ToDoItemRow({ task, projectId, onSuccess }) {
-  const [editStatusOpen, setStatusOpen] = useState(false)
+  const [editStatusOpen, setStatusOpen] = useState(false);
   return (
     <tr className="mb-2">
       <td className="text-center w-[60px] py-2 border-r border-yellow">1</td>
-      <td className="px-2 border-r border-yellow">{task?.name ?? 'Discussion'}</td>
-      <td className="text-center border-r border-yellow">{task?.assignees?.map(as =>('🤡 ' + as + ' '))}</td>
+      <td className="px-2 border-r border-yellow">{task?.name ?? "Discussion"}</td>
+      <td className="text-center border-r border-yellow">{task?.assignees?.map(as =>("🤡 " + as + " "))}</td>
       <td className="px-2 flex items-center justify-center">
         <button onClick={()=>setStatusOpen(true)}>
           <StatusBadge status={task?.status} />
