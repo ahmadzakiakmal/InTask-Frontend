@@ -1,37 +1,70 @@
 import Modal from "react-modal";
 import Button from "../Button";
+import { useState } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
 
-export default function CreateNewProjectModal() {
+export default function CreateNewProjectModal({
+  isOpen,
+  setOpenModal,
+  onClose,
+  setProjectName,
+  setName,
+}) {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  Modal.setAppElement("#__next");
+
+  function createProject(e) {
+    e.preventDefault();
+    axios.post(process.env.NEXT_PUBLIC_API_URL + "/project/", {
+      title, description
+    }, {
+      withCredentials: true
+    }).then((res) => {
+      console.log(res.data);
+      setOpenModal(false);
+    })
+      .catch((err) => {
+        toast.error("An error occurred while creating project");
+        console.log(err);
+      });
+  }
+
   return (
-    <Modal className="p-10 px-12 bg-navy  w-[350px] h-[460px] flex flex-col gap-4 justify-center items-center my-10">
-      <p className="text-[20px] font-semibold mt-0 text-center" 
-        style={{ color: "#D6D5A8", marginTop : "-1rem" }}>Create Project</p>
-
-      <div style = {{ background: "#D6D5A8", width:"260px", height:"400px", borderRadius:"10px", fontWeight:550 }}>
-        <section style={{ marginLeft:"18px", marginTop:"20px", marginRight:"10px", marginBottom:"10px" }}>
-          <label className="flex flex-col gap-2.5 color" style={{ color: "#1B2430", fontSize:"14px" }}>
-                    Project&apos;s Name
-            <input className="outline" style={{ width:"225px", height:"25px", borderRadius:"4px" }}onChange={(e) => setProjectName(e.target.value)}/>
+    <Modal
+      isOpen={isOpen}
+      className="w-screen h-screen flex justify-center items-center rounded-[10px] absolute !z-[11]"
+    >
+      <div className="w-full h-full absolute top-0" onClick={() => setOpenModal(false)}></div>
+      <div className="bg-navy w-[90%] md:w-1/2 md:max-w-[600px] lg:max-w-[800px] p-8 rounded-[10px] relative z-[10]">
+        <h1 className="text-yellow text-[32px] font-semibold text-center">
+          Create Project
+        </h1>
+        <form onSubmit={(e) => {
+          createProject(e);
+        }} className="bg-yellow p-8 rounded-[5px] text-[20px] flex flex-col gap-4">
+          <label className="flex flex-col gap-2.5">
+            Project Title
+            <input
+              className="outline rounded-[4px]"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
           </label>
-
-          <label className="flex flex-col gap-2.5 color" style={{ color: "#1B2430", fontSize:"14px", marginTop:"8px" }}>
-                    Deadline Project
-            <input className="outline" style={{ width:"225px", height:"25px", borderRadius:"4px" }}onChange={(e) => setName(e.target.value)}/>
+          <label className="flex flex-col gap-2.5">
+            Project Description
+            <input
+              className="outline rounded-[4px]"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
           </label>
-
-          <label className="flex flex-col gap-2.5 color" style={{ color: "#1B2430", fontSize:"14px", marginTop:"8px" }}>
-                    Add Other Contributor
-            <input className="outline" style={{ width:"225px", height:"25px", borderRadius:"4px" }}onChange={(e) => setName(e.target.value)}/>
-          </label>
-
-          <label className="flex flex-col gap-2.5 color" style={{ color: "#1B2430", fontSize:"14px", marginTop:"8px" }}>
-                    Visibility
-            <input className="outline" style={{ width:"225px", height:"25px", borderRadius:"4px" }}onChange={(e) => setName(e.target.value)}/>
-          </label>
-          <div className="flex justify-end w-[95%]" style={{ marginTop:"20px" }}>
-            <Button className="mr-2" text="Create"/>
-          </div>
-        </section>
+          <Button
+            text="Create"
+            type="submit"
+          />
+        </form>
       </div>
     </Modal>
   );
