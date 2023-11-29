@@ -18,7 +18,7 @@ export default function Project() {
     axios
       .get(
         process.env.NEXT_PUBLIC_API_URL + "/project/" + projectId + "/tasks",
-        {}
+        { withCredentials: true }
       )
       .then((res) => {
         setTasks(res.data.tasks);

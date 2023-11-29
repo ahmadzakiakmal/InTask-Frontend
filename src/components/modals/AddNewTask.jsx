@@ -21,7 +21,8 @@ export default function NewTaskModal({
     axios
       .post(
         process.env.NEXT_PUBLIC_API_URL + "/project/" + projectId + "/tasks",
-        newTask
+        newTask,
+        { withCredentials: true }
       )
       .then(() => {
         toast.success("added new task");

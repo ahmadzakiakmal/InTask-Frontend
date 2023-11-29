@@ -3,14 +3,20 @@ import StatusBadge from "../StatusBadge";
 import { useState } from "react";
 import Button from "../Button";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export default function EditTaskStatusModal({ isOpen, taskstatus, taskname, projectId, taskId, onClose, onSuccess }){
   const [status, setStatus] = useState(taskstatus ?? "todo");
   const editStatus = () => {
-    axios.patch(process.env.NEXT_PUBLIC_API_URL + "/project/" + projectId + "/tasks/" + taskId, { status: status })
+    axios.patch(process.env.NEXT_PUBLIC_API_URL + "/project/" + projectId + "/tasks/" + taskId, 
+    { status: status }, 
+    { withCredentials: true})
       .then(()=>{
         onSuccess();
         onClose();
+      })
+      .catch(e => {
+        toast.error('error ' + e.message)
       });
   };
   return (
