@@ -13,7 +13,7 @@ export default function ProjectCardComponent({
 
   const handleProjectClick = () => {
     router.push({
-      pathname: `/dashboard/project/${title}`,
+      pathname: `/dashboard/project/${id}`,
       query: {
         projectId: projectId,
         projectContributor: projectContributor,
