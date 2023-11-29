@@ -1,4 +1,6 @@
+import AddProjectButton from "@/components/AddProject";
 import Layout from "@/components/dashboard/Layout";
+import CreateNewProjectModal from "@/components/modals/CreateProject";
 import ProjectCardComponent from "@/components/ProjectCard";
 import ProjectNavbar from "@/components/ProjectNavbar";
 import axios from "axios";
@@ -11,6 +13,7 @@ import { toast } from "react-toastify";
 export default function Dashboard() {
   const [projects, setProjects] = useState([]);
   const [username, setUsername] = useState("");
+  const [openModal, setOpenModal] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -30,7 +33,7 @@ export default function Dashboard() {
         })
         .then((res) => {
           console.log(res.data.projects);
-          // setProjects(res.data.data.projects);
+          setProjects(res.data.projects);
         })
         .catch((err) => {
           console.log(err);
@@ -38,7 +41,7 @@ export default function Dashboard() {
           toast.error("An error occurred while fetching projects!");
         });
     }
-  }, []);
+  }, [openModal]);
 
   const colors = [
     "yellow",
@@ -65,7 +68,8 @@ export default function Dashboard() {
 
   return (
     <Layout>
-      <main className="flex flex-col items-center h-full">
+      <main className="relative flex flex-col items-center h-full">
+        <CreateNewProjectModal isOpen={openModal} setOpenModal={setOpenModal} />
         <section className="shadow-md p-4 font-semibold rounded-[20px] w-full border-2 border-gray-300 gap-4 flex items-center">
           <div>
             <span className="text-3xl">{`${toCamelCase(
@@ -103,6 +107,9 @@ export default function Dashboard() {
               </Link> */}
           </div>
         )}
+        <div className="absolute bottom-0 right-0" onClick={() => setOpenModal(true)}>
+          <AddProjectButton />
+        </div>
       </main>
     </Layout>
   );
