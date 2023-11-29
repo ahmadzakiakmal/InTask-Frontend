@@ -11,9 +11,11 @@ export default function AddFriendModal ({ isOpen, onClose, projectId }) {
     try {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/project/${projectId}/contributors`,
-        { identifier: identifier }
+        { identifier: identifier },  
+        {
+          withCredentials: true
+        }
       );
-
       toast.success(response.data.message);
       onClose();
     } catch (error) {
@@ -25,7 +27,6 @@ export default function AddFriendModal ({ isOpen, onClose, projectId }) {
       }
     }
   };
-
 
   return (
     <Modal
