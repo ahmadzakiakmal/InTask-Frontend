@@ -68,7 +68,7 @@ export default function Dashboard() {
 
   return (
     <Layout>
-      <main className="relative flex flex-col items-center h-full min-h-[90vh] bg-red-500/20">
+      <main className="relative flex flex-col items-center h-full min-h-[90vh]">
         <CreateNewProjectModal isOpen={openModal} setOpenModal={setOpenModal} />
         <section className="shadow-md p-4 font-semibold rounded-[20px] w-full border-2 border-gray-300 gap-4 flex items-center">
           <div>
