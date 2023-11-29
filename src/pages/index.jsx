@@ -16,7 +16,7 @@ export default function Home() {
           <Image
             src={InTaskLogo}
             alt="InTask Logo"
-            className="w-[50px] py-1 hidden xs:block"
+            className="w-[50px] py-2 hidden xs:block"
           />
           <Image
             src={textInTaskLogo}
@@ -96,8 +96,8 @@ export default function Home() {
             membantu pengguna untuk membuat, mengelola, dan memonitor project
             atau tugas dengan lebih efisien.
           </p>
-          <Link href="/auth/register">
-            <button className="btn btn-sm lg:btn-lg bg-[#816797] self-center lg:self-start text-white rounded-full border-[#5F4C6F] w-40 lg:w-44 capitalize py-2">
+          <Link href="/auth/register" className="self-center lg:self-start">
+            <button className="btn btn-sm lg:btn-lg bg-[#816797] text-white rounded-full border-[#5F4C6F] w-40 lg:w-44 capitalize py-2">
             Get Started
             </button>
           </Link>
