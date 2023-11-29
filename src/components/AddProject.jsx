@@ -1,6 +1,6 @@
 export default function AddProjectButton({ onClick }) {
   return (
-    <div className="relative right-0 w-[70px] h-[70px]">
+    <div className="relative right-0 w-[70px] h-[70px] z-[1]">
       <button 
         onClick={onClick}
         className="w-full h-full bg-navy absolute top-0 left-0 py-5 px-5 rounded-full"

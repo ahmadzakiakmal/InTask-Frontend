@@ -24,19 +24,24 @@ export default function Dashboard() {
     setUsername(localStorage.getItem("username"));
     if (localStorage.getItem("username")) {
       axios
-        .get(process.env.NEXT_PUBLIC_API_URL + "/project/" + localStorage.getItem("username"), {
-          domain:
-            process.env.NEXT_PUBLIC_API_URL === "http://localhost:5000"
-              ? "localhost"
-              : process.env.NEXT_PUBLIC_DEPLOYMENT_URL,
-          withCredentials: true,
-        })
+        .get(
+          process.env.NEXT_PUBLIC_API_URL +
+            "/project/" +
+            localStorage.getItem("username"),
+          {
+            domain:
+              process.env.NEXT_PUBLIC_API_URL === "http://localhost:5000"
+                ? "localhost"
+                : process.env.NEXT_PUBLIC_DEPLOYMENT_URL,
+            withCredentials: true,
+          }
+        )
         .then((res) => {
-          console.log(res.data.projects);
+          // console.log(res.data.projects);
           setProjects(res.data.projects);
         })
         .catch((err) => {
-          console.log(err);
+          // console.log(err);
           if (err.response) return toast.error(err.response.data.message);
           toast.error("An error occurred while fetching projects!");
         });
@@ -84,6 +89,7 @@ export default function Dashboard() {
                 return (
                   <ProjectCardComponent
                     key={project._id}
+                    id={project._id}
                     title={project.title}
                     description={project.description}
                     color={getColor(id)}
@@ -96,7 +102,9 @@ export default function Dashboard() {
         )}
         {projects?.length === 0 && (
           <div className="flex flex-col h-full items-center justify-center gap-4 mt-10">
-            <h1 className="text-[20px] leading-[100%]">You have no projects yet</h1>
+            <h1 className="text-[20px] leading-[100%]">
+              You have no projects yet
+            </h1>
             <h1 className="text-[20px] leading-[100%]">
               Create your own or join other&apos;s projects
             </h1>
@@ -107,8 +115,19 @@ export default function Dashboard() {
               </Link> */}
           </div>
         )}
-        <div className="absolute bottom-[50px] sm:bottom-[40px] right-[20px] sm:right-[40px] shadow-[0_0_10px_rgba(0,0,0,.9)] rounded-full" onClick={() => setOpenModal(true)}>
+        <div
+          className={
+            "absolute bottom-[50px] sm:bottom-[40px] right-[20px] sm:right-[40px] shadow-[0_0_10px_rgba(0,0,0,.9)] rounded-full "
+          }
+          onClick={() => setOpenModal(true)}
+        >
           <AddProjectButton />
+          <div
+            className={
+              "bg-navy absolute top-0 w-full h-full rounded-full z-[0] " +
+              (projects?.length < 1 ? "animate-ping" : "")
+            }
+          ></div>
         </div>
       </main>
     </Layout>
