@@ -5,13 +5,12 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { useAuth } from "@/components/AuthProvider";
+import Cookies from "js-cookie";
 
 export default function Login() {
   const router = useRouter();
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
-  const { login } = useAuth();
 
   return (
     <main className="flex flex-col justify-center items-center min-h-screen px-[5%] xs:px-auto" style = {{ backgroundColor: "#1B2430" }}>
@@ -31,7 +30,17 @@ export default function Login() {
               password,
             }).then((res) => {
               toast.success("Logged in successfully!");
-              login(res.data.data);
+              Cookies.set("Authorization", res.data.token, {
+                path: "/",
+                domain:
+                  process.env.NEXT_PUBLIC_API_URL === "http://localhost:5000"
+                    ? "localhost"
+                    : process.env.NEXT_PUBLIC_DEPLOYMENT_URL,
+              });
+              const id = res.data.data.id;
+              const username = res.data.data.username;
+              localStorage.setItem("userId", id);
+              localStorage.setItem("username", username);
               router.replace("/dashboard");
             }).catch((err) => {
               if(err.response) return toast.error(err.response.data.message);
