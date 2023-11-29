@@ -68,7 +68,7 @@ export default function Dashboard() {
 
   return (
     <Layout>
-      <main className="relative flex flex-col items-center h-full">
+      <main className="relative flex flex-col items-center h-full min-h-[90vh] bg-red-500/20">
         <CreateNewProjectModal isOpen={openModal} setOpenModal={setOpenModal} />
         <section className="shadow-md p-4 font-semibold rounded-[20px] w-full border-2 border-gray-300 gap-4 flex items-center">
           <div>
@@ -107,7 +107,7 @@ export default function Dashboard() {
               </Link> */}
           </div>
         )}
-        <div className="absolute bottom-[50px] sm:bottom-0 right-[20px] sm:right-0 shadow-[0_0_10px_rgba(0,0,0,.9)] rounded-full" onClick={() => setOpenModal(true)}>
+        <div className="absolute bottom-[50px] sm:bottom-[40px] right-[20px] sm:right-[40px] shadow-[0_0_10px_rgba(0,0,0,.9)] rounded-full" onClick={() => setOpenModal(true)}>
           <AddProjectButton />
         </div>
       </main>
