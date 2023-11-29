@@ -4,7 +4,7 @@ import { useState } from "react";
 import Button from "../Button";
 import axios from "axios";
 
-export default function EditTaskStatus({ isOpen, taskstatus, taskname, projectId, taskId, onClose, onSuccess }){
+export default function EditTaskStatusModal({ isOpen, taskstatus, taskname, projectId, taskId, onClose, onSuccess }){
   const [status, setStatus] = useState(taskstatus ?? "todo");
   const editStatus = () => {
     axios.patch(process.env.NEXT_PUBLIC_API_URL + "/project/" + projectId + "/tasks/" + taskId, { status: status })

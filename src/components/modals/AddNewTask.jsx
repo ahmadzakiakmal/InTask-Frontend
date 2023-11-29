@@ -4,7 +4,7 @@ import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-export default function NewTask({
+export default function NewTaskModal({
   isOpen,
   onClose,
   projectId,

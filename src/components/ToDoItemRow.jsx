@@ -1,7 +1,7 @@
 import StatusBadge from "./StatusBadge";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
-import EditTaskStatus from "./modals/EditTaskStatus";
+import EditTaskStatusModal from "./modals/EditTaskStatus";
 import { useState } from "react";
 
 export default function ToDoItemRow({ task, projectId, onSuccess }) {
@@ -15,7 +15,7 @@ export default function ToDoItemRow({ task, projectId, onSuccess }) {
         <button onClick={()=>setStatusOpen(true)}>
           <StatusBadge status={task?.status} />
         </button>
-        <EditTaskStatus 
+        <EditTaskStatusModal 
           isOpen={editStatusOpen}
           onClose={()=>setStatusOpen(false)}
           onSuccess={onSuccess}

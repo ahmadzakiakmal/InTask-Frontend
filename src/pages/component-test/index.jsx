@@ -6,8 +6,8 @@ import Button from "@/components/Button";
 import ToDoItemRow from "@/components/ToDoItemRow";
 import ProjectNavbar from "@/components/ProjectNavbar";
 import TextInput from "@/components/TextInput";
-import CreateNewProject from "@/components/modals/CreateProject";
-import NewTask from "@/components/modals/AddNewTask";
+import CreateNewProjectModal from "@/components/modals/CreateProject";
+import NewTaskModal from "@/components/modals/AddNewTask";
 import NewTable from "@/components/modals/CreateTable";
 import TaskTable from "@/components/TaskTable";
 
@@ -69,12 +69,12 @@ export default function ComponentTestPage() {
 
       <div className="flex flex-col justify-center items-center">
         <h2 className="text-center"> Project Card</h2>
-        <CreateNewProject/>
+        <CreateNewProjectModal/>
       </div>
 
       <div className="flex flex-col justify-center items-center">
         <h2 className="text-center"> Form New Task</h2>
-        <NewTask/>
+        <NewTaskModal/>
       </div>
 
       <div className="flex flex-col justify-center items-center">

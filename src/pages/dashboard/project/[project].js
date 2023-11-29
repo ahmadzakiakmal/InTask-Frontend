@@ -2,7 +2,7 @@ import AddProjectButton from "@/components/AddProject";
 import ProjectNavbar from "@/components/ProjectNavbar";
 import TaskTable from "@/components/TaskTable";
 import Layout from "@/components/dashboard/Layout";
-import NewTask from "@/components/modals/AddNewTask";
+import NewTaskModal from "@/components/modals/AddNewTask";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -39,7 +39,7 @@ export default function Project() {
         onEdit={() => loadTaskData()}
         projectId={projectId}
       />
-      <NewTask
+      <NewTaskModal
         isOpen={addTaskOpen}
         projectId={projectId}
         contributors={projectContributor}

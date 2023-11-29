@@ -1,7 +1,7 @@
 import Modal from "react-modal";
 import Button from "../Button";
 
-export default function CreateNewProject() {
+export default function CreateNewProjectModal() {
   return (
     <Modal className="p-10 px-12 bg-navy  w-[350px] h-[460px] flex flex-col gap-4 justify-center items-center my-10">
       <p className="text-[20px] font-semibold mt-0 text-center" 
