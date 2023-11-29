@@ -39,7 +39,7 @@ export default function MenuComponent() {
             <span className="hidden md:inline">Projects</span>
           </Link>
         </li>
-        <li>
+        {/* <li>
           <Link
             href="/dashboard/tasks"
             className={`py-2 px-3 cursor-pointer flex items-center gap-4 justify-center md:justify-start rounded-[10px] ${
@@ -51,7 +51,7 @@ export default function MenuComponent() {
             </svg>
             <span className="hidden md:inline">Tasks</span>
           </Link>
-        </li>
+        </li> */}
         <li>
           <Link
             href="/dashboard/user"
