@@ -16,12 +16,12 @@ export default function Register() {
 
   return (
     <main
-      className="flex flex-col justify-center items-center min-h-screen"
+      className="flex flex-col justify-center items-center min-h-screen px-[5%] xs:px-auto"
       style={{ backgroundColor: "#1B2430" }}
     >
-      <section className="p-10 px-12 bg-yellow rounded-[20px]  w-[350px] flex flex-col gap-4 justify-center items-center my-10">
+      <section className="py-10 xs:px-12 bg-yellow rounded-[20px] w-full xs:w-fit xs:min-w-[350px] flex flex-col gap-4 justify-center items-center my-10">
         <div className="p-2 bg-navy rounded-[10px] grid place-items-center">
-          <Image src={InTaskLogo} alt="InTask Logo" className="w-[135px]" />
+          <Image src={InTaskLogo} alt="InTask Logo" className="max-w-[135px]" />
         </div>
         <p
           className="text-[20px] font-bold mt-0"
