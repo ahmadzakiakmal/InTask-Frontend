@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import Button from "../Button";
+import axios from "axios";
+import { toast } from "react-toastify";
 
-export default function RemoveFriendModal({ isOpen, onClose, projectContributor }) {
+export default function RemoveFriendModal({ isOpen, onClose, projectId, projectContributor }) {
   const [selectedFriends, setSelectedFriends] = useState([]);
   const [friends, setFriends] = useState([]);
 
@@ -20,10 +22,10 @@ export default function RemoveFriendModal({ isOpen, onClose, projectContributor 
         setSelectedFriends([]);
       } else {
         setSelectedFriends([...friends]);
-      }
+      } 
     }
   };
-  
+
   const handleToggleFriend = (friend) => {
     if (friends && friends.length > 0) {
       if (selectedFriends.includes(friend)) {
@@ -35,10 +37,35 @@ export default function RemoveFriendModal({ isOpen, onClose, projectContributor 
       }
     }
   };
-  
-  const handleRemove = () => {
 
+  const handleRemoveFriend = (e) => {
+    console.log(selectedFriends.toString());
+    axios
+      .delete(process.env.NEXT_PUBLIC_API_URL + `/project/${projectId}/contributors/${selectedFriends.toString()}`, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        toast.success(`Successfully Removed ${selectedFriends.toString()} from Project`);
+        onClose();
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("An error occurred while deleting contributors");
+      });
   };
+
+  useEffect(() => {
+    // Menyimpan data contributor yang dipilih ke session storage
+    sessionStorage.setItem('selectedFriends', JSON.stringify(selectedFriends));
+  }, [selectedFriends]);
+
+  useEffect(() => {
+    // Mengambil data contributor yang dipilih dari session storage saat komponen dimount
+    const storedSelectedFriends = sessionStorage.getItem('selectedFriends');
+    if (storedSelectedFriends) {
+      setSelectedFriends(JSON.parse(storedSelectedFriends));
+    }
+  }, []);
 
   return (
     <Modal
@@ -105,7 +132,7 @@ export default function RemoveFriendModal({ isOpen, onClose, projectContributor 
         </form>
       </body>
       <div className="mt-3 flex justify-end">
-        <Button onClick={handleRemove} className="mr-2" text="Delete"/>
+        <Button onClick={handleRemoveFriend} className="mr-2" text="Delete"/>
       </div>
     </Modal>
   );
