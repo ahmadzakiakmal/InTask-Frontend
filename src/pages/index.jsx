@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <main className="flex flex-col justify-center items-center min-h-screen bg-neutral font-poppins">
       <nav className="fixed top-0 w-full bg-navy z-10 flex justify-between px-[5%] xs:px-4 sm:px-7">
-        <div className="flex items-center">
+        <div className="flex items-center cursor-pointer">
           <Image
             src={InTaskLogo}
             alt="InTask Logo"
