@@ -1,6 +1,14 @@
+import Link from "next/link";
 import { useRouter } from "next/router";
 
-export default function ProjectCardComponent({ title, color, description, projectId, projectContributor }) {
+export default function ProjectCardComponent({
+  title,
+  color,
+  description,
+  projectId,
+  projectContributor,
+  id,
+}) {
   const router = useRouter();
 
   const handleProjectClick = () => {
@@ -8,7 +16,7 @@ export default function ProjectCardComponent({ title, color, description, projec
       pathname: `/dashboard/project/${title}`,
       query: {
         projectId: projectId,
-        projectContributor: projectContributor
+        projectContributor: projectContributor,
       },
     });
   };
@@ -25,15 +33,21 @@ export default function ProjectCardComponent({ title, color, description, projec
     orange: "bg-[#FFC5A8]",
   };
   return (
-    <div className="relative w-full rounded-[15px] bg-navy cursor-pointer transition duration-200 hover:shadow-[0_0_8px_rgb(27,36,48,.9)]" onClick={handleProjectClick}>
+    <Link href={`/dashboard/project/${id}`}>
       <div
-        className={
-          "w-full py-3 px-8 text-center rounded-t-[15px] mt-[-2px] " + (colors[color]? colors[color] : colors["orange"])
-        }
+        className="relative w-full rounded-[15px] bg-navy cursor-pointer transition duration-200 hover:shadow-[0_0_8px_rgb(27,36,48,.9)]"
+        onClick={handleProjectClick}
       >
-        <span className="font-semibold">{title}</span>
+        <div
+          className={
+            "w-full py-3 px-8 text-center rounded-t-[15px] mt-[-2px] " +
+            (colors[color] ? colors[color] : colors["orange"])
+          }
+        >
+          <span className="font-semibold">{title}</span>
+        </div>
+        <div className="w-full h-fit px-3 py-4 text-white">{description}</div>
       </div>
-      <div className="w-full h-fit px-3 py-4 text-white">{description}</div>
-    </div>
+    </Link>
   );
 }
