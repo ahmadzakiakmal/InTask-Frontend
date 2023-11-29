@@ -96,9 +96,11 @@ export default function Home() {
             membantu pengguna untuk membuat, mengelola, dan memonitor project
             atau tugas dengan lebih efisien.
           </p>
-          <button className="btn btn-sm lg:btn-lg bg-[#816797] self-center lg:self-start text-white rounded-full border-[#5F4C6F] w-40 lg:w-44 capitalize py-2">
+          <Link href="/auth/register">
+            <button className="btn btn-sm lg:btn-lg bg-[#816797] self-center lg:self-start text-white rounded-full border-[#5F4C6F] w-40 lg:w-44 capitalize py-2">
             Get Started
-          </button>
+            </button>
+          </Link>
         </div>
         <Image
           src={InTaskLogoDark}
