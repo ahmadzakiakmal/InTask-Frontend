@@ -22,12 +22,12 @@ export default function CreateNewProjectModal({
     }, {
       withCredentials: true
     }).then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       setOpenModal(false);
     })
       .catch((err) => {
         toast.error("An error occurred while creating project");
-        console.log(err);
+        // console.log(err);
       });
   }
 
