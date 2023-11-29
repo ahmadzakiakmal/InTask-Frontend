@@ -107,7 +107,7 @@ export default function Dashboard() {
               </Link> */}
           </div>
         )}
-        <div className="absolute bottom-0 right-0" onClick={() => setOpenModal(true)}>
+        <div className="absolute bottom-[50px] sm:bottom-0 right-[20px] sm:right-0 shadow-[0_0_10px_rgba(0,0,0,.9)] rounded-full" onClick={() => setOpenModal(true)}>
           <AddProjectButton />
         </div>
       </main>
