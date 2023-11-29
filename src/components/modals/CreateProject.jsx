@@ -34,7 +34,7 @@ export default function CreateNewProjectModal({
   return (
     <Modal
       isOpen={isOpen}
-      className="w-screen h-screen flex justify-center items-center rounded-[10px] absolute !z-[11]"
+      className="w-screen h-screen flex justify-center items-center rounded-[10px] absolute !z-[11] backdrop-blur-[8px] bg-navy/30"
     >
       <div className="w-full h-full absolute top-0" onClick={() => setOpenModal(false)}></div>
       <div className="bg-navy w-[90%] md:w-1/2 md:max-w-[600px] lg:max-w-[800px] p-8 rounded-[10px] relative z-[10]">
@@ -47,7 +47,7 @@ export default function CreateNewProjectModal({
           <label className="flex flex-col gap-2.5">
             Project Title
             <input
-              className="outline rounded-[4px]"
+              className="focus:outline px-2 py-1 rounded-[4px]"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
@@ -55,7 +55,7 @@ export default function CreateNewProjectModal({
           <label className="flex flex-col gap-2.5">
             Project Description
             <input
-              className="outline rounded-[4px]"
+              className="focus:outline px-2 py-1 rounded-[4px]"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
