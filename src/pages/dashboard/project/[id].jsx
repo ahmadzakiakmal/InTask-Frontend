@@ -6,11 +6,13 @@ import Button from "@/components/Button";
 import TaskTable from "@/components/TaskTable";
 import AddProjectButton from "@/components/AddProject";
 import NewTaskModal from "@/components/modals/AddNewTask";
+import ToDoItem from "@/components/ToDo";
 
 function KanbanContainer({ status, tasks }) {
   return (
-    <section className="py-[10px] px-6 bg-navy rounded-[20px] text-yellow">
+    <section className="py-[10px] px-6 space-y-2 bg-navy rounded-[20px] text-yellow">
       <h1 className="text-center text-[22px] font-bold">{status}</h1>
+      {tasks.map(task => (<ToDoItem taskname={task.name} />))}
     </section>
   );
 }
@@ -42,7 +44,7 @@ export default function Project({ project }) {
       <main className="relative flex flex-col h-full min-h-[90vh]">
         {id}
         <h1>Select View: {view}</h1>
-        <div className="flex gap-3">
+        <div className="flex gap-3 mb-4">
           <Button text="Kanban" onClick={() => setView("kanban")} />
           <Button text="Table" onClick={() => setView("table")} />
         </div>
@@ -50,9 +52,9 @@ export default function Project({ project }) {
           {/* //? Kanban View */}
           {view === "kanban" && (
             <section className="grid grid-cols-3 gap-10">
-              <KanbanContainer status="To Do" tasks={tasks} />
-              <KanbanContainer status="Doing" tasks={tasks} />
-              <KanbanContainer status="Done" tasks={tasks} />
+              <KanbanContainer status="To Do" tasks={tasks.filter(t => t.status == 'todo')} />
+              <KanbanContainer status="Doing" tasks={tasks.filter(t => t.status == 'ongoing')} />
+              <KanbanContainer status="Done" tasks={tasks.filter(t => t.status == 'done')} />
             </section>
           )}
 
