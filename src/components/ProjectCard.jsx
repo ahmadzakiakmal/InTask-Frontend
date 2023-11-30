@@ -36,7 +36,6 @@ export default function ProjectCardComponent({
     <Link href={`/dashboard/project/${id}`}>
       <div
         className="relative w-full rounded-[15px] bg-navy cursor-pointer transition duration-200 hover:shadow-[0_0_8px_rgb(27,36,48,.9)]"
-        onClick={handleProjectClick}
       >
         <div
           className={

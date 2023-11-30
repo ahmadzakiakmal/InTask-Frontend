@@ -7,6 +7,7 @@ import TaskTable from "@/components/TaskTable";
 import AddProjectButton from "@/components/AddProject";
 import NewTaskModal from "@/components/modals/AddNewTask";
 import ToDoItem from "@/components/ToDo";
+import ProjectNavbar from "@/components/ProjectNavbar";
 
 function KanbanContainer({ status, tasks }) {
   return (
@@ -17,9 +18,10 @@ function KanbanContainer({ status, tasks }) {
   );
 }
 
-export default function Project({ project }) {
+export default function Project() {
   const [view, setView] = useState("kanban");
   const [tasks, setTasks] = useState([]);
+  const [project, setProject] = useState({})
   const [openNewTaskModal, setOpenNewTaskModal] = useState(false);
   const router = useRouter();
   const { id } = router.query;
@@ -38,11 +40,28 @@ export default function Project({ project }) {
   }
   useEffect(loadTaskData, [id]);
 
+  const loadProjectData = () => {
+    axios
+      .get(process.env.NEXT_PUBLIC_API_URL + "/project/id/" + id, 
+      { withCredentials: true })
+      .then((res) => {
+        console.log(res.data);
+        setProject(res.data.project);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+  useEffect(loadProjectData, [id])
+  
+
   return (
     <Layout>
       <NewTaskModal isOpen={openNewTaskModal} setOpenModal={setOpenNewTaskModal} />
       <main className="relative flex flex-col h-full min-h-[90vh]">
-        {id}
+        <ProjectNavbar
+          project={{ title: project.title, projectId: id }}
+        />
         <h1>Select View: {view}</h1>
         <div className="flex gap-3 mb-4">
           <Button text="Kanban" onClick={() => setView("kanban")} />
