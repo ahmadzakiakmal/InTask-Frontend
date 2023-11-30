@@ -60,7 +60,7 @@ export default function Project() {
       <NewTaskModal isOpen={openNewTaskModal} setOpenModal={setOpenNewTaskModal} />
       <main className="relative flex flex-col h-full min-h-[90vh]">
         <ProjectNavbar
-          project={{ title: project.title, projectId: id }}
+          project={{ title: project.title, projectId: id, projectContributor: project.contributors }}
         />
         <h1>Select View: {view}</h1>
         <div className="flex gap-3 mb-4">
