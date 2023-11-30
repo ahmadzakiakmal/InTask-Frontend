@@ -22,9 +22,10 @@ export default function Project({ project }) {
   const router = useRouter();
   const { id } = router.query;
 
-  useEffect(() => {
+  const loadTaskData = () => {
     axios
-      .get(process.env.NEXT_PUBLIC_API_URL + "/project/" + id + "/tasks", {})
+      .get(process.env.NEXT_PUBLIC_API_URL + "/project/" + id + "/tasks", 
+      { withCredentials: true })
       .then((res) => {
         console.log(res.data);
         setTasks(res.data.tasks);
@@ -32,7 +33,9 @@ export default function Project({ project }) {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }
+  useEffect(loadTaskData, [id]);
+
   return (
     <Layout>
       <NewTaskModal isOpen={openNewTaskModal} setOpenModal={setOpenNewTaskModal} />
@@ -56,7 +59,11 @@ export default function Project({ project }) {
           {/* //? Table View */}
           {view === "table" && (
             <section>
-              <TaskTable />
+              <TaskTable
+                tasks={tasks}
+                onEdit={() => loadTaskData()}
+                projectId={id}
+              />
             </section>
           )}
         </section>
