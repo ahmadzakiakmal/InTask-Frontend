@@ -16,6 +16,7 @@ export default function NewTaskModal({
   Modal.setAppElement("#__next");
   const [searchQuery, setSearchQuery] = useState("");
   const [assignees, setAssignees] = useState(["test"]);
+
   const searchUser = () => {
     axios
       .post(
@@ -44,6 +45,22 @@ export default function NewTaskModal({
       });
   };
 
+  const colors = {
+    1: "bg-yellow",
+    2: "bg-[#C9A2EA]",
+    3: "bg-[#FFC5C5]",
+    4: "bg-[#A8C5D6]",
+    5: "bg-[#C9CAF4]",
+    6: "bg-[#D6A8CC]",
+    7: "bg-[#ACC9A2]",
+    8: "bg-[#D6A8A8]",
+    9: "bg-[#FFC5A8]",
+  };
+  const getColor = (id) => {
+    const idx = id % colors.length;
+    return colors[idx];
+  };
+
   return (
     <Modal
       isOpen={isOpen}
@@ -53,7 +70,7 @@ export default function NewTaskModal({
         className="w-full h-full absolute top-0"
         onClick={() => setOpenModal(false)}
       ></div>
-      <div className="bg-navy w-[90%] md:w-1/2 md:max-w-[600px] lg:max-w-[800px] p-8 rounded-[10px] relative z-[10]">
+      <div className="bg-navy w-[90%] max-h-[90vh] overflow-y-scroll md:w-1/2 md:max-w-[600px] lg:max-w-[800px] p-8 rounded-[10px] relative z-[10]">
         <h1 className="text-yellow text-[32px] font-semibold text-center">
           Create Project
         </h1>
@@ -97,8 +114,8 @@ export default function NewTaskModal({
             Assignees
               <div className="flex gap-3">
                 {
-                  assignees.map((assignee) => {
-                    return <span className="bg-navy rounded-[5px]" key={assignee}>{assignee}</span>;
+                  assignees.map((assignee, index) => {
+                    return <span className={`text-navy rounded-[5px] ${getColor(index)}`}  key={assignee}>{assignee}</span>;
                   })
                 }
               </div>
