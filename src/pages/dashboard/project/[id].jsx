@@ -11,8 +11,8 @@ import ProjectNavbar from "@/components/ProjectNavbar";
 import { DndContext, useDraggable, useDroppable } from "@dnd-kit/core";
 import { toast } from "react-toastify";
 
-function KanbanContainer({ status, tasks }) {
-  const { setNodeRef } = useDroppable({id: status})
+function KanbanContainer({ status, tasks, id }) {
+  const { setNodeRef } = useDroppable({id: id})
   return (
     <section 
       className="py-[10px] px-6 space-y-2 bg-navy rounded-[20px] text-yellow"
@@ -60,7 +60,16 @@ export default function Project() {
   useEffect(loadProjectData, [id])
   
   const updateTaskStatus = ({active, over}) => {
-    toast.info("task " + active.id + " on " + over?.id)
+    if(over==null) return;
+    axios.patch(process.env.NEXT_PUBLIC_API_URL + "/project/" + id + "/tasks/" + active.id, 
+    { status: over.id }, 
+    { withCredentials: true})
+      .then(()=>{
+        loadTaskData();
+      })
+      .catch(e => {
+        toast.error('error ' + e.message)
+      });
   }
 
   return (
@@ -80,9 +89,9 @@ export default function Project() {
           {view === "kanban" && (
             <section className="grid grid-cols-3 gap-10">
               <DndContext onDragEnd={updateTaskStatus}>
-                <KanbanContainer status="To Do" tasks={tasks.filter(t => t.status == 'todo')} />
-                <KanbanContainer status="Doing" tasks={tasks.filter(t => t.status == 'ongoing')} />
-                <KanbanContainer status="Done" tasks={tasks.filter(t => t.status == 'done')} />
+                <KanbanContainer status="To Do" id="todo" tasks={tasks.filter(t => t.status == 'todo')} />
+                <KanbanContainer status="Doing" id="ongoing" tasks={tasks.filter(t => t.status == 'ongoing')} />
+                <KanbanContainer status="Done"  id="done" tasks={tasks.filter(t => t.status == 'done')} />
               </DndContext>
             </section>
           )}
