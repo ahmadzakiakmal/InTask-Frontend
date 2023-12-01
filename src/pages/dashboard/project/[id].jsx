@@ -29,22 +29,24 @@ export default function Project() {
   const [project, setProject] = useState({});
   const [openNewTaskModal, setOpenNewTaskModal] = useState(false);
   const router = useRouter();
-  const { id } = router.query;
-
+  const [id, setId] = useState(router.query.id);
+  
   const loadTaskData = () => {
-    if(id == null || id == undefined) return;
-    axios
-      .get(process.env.NEXT_PUBLIC_API_URL + "/project/" + id + "/tasks", 
-        { withCredentials: true })
-      .then((res) => {
-        console.log(res.data);
-        setTasks(res.data.tasks);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    setId(router.query.id);
+    console.log(id);
+    if(id !== undefined){
+      axios
+        .get(process.env.NEXT_PUBLIC_API_URL + "/project/" + id + "/tasks", 
+          { withCredentials: true })
+        .then((res) => {
+          console.log(res.data);
+          setTasks(res.data.tasks);
+        })
+        .catch((err) => {
+          console.log(err);
+        });}
   };
-  useEffect(loadTaskData, [id]);
+  useEffect(loadTaskData, [router]);
 
   const loadProjectData = () => {
     axios
