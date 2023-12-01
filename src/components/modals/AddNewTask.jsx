@@ -45,19 +45,20 @@ export default function NewTaskModal({
       });
   };
 
-  const colors = {
-    1: "bg-yellow",
-    2: "bg-[#C9A2EA]",
-    3: "bg-[#FFC5C5]",
-    4: "bg-[#A8C5D6]",
-    5: "bg-[#C9CAF4]",
-    6: "bg-[#D6A8CC]",
-    7: "bg-[#ACC9A2]",
-    8: "bg-[#D6A8A8]",
-    9: "bg-[#FFC5A8]",
-  };
+  const colors = [
+    "bg-yellow",
+    "bg-[#C9A2EA]",
+    "bg-[#FFC5C5]",
+    "bg-[#A8C5D6]",
+    "bg-[#C9CAF4]",
+    "bg-[#D6A8CC]",
+    "bg-[#ACC9A2]",
+    "bg-[#D6A8A8]",
+    "bg-[#FFC5A8]",
+  ];
+
   const getColor = (id) => {
-    const idx = id % colors.length;
+    const idx = id % 9;
     return colors[idx];
   };
 
@@ -115,7 +116,7 @@ export default function NewTaskModal({
               <div className="flex gap-3">
                 {
                   assignees.map((assignee, index) => {
-                    return <span className={`text-navy rounded-[5px] ${getColor(index)}`}  key={assignee}>{assignee}</span>;
+                    return <span className={`text-navy rounded-[5px] bg-purple-100 px-1 text-white`}  key={assignee}>{assignee} &times;</span>;
                   })
                 }
               </div>
