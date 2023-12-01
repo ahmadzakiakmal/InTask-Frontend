@@ -8,17 +8,17 @@ import AddProjectButton from "@/components/AddProject";
 import NewTaskModal from "@/components/modals/AddNewTask";
 import ToDoItem from "@/components/ToDo";
 import ProjectNavbar from "@/components/ProjectNavbar";
-import { DndContext, useDraggable, useDroppable } from "@dnd-kit/core";
+import { DndContext, useDroppable } from "@dnd-kit/core";
 import { toast } from "react-toastify";
 
 function KanbanContainer({ status, tasks, id }) {
-  const { setNodeRef } = useDroppable({id: id})
+  const { setNodeRef } = useDroppable({ id: id });
   return (
     <section 
       className="py-[10px] px-6 space-y-2 bg-navy rounded-[20px] text-yellow"
       ref={setNodeRef} >
       <h1 className="text-center text-[22px] font-bold">{status}</h1>
-      {tasks.map(task => (<ToDoItem taskname={task.name} id={task._id} />))}
+      {tasks.map(task => (<ToDoItem key={task._id} taskname={task.name} id={task._id} />))}
     </section>
   );
 }
@@ -26,15 +26,16 @@ function KanbanContainer({ status, tasks, id }) {
 export default function Project() {
   const [view, setView] = useState("kanban");
   const [tasks, setTasks] = useState([]);
-  const [project, setProject] = useState({})
+  const [project, setProject] = useState({});
   const [openNewTaskModal, setOpenNewTaskModal] = useState(false);
   const router = useRouter();
   const { id } = router.query;
 
   const loadTaskData = () => {
+    if(id == null || id == undefined) return;
     axios
       .get(process.env.NEXT_PUBLIC_API_URL + "/project/" + id + "/tasks", 
-      { withCredentials: true })
+        { withCredentials: true })
       .then((res) => {
         console.log(res.data);
         setTasks(res.data.tasks);
@@ -42,13 +43,13 @@ export default function Project() {
       .catch((err) => {
         console.log(err);
       });
-  }
+  };
   useEffect(loadTaskData, [id]);
 
   const loadProjectData = () => {
     axios
       .get(process.env.NEXT_PUBLIC_API_URL + "/project/id/" + id, 
-      { withCredentials: true })
+        { withCredentials: true })
       .then((res) => {
         console.log(res.data);
         setProject(res.data.project);
@@ -56,21 +57,21 @@ export default function Project() {
       .catch((err) => {
         console.log(err);
       });
-  }
-  useEffect(loadProjectData, [id])
+  };
+  useEffect(loadProjectData, [id]);
   
-  const updateTaskStatus = ({active, over}) => {
+  const updateTaskStatus = ({ active, over }) => {
     if(over==null) return;
     axios.patch(process.env.NEXT_PUBLIC_API_URL + "/project/" + id + "/tasks/" + active.id, 
-    { status: over.id }, 
-    { withCredentials: true})
+      { status: over.id }, 
+      { withCredentials: true })
       .then(()=>{
         loadTaskData();
       })
       .catch(e => {
-        toast.error('error ' + e.message)
+        toast.error("error " + e.message);
       });
-  }
+  };
 
   return (
     <Layout>
@@ -89,9 +90,9 @@ export default function Project() {
           {view === "kanban" && (
             <section className="grid grid-cols-3 gap-10">
               <DndContext onDragEnd={updateTaskStatus}>
-                <KanbanContainer status="To Do" id="todo" tasks={tasks.filter(t => t.status == 'todo')} />
-                <KanbanContainer status="Doing" id="ongoing" tasks={tasks.filter(t => t.status == 'ongoing')} />
-                <KanbanContainer status="Done"  id="done" tasks={tasks.filter(t => t.status == 'done')} />
+                <KanbanContainer status="To Do" id="todo" tasks={tasks.filter(t => t.status == "todo")} />
+                <KanbanContainer status="Doing" id="ongoing" tasks={tasks.filter(t => t.status == "ongoing")} />
+                <KanbanContainer status="Done"  id="done" tasks={tasks.filter(t => t.status == "done")} />
               </DndContext>
             </section>
           )}
