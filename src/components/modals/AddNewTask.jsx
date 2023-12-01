@@ -3,19 +3,11 @@ import Button from "../Button";
 import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { setRequestMeta } from "next/dist/server/request-meta";
 
-export default function NewTaskModal({
-  isOpen,
-  onClose,
-  projectId,
-  onSuccess,
-  contributors,
-  setOpenModal,
-}) {
+export default function NewTaskModal({ isOpen, setOpenModal }) {
   Modal.setAppElement("#__next");
   const [searchQuery, setSearchQuery] = useState("");
-  const [assignees, setAssignees] = useState(["test"]);
+  const [assignees, setAssignees] = useState([]);
 
   const searchUser = () => {
     axios
@@ -29,37 +21,24 @@ export default function NewTaskModal({
         }
       )
       .then((res) => {
-        console.log(res.data);
         if (res.data.length === 0) {
           toast.error("No user found!");
           return;
         }
-        console.log(res.data);
-        const newAssignees = [...assignees, res.data.username];
-        console.log(newAssignees);
+        if(assignees.includes(res.data.username)) {
+          toast.error("User already added!");
+          return;
+        }
+        const newAssignees = [...assignees, {
+          emoticon: res.data.emoticon,
+          username: res.data.username,
+        }];
         setAssignees(newAssignees);
       })
-      .catch((err) => {
+      .catch(() => {
         toast.error("User not found!");
-        console.log(err);
+        // console.log(err);
       });
-  };
-
-  const colors = [
-    "bg-yellow",
-    "bg-[#C9A2EA]",
-    "bg-[#FFC5C5]",
-    "bg-[#A8C5D6]",
-    "bg-[#C9CAF4]",
-    "bg-[#D6A8CC]",
-    "bg-[#ACC9A2]",
-    "bg-[#D6A8A8]",
-    "bg-[#FFC5A8]",
-  ];
-
-  const getColor = (id) => {
-    const idx = id % 9;
-    return colors[idx];
   };
 
   return (
@@ -71,9 +50,9 @@ export default function NewTaskModal({
         className="w-full h-full absolute top-0"
         onClick={() => setOpenModal(false)}
       ></div>
-      <div className="bg-navy w-[90%] max-h-[90vh] overflow-y-scroll md:w-1/2 md:max-w-[600px] lg:max-w-[800px] p-8 rounded-[10px] relative z-[10]">
+      <div className="bg-navy w-[90%] max-h-[90vh] overflow-y-auto md:w-1/2 md:max-w-[600px] lg:max-w-[800px] p-8 rounded-[10px] relative z-[10]">
         <h1 className="text-yellow text-[32px] font-semibold text-center">
-          Create Project
+          Create Task
         </h1>
         <form
           onSubmit={(e) => {
@@ -112,13 +91,24 @@ export default function NewTaskModal({
           </label>
           <label className="flex flex-col gap-2.5">
             <div>
-            Assignees
+              Assignees
               <div className="flex gap-3">
-                {
-                  assignees.map((assignee, index) => {
-                    return <span className={`text-navy rounded-[5px] bg-purple-100 px-1 text-white`}  key={assignee}>{assignee} &times;</span>;
-                  })
-                }
+                {assignees.map((assignee, index) => {
+                  return (
+                    <div
+                      className={"rounded-[5px] py-1 bg-purple-100 px-2 text-white flex gap-2"}
+                      key={assignee.username}
+                    >
+                      <span>{assignee.emoticon} {assignee.username}</span> 
+                      <button className="hover:text-red-100 px-1" onClick={() => {
+                        console.log(assignee, index);
+                        const newAssignees = [...assignees];
+                        newAssignees.splice(index, 1);
+                        setAssignees(newAssignees);
+                      }}>&times;</button>
+                    </div>
+                  );
+                })}
               </div>
             </div>
             <div className="flex gap-3 bg-white w-full pl-1 pr-2 py-1 rounded-[4px]">
