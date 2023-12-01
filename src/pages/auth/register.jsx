@@ -13,6 +13,9 @@ export default function Register() {
   const [username, setUsername] = useState("");
   const [password, setPassowrd] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [isEmailValid, setEmailValid] = useState(true);
+  const [isUsernameValid, setUsernameValid] = useState(true);
+  const [isPasswordValid, setPasswordValid] = useState(true);
 
   return (
     <main
@@ -41,6 +44,15 @@ export default function Register() {
           onSubmit={(e) => {
             e.preventDefault();
             if(!name || !email || !username || !password || !confirmPassword) return toast.error("Please fill all the fields!");
+            if(!email.includes('@')) {
+              setEmailValid(false);
+              return toast.error("Invalid email format.");
+            }
+            if(username.length <= 8) {
+              setUsernameValid(false);
+              return toast.error("Username must be longer than 8 characters.");
+            }
+            if(password !== confirmPassword) return toast.error("Passwords don't match!");
             if((password !== confirmPassword)) return toast.error("Passwords don't match!");
             axios
               .post(process.env.NEXT_PUBLIC_API_URL + "/user/register", {
@@ -72,27 +84,45 @@ export default function Register() {
             Email
             <input
               type="email"
-              className="outline"
+              className={`outline ${isEmailValid ? '' : 'border-red-500'}`}
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                setEmailValid(e.target.value.includes('@'));
+              }}
             />
+            {!isEmailValid && (
+              <p className="text-red-500 text-[11px]">Invalid email format.</p>
+            )}
           </label>
           <label className="flex flex-col gap-1">
             Username
             <input
-              className="outline"
+              className={`outline ${isUsernameValid ? '' : 'border-red-500'}`}
               value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) => {
+                setUsername(e.target.value);
+                setUsernameValid(e.target.value.length > 8);
+              }}
             />
+            {!isUsernameValid && (
+              <p className="text-red-500 text-[11px]">Username must be longer than 8 characters.</p>
+            )}
           </label>
           <label className="flex flex-col gap-1">
             Password
             <input
               type="password"
-              className="outline"
+              className={`outline ${isPasswordValid ? '' : 'border-red-500'}`}
               value={password}
-              onChange={(e) => setPassowrd(e.target.value)}
+              onChange={(e) => {
+                setPassowrd(e.target.value);
+                setPasswordValid(e.target.value.length >= 8);
+              }}
             />
+            {!isPasswordValid && (
+              <p className="text-red-500 text-[11px]">Password must be at least 8 characters long.</p>
+            )}
           </label>
           <label type="password" className="flex flex-col gap-1">
             Confirm Password
