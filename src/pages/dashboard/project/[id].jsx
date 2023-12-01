@@ -8,12 +8,13 @@ import AddProjectButton from "@/components/AddProject";
 import NewTaskModal from "@/components/modals/AddNewTask";
 import ToDoItem from "@/components/ToDo";
 import ProjectNavbar from "@/components/ProjectNavbar";
+import { DndContext } from "@dnd-kit/core";
 
 function KanbanContainer({ status, tasks }) {
   return (
     <section className="py-[10px] px-6 space-y-2 bg-navy rounded-[20px] text-yellow">
       <h1 className="text-center text-[22px] font-bold">{status}</h1>
-      {tasks.map(task => (<ToDoItem taskname={task.name} />))}
+      {tasks.map(task => (<ToDoItem taskname={task.name} id={task._id} />))}
     </section>
   );
 }
@@ -71,9 +72,11 @@ export default function Project() {
           {/* //? Kanban View */}
           {view === "kanban" && (
             <section className="grid grid-cols-3 gap-10">
-              <KanbanContainer status="To Do" tasks={tasks.filter(t => t.status == 'todo')} />
-              <KanbanContainer status="Doing" tasks={tasks.filter(t => t.status == 'ongoing')} />
-              <KanbanContainer status="Done" tasks={tasks.filter(t => t.status == 'done')} />
+              <DndContext>
+                <KanbanContainer status="To Do" tasks={tasks.filter(t => t.status == 'todo')} />
+                <KanbanContainer status="Doing" tasks={tasks.filter(t => t.status == 'ongoing')} />
+                <KanbanContainer status="Done" tasks={tasks.filter(t => t.status == 'done')} />
+              </DndContext>
             </section>
           )}
 
