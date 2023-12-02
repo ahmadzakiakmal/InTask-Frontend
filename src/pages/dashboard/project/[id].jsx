@@ -15,11 +15,14 @@ import Cookies from "js-cookie";
 function KanbanContainer({ status, tasks, id }) {
   const { setNodeRef } = useDroppable({ id: id });
   return (
-    <section 
-      className="py-[10px] px-6 space-y-2 bg-navy rounded-[20px] text-yellow"
-      ref={setNodeRef} >
+    <section
+      className="pt-[10px] pb-5 px-6 space-y-2 bg-navy rounded-[20px] text-yellow"
+      ref={setNodeRef}
+    >
       <h1 className="text-center text-[22px] font-bold">{status}</h1>
-      {tasks.map(task => (<ToDoItem key={task._id} taskname={task.name} id={task._id} />))}
+      {tasks.map((task) => (
+        <ToDoItem key={task._id} taskname={task.name} id={task._id} />
+      ))}
     </section>
   );
 }
@@ -29,16 +32,18 @@ export default function Project() {
   const [tasks, setTasks] = useState([]);
   const [project, setProject] = useState({});
   const [openNewTaskModal, setOpenNewTaskModal] = useState(false);
+  const [refetch, setRefetch] = useState(false);
   const router = useRouter();
   const { id } = router.query;
-  
+
   const loadTaskData = () => {
     if (id !== undefined && id) {
       axios
-        .get(process.env.NEXT_PUBLIC_API_URL + "/project/" + id + "/tasks", 
-          { withCredentials: true })
+        .get(process.env.NEXT_PUBLIC_API_URL + "/project/" + id + "/tasks", {
+          withCredentials: true,
+        })
         .then((res) => {
-          // console.log("API Response for id:", id, res.data);
+          console.log(res.data.tasks);
           setTasks(res.data.tasks);
         })
         .catch((err) => {
@@ -53,14 +58,15 @@ export default function Project() {
         });
     }
   };
-  useEffect(loadTaskData, [router]);
+  useEffect(loadTaskData, [router, refetch]);
 
   const loadProjectData = () => {
     axios
-      .get(process.env.NEXT_PUBLIC_API_URL + "/project/id/" + id, 
-        { withCredentials: true })
+      .get(process.env.NEXT_PUBLIC_API_URL + "/project/id/" + id, {
+        withCredentials: true,
+      })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setProject(res.data.project);
       })
       .catch((err) => {
@@ -68,26 +74,42 @@ export default function Project() {
       });
   };
   useEffect(loadProjectData, [id]);
-  
+
   const updateTaskStatus = ({ active, over }) => {
-    if(over==null) return;
-    axios.patch(process.env.NEXT_PUBLIC_API_URL + "/project/" + id + "/tasks/" + active.id, 
-      { status: over.id }, 
-      { withCredentials: true })
-      .then(()=>{
+    if (over == null) return;
+    axios
+      .patch(
+        process.env.NEXT_PUBLIC_API_URL +
+          "/project/" +
+          id +
+          "/tasks/" +
+          active.id,
+        { status: over.id },
+        { withCredentials: true }
+      )
+      .then(() => {
         loadTaskData();
       })
-      .catch(e => {
+      .catch((e) => {
         toast.error("error " + e.message);
       });
   };
 
   return (
     <Layout>
-      <NewTaskModal isOpen={openNewTaskModal} setOpenModal={setOpenNewTaskModal} />
+      <NewTaskModal
+        isOpen={openNewTaskModal}
+        setOpenModal={setOpenNewTaskModal}
+        id={id}
+        onClose={() => setRefetch(!refetch)}
+      />
       <main className="relative flex flex-col h-full min-h-[90vh]">
         <ProjectNavbar
-          project={{ title: project.title, projectId: id, projectContributor: project.contributors }}
+          project={{
+            title: project.title,
+            projectId: id,
+            projectContributor: project.contributors,
+          }}
         />
         <h1>Select View: {view}</h1>
         <div className="flex gap-3 mb-4">
@@ -99,9 +121,21 @@ export default function Project() {
           {view === "kanban" && (
             <section className="grid grid-cols-3 gap-10">
               <DndContext onDragEnd={updateTaskStatus}>
-                <KanbanContainer status="To Do" id="todo" tasks={tasks.filter(t => t.status == "todo")} />
-                <KanbanContainer status="Doing" id="ongoing" tasks={tasks.filter(t => t.status == "ongoing")} />
-                <KanbanContainer status="Done"  id="done" tasks={tasks.filter(t => t.status == "done")} />
+                <KanbanContainer
+                  status="To Do"
+                  id="todo"
+                  tasks={tasks.filter((t) => t.status == "todo")}
+                />
+                <KanbanContainer
+                  status="Doing"
+                  id="ongoing"
+                  tasks={tasks.filter((t) => t.status == "ongoing")}
+                />
+                <KanbanContainer
+                  status="Done"
+                  id="done"
+                  tasks={tasks.filter((t) => t.status == "done")}
+                />
               </DndContext>
             </section>
           )}
