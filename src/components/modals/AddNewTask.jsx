@@ -4,10 +4,13 @@ import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-export default function NewTaskModal({ isOpen, setOpenModal }) {
+export default function NewTaskModal({ isOpen, setOpenModal, id, onClose }) {
   Modal.setAppElement("#__next");
   const [searchQuery, setSearchQuery] = useState("");
   const [assignees, setAssignees] = useState([]);
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [status, setStatus] = useState("To Do");
 
   const searchUser = () => {
     axios
@@ -25,14 +28,17 @@ export default function NewTaskModal({ isOpen, setOpenModal }) {
           toast.error("No user found!");
           return;
         }
-        if(assignees.includes(res.data.username)) {
+        if (assignees.includes(res.data.username)) {
           toast.error("User already added!");
           return;
         }
-        const newAssignees = [...assignees, {
-          emoticon: res.data.emoticon,
-          username: res.data.username,
-        }];
+        const newAssignees = [
+          ...assignees,
+          {
+            emoticon: res.data.emoticon,
+            username: res.data.username,
+          },
+        ];
         setAssignees(newAssignees);
       })
       .catch(() => {
@@ -41,9 +47,45 @@ export default function NewTaskModal({ isOpen, setOpenModal }) {
       });
   };
 
+  const postNewTask = () => {
+    console.log({
+      name,
+      description,
+      assignees: assignees.map((assignee) => assignee.username),
+      status: status.toLowerCase(),
+    });
+    axios
+      .post(
+        process.env.NEXT_PUBLIC_API_URL + "/project/" + id + "/tasks",
+        {
+          name,
+          description,
+          assignees: assignees.map((a) => {
+            return a.username;
+          }),
+          status: status.toLowerCase(),
+        },
+        { withCredentials: true }
+      )
+      .then(() => {
+        toast.success("New Task Created");
+        setOpenModal(false);
+        setName("");
+        setDescription("");
+        setStatus("To Do");
+        setAssignees([]);
+        onClose();
+      })
+      .catch((e) => {
+        toast.error("error " + e.message);
+        console.log(e);
+      });
+  };
+
   return (
     <Modal
       isOpen={isOpen}
+      // onClose={onClose}
       className="w-screen h-screen flex justify-center items-center rounded-[10px] absolute !z-[11] backdrop-blur-[8px] bg-navy/30"
     >
       <div
@@ -57,7 +99,7 @@ export default function NewTaskModal({ isOpen, setOpenModal }) {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            // createProject(e);
+            postNewTask();
           }}
           className="bg-yellow p-8 rounded-[5px] text-[20px] flex flex-col gap-4"
         >
@@ -65,27 +107,27 @@ export default function NewTaskModal({ isOpen, setOpenModal }) {
             Task Name
             <input
               className="focus:outline px-2 py-1 rounded-[4px]"
-              // value={title}
-              // onChange={(e) => setTitle(e.target.value)}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
           </label>
           <label className="flex flex-col gap-2.5">
             Task Description
             <textarea
               className="focus:outline px-2 py-1 rounded-[4px] max-h-[200px] min-h-[100px]"
-              // value={description}
-              // onChange={(e) => setDescription(e.target.value)}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
             />
           </label>
           <label className="flex flex-col gap-2.5">
             Task Status
             <select
               className="focus:outline px-2 py-1 rounded-[4px]"
-              // value={title}
-              // onChange={(e) => setTitle(e.target.value)}
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}
             >
-              <option value="To Do">To Do</option>
-              <option value="Doing">Doing</option>
+              <option value="ToDo">To Do</option>
+              <option value="OnGoing">Doing</option>
               <option value="Done">Done</option>
             </select>
           </label>
@@ -96,16 +138,25 @@ export default function NewTaskModal({ isOpen, setOpenModal }) {
                 {assignees.map((assignee, index) => {
                   return (
                     <div
-                      className={"rounded-[5px] py-1 bg-purple-100 px-2 text-white flex gap-2"}
+                      className={
+                        "rounded-[5px] py-1 bg-purple-100 px-2 text-white flex gap-2"
+                      }
                       key={assignee.username}
                     >
-                      <span>{assignee.emoticon} {assignee.username}</span> 
-                      <button className="hover:text-red-100 px-1" onClick={() => {
-                        console.log(assignee, index);
-                        const newAssignees = [...assignees];
-                        newAssignees.splice(index, 1);
-                        setAssignees(newAssignees);
-                      }}>&times;</button>
+                      <span>
+                        {assignee.emoticon} {assignee.username}
+                      </span>
+                      <button
+                        className="hover:text-red-100 px-1"
+                        onClick={() => {
+                          console.log(assignee, index);
+                          const newAssignees = [...assignees];
+                          newAssignees.splice(index, 1);
+                          setAssignees(newAssignees);
+                        }}
+                      >
+                        &times;
+                      </button>
                     </div>
                   );
                 })}
