@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { faPersonWalkingWithCane } from "@fortawesome/free-solid-svg-icons";
 
 export default function Register() {
   const router = useRouter();
@@ -44,16 +45,20 @@ export default function Register() {
           className="flex flex-col gap-2"
           onSubmit={(e) => {
             e.preventDefault();
-            if(!name || !email || !username || !password || !confirmPassword) return toast.error("Please fill all the fields!");
             if(!email.includes('@')) {
               setEmailValid(false);
-              return toast.error("Invalid email format.");
             }
-            if(username.length <= 8) {
+            if(username.length < 8) {
               setUsernameValid(false);
-              return toast.error("Username must be longer than 8 characters.");
             }
-            if(password !== confirmPassword) return toast.error("Passwords don't match!");
+            if(password.length < 8) {
+              setPasswordValid(false);
+            }
+            if(password !== confirmPassword) {
+              setConfirmPasswordValid(false);
+            }
+            if(!name || !email.includes('@') || username.length < 8 || password.length < 8 || confirmPassword !== password) return toast.error("Please fill all the fields!");
+            console.log(name + email + username + password)
             axios
               .post(process.env.NEXT_PUBLIC_API_URL + "/user/register", {
                 realName : name,
@@ -102,11 +107,11 @@ export default function Register() {
               value={username}
               onChange={(e) => {
                 setUsername(e.target.value);
-                setUsernameValid(e.target.value.length > 8);
+                setUsernameValid(e.target.value.length >= 8);
               }}
             />
             {!isUsernameValid && (
-              <p className="text-red-500 text-[11px]">Username must be longer than 8 characters.</p>
+              <p className="text-red-500 text-[11px]">Username must be at least 8 characters long.</p>
             )}
           </label>
           <label className="flex flex-col gap-1">
@@ -128,10 +133,16 @@ export default function Register() {
             Confirm Password
             <input
               type="password"
-              className="outline"
+              className={`outline ${isConfirmPasswordValid ? '' : 'border-red-500'}`}
               value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              onChange={(e) => {
+                setConfirmPassword(e.target.value)
+                setConfirmPasswordValid(e.target.value === password)
+              }}
             />
+            {!isConfirmPasswordValid && (
+              <p className="text-red-500 text-[11px]">Password must match.</p>
+            )}
           </label>
           <p className="text-[14px]">
             {" "}
