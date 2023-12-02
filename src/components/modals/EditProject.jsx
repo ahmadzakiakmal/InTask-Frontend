@@ -22,7 +22,7 @@ export default function EditProjectModal({
 
   function updateProject(e) {
     e.preventDefault();
-    axios.put(process.env.NEXT_PUBLIC_API_URL + "/project/" + project._id, {
+    axios.put(process.env.NEXT_PUBLIC_API_URL + "/project/" + project.projectId, {
         title, description
     }, {
         withCredentials: true

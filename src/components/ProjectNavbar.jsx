@@ -8,11 +8,13 @@ import { useEffect, useRef } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
+import EditProjectModal from "./modals/EditProject";
 
 export default function ProjectNavbar({ project }) {
   const [isAddFriendOpen, setIsAddFriendOpen] = useState(false);
   const [isRemoveFriendOpen, setIsRemoveFriendOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isEditProjectOpen, setOpenEditProject] = useState(false);
   const [contributors, setContributors] = useState([]);
   const dropdownRef = useRef(null);
   const router = useRouter();
@@ -78,6 +80,11 @@ export default function ProjectNavbar({ project }) {
 
   return (
     <section className="shadow-md p-4 font-semibold rounded-[20px] w-full border-2 border-gray-300 gap-4 flex items-center">
+      <EditProjectModal
+        isOpen={isEditProjectOpen}
+        setOpenModal={setOpenEditProject}
+        project={project}
+      />
       <div className="float-left">
         <Link href="/dashboard">
           <span className="text-3xl">{project?.title ?? "Task"}</span>
@@ -99,8 +106,10 @@ export default function ProjectNavbar({ project }) {
           <RemoveFriendModal isOpen={isRemoveFriendOpen} onClose={handleCloseRemoveFriendModal} projectId={project?.projectId} projectContributor={contributors} onUpdateContributors={loadProjectContributors}/>
         </li>
         <li className="hidden lg:block cursor-pointer hover:text-blue-500">
-          <FontAwesomeIcon icon={faListUl} />
-          <span className="ml-2">Add another list</span>
+          <button onClick={() => setOpenEditProject(true)}>
+            <FontAwesomeIcon icon={faListUl} />
+            <span className="ml-2">Edit Project</span>
+          </button>
         </li>
         <li className="lg:hidden cursor-pointer text-[18px]" onClick={handleToggleDropdown} ref={dropdownRef}>
           <FontAwesomeIcon icon={faBars} className="text-[22px] xs:text-[16px]"/>

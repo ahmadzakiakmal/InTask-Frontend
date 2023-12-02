@@ -11,6 +11,7 @@ import ProjectNavbar from "@/components/ProjectNavbar";
 import { DndContext, useDroppable } from "@dnd-kit/core";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
+import EditProjectModal from "@/components/modals/EditProject";
 
 function KanbanContainer({ status, tasks, id, initialStatus, setInitialStatus, openModal }) {
   const { setNodeRef } = useDroppable({ id: id });
@@ -60,6 +61,7 @@ export default function Project() {
   const [openNewTaskModal, setOpenNewTaskModal] = useState(false);
   const [refetch, setRefetch] = useState(false);
   const [initialStatus, setInitialStatus] = useState("apcb");
+
   const router = useRouter();
   const { id } = router.query;
 
@@ -138,6 +140,7 @@ export default function Project() {
           project={{
             title: project.title,
             projectId: id,
+            description: project.description
           }}
         />
         <div className="flex items-center gap-3 my-4">
