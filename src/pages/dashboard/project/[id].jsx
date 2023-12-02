@@ -137,6 +137,7 @@ export default function Project() {
       />
       <main className="relative flex flex-col h-full min-h-[90vh]">
         <ProjectNavbar
+          onEdit={()=>loadProjectData()}
           project={{
             title: project.title,
             projectId: id,

@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import EditProjectModal from "./modals/EditProject";
 
-export default function ProjectNavbar({ project }) {
+export default function ProjectNavbar({ project, onEdit }) {
   const [isAddFriendOpen, setIsAddFriendOpen] = useState(false);
   const [isRemoveFriendOpen, setIsRemoveFriendOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -84,6 +84,7 @@ export default function ProjectNavbar({ project }) {
         isOpen={isEditProjectOpen}
         setOpenModal={setOpenEditProject}
         project={project}
+        onEdit={onEdit}
       />
       <div className="float-left">
         <Link href="/dashboard">

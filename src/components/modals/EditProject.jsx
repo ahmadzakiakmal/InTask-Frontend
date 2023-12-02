@@ -7,7 +7,8 @@ import { toast } from "react-toastify";
 export default function EditProjectModal({
   isOpen,
   setOpenModal,
-  project
+  project,
+  onEdit
 }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -28,6 +29,7 @@ export default function EditProjectModal({
         withCredentials: true
     })
     .then((res) => {
+        onEdit();
         setOpenModal(false);
         toast.success("Project updated")
     })
