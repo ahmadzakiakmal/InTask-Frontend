@@ -1,16 +1,28 @@
 import Modal from "react-modal";
 import Button from "../Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-export default function NewTaskModal({ isOpen, setOpenModal, id, onClose }) {
+export default function NewTaskModal({
+  isOpen,
+  setOpenModal,
+  id,
+  onClose,
+  initialStatus,
+}) {
   Modal.setAppElement("#__next");
   const [searchQuery, setSearchQuery] = useState("");
   const [assignees, setAssignees] = useState([]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [status, setStatus] = useState("To Do");
+  const [status, setStatus] = useState(initialStatus);
+  const [openDropdown, setOpenDropdown] = useState(false);
+
+  useEffect(() => {
+    setStatus(initialStatus);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen]);
 
   const searchUser = () => {
     axios
@@ -66,7 +78,7 @@ export default function NewTaskModal({ isOpen, setOpenModal, id, onClose }) {
         setOpenModal(false);
         setName("");
         setDescription("");
-        setStatus("To Do");
+        setStatus("ToDo");
         setAssignees([]);
         onClose();
       })
@@ -115,7 +127,7 @@ export default function NewTaskModal({ isOpen, setOpenModal, id, onClose }) {
           </label>
           <label className="flex flex-col gap-2.5">
             Task Status
-            <select
+            {/* <select
               className="focus:outline px-2 py-1 rounded-[4px]"
               value={status}
               onChange={(e) => setStatus(e.target.value)}
@@ -123,7 +135,50 @@ export default function NewTaskModal({ isOpen, setOpenModal, id, onClose }) {
               <option value="ToDo">To Do</option>
               <option value="OnGoing">Doing</option>
               <option value="Done">Done</option>
-            </select>
+            </select> */}
+            <div
+              className="bg-white w-full rounded-[4px] px-2 py-1 relative cursor-pointer select-none"
+              onClick={() => {
+                setOpenDropdown(!openDropdown);
+              }}
+            >
+              <p>
+                {
+                  status.toLowerCase() === "todo" && "To Do"
+                }
+                {
+                  status.toLowerCase() === "ongoing" && "Doing"
+                }
+                {
+                  status.toLowerCase() === "done" && "Done"
+                }
+              </p>
+              <div
+                className={
+                  "bg-white shadow-[0_0_5px_rgba(0,0,0,.6)] rounded-[5px] absolute top-[calc(100%+10px)] left-0 " +
+                  (openDropdown ? "" : "hidden")
+                }
+              >
+                <p
+                  className="hover:bg-navy/10 px-5 py-2 cursor-pointer "
+                  onClick={() => setStatus("ToDo")}
+                >
+                  ToDo
+                </p>
+                <p
+                  className="hover:bg-navy/10 px-5 py-2 cursor-pointer "
+                  onClick={() => setStatus("ongoing")}
+                >
+                  Doing
+                </p>
+                <p
+                  className="hover:bg-navy/10 px-5 py-2 cursor-pointer "
+                  onClick={() => setStatus("Done")}
+                >
+                  Done
+                </p>
+              </div>
+            </div>
           </label>
           <label className="flex flex-col gap-2.5">
             <div>

@@ -12,21 +12,43 @@ import { DndContext, useDroppable } from "@dnd-kit/core";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 
-function KanbanContainer({
-  status,
-  tasks,
-  id,
-}) {
+function KanbanContainer({ status, tasks, id, initialStatus, setInitialStatus, openModal }) {
   const { setNodeRef } = useDroppable({ id: id });
   return (
     <section
-      className="pt-[10px] pb-5 px-6 space-y-2 bg-navy rounded-[20px] text-yellow"
+      className="pt-[10px] pb-5 px-6 space-y-2 bg-navy rounded-[20px] text-yellow h-min"
       ref={setNodeRef}
     >
       <h1 className="text-center text-[22px] font-bold">{status}</h1>
       {tasks.map((task) => (
-        <ToDoItem key={task._id} taskname={task.name} id={task._id} desc={task.description} />
+        <ToDoItem
+          key={task._id}
+          taskname={task.name}
+          id={task._id}
+          desc={task.description}
+        />
       ))}
+      <button className="flex items-center gap-2 p-[10px] hover:bg-yellow/10 w-full rounded-[10px] transition" onClick={() => {
+        setInitialStatus(initialStatus);
+        openModal();
+      }}>
+        <svg
+          width="25"
+          height="24"
+          viewBox="0 0 25 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M12.5 5.25V18.75M19.25 12H5.75"
+            stroke="#D6D5A8"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+        <span>Add a task</span>
+      </button>
     </section>
   );
 }
@@ -37,6 +59,7 @@ export default function Project() {
   const [project, setProject] = useState({});
   const [openNewTaskModal, setOpenNewTaskModal] = useState(false);
   const [refetch, setRefetch] = useState(false);
+  const [initialStatus, setInitialStatus] = useState("apcb");
   const router = useRouter();
   const { id } = router.query;
 
@@ -108,6 +131,7 @@ export default function Project() {
         setOpenModal={setOpenNewTaskModal}
         id={id}
         onClose={() => setRefetch(!refetch)}
+        initialStatus={initialStatus}
       />
       <main className="relative flex flex-col h-full min-h-[90vh]">
         <ProjectNavbar
@@ -117,7 +141,7 @@ export default function Project() {
           }}
         />
         <div className="flex items-center gap-3 my-4">
-          <h1 className="font-bold text-[20px]">Select View: </h1>
+          <h1 className="font-bold text-[20px]">{initialStatus} Select View: </h1>
           <Button text="Kanban" onClick={() => setView("kanban")} />
           <Button text="Table" onClick={() => setView("table")} />
         </div>
@@ -130,16 +154,25 @@ export default function Project() {
                   status="To Do"
                   id="todo"
                   tasks={tasks.filter((t) => t.status == "todo")}
+                  initialStatus="ToDo"
+                  setInitialStatus={setInitialStatus}
+                  openModal={() => setOpenNewTaskModal(true)}
                 />
                 <KanbanContainer
                   status="Doing"
                   id="ongoing"
                   tasks={tasks.filter((t) => t.status == "ongoing")}
+                  initialStatus="ongoing"
+                  setInitialStatus={setInitialStatus}
+                  openModal={() => setOpenNewTaskModal(true)}
                 />
                 <KanbanContainer
                   status="Done"
                   id="done"
                   tasks={tasks.filter((t) => t.status == "done")}
+                  initialStatus="Done"
+                  setInitialStatus={setInitialStatus}
+                  openModal={() => setOpenNewTaskModal(true)}
                 />
               </DndContext>
             </section>
