@@ -10,6 +10,7 @@ import ToDoItem from "@/components/ToDo";
 import ProjectNavbar from "@/components/ProjectNavbar";
 import { DndContext, useDroppable } from "@dnd-kit/core";
 import { toast } from "react-toastify";
+import Cookies from "js-cookie";
 
 function KanbanContainer({ status, tasks, id }) {
   const { setNodeRef } = useDroppable({ id: id });
@@ -29,22 +30,28 @@ export default function Project() {
   const [project, setProject] = useState({});
   const [openNewTaskModal, setOpenNewTaskModal] = useState(false);
   const router = useRouter();
-  const [id, setId] = useState(router.query.id);
+  const { id } = router.query;
   
   const loadTaskData = () => {
-    setId(router.query.id);
-    console.log(id);
-    if(id !== undefined){
+    if (id !== undefined && id) {
       axios
         .get(process.env.NEXT_PUBLIC_API_URL + "/project/" + id + "/tasks", 
           { withCredentials: true })
         .then((res) => {
-          console.log(res.data);
+          // console.log("API Response for id:", id, res.data);
           setTasks(res.data.tasks);
         })
         .catch((err) => {
-          console.log(err);
-        });}
+          // console.log("API Error for id:", id, err);
+          if (err.response.status === 401) {
+            localStorage.clear();
+            Cookies.remove("Authorization");
+            router.push("/auth/login");
+            return toast.error("Session Expired! Please login again.");
+          }
+          toast.error("An error occurred!");
+        });
+    }
   };
   useEffect(loadTaskData, [router]);
 
