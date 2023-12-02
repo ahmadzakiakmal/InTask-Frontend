@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 
 export default function AddFriendModal ({ isOpen, onClose, projectId }) {
   const [identifier, setIdentifier] = useState("");
-  const [options, setOptions] = useState([])
+  const [options, setOptions] = useState([]);
 
   const handleAddFriend = async () => {
     try {
@@ -31,13 +31,13 @@ export default function AddFriendModal ({ isOpen, onClose, projectId }) {
 
   const searchOption = () => {
     if(!identifier)
-      setOptions([])
+      setOptions([]);
     else
       axios.get(process.env.NEXT_PUBLIC_API_URL + "/user/search/" + identifier)
       .then(response =>{
-        setOptions([...response.data, ...response.data]);  
+        setOptions(response.data);  
       })
-      .catch(err => toast.info(err.message))
+      .catch(err => toast.info(err.message));
   };
   useEffect(searchOption, [identifier]);
 
@@ -79,7 +79,8 @@ export default function AddFriendModal ({ isOpen, onClose, projectId }) {
           list="users"
         />
         {options.map(user=>(
-          <p onClick={()=>setIdentifier(user.username)}
+          <p key={user._id}
+            onClick={()=>setIdentifier(user.username)}
             className="hover:cursor-pointer hover:font-bold my-1">
             {user.emoticon} {user.username}
           </p>
