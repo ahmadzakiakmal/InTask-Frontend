@@ -52,7 +52,7 @@ export default function Login() {
           <label className="flex flex-col gap-1">
             Username / Email
             <input 
-              className="outline" 
+              className="outline rounded-[3px]" 
               value={identifier}
               onChange={(e) => setIdentifier(e.target.value)} 
             />
@@ -60,7 +60,7 @@ export default function Login() {
           <label className="flex flex-col gap-1">
             Password
             <input 
-              className="outline" 
+              className="outline rounded-[3px]" 
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}

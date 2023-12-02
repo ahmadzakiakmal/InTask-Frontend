@@ -79,7 +79,7 @@ export default function Register() {
           <label className="flex flex-col gap-1">
             Name
             <input
-              className="outline"
+              className="outline rounded-[3px]"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
@@ -88,7 +88,7 @@ export default function Register() {
             Email
             <input
               type="email"
-              className={`outline ${isEmailValid ? '' : 'border-red-500'}`}
+              className={`outline ${isEmailValid ? '' : 'outline-red-500'} rounded-[3px]`}
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
@@ -102,7 +102,7 @@ export default function Register() {
           <label className="flex flex-col gap-1">
             Username
             <input
-              className={`outline ${isUsernameValid ? '' : 'border-red-500'}`}
+              className={`outline ${isUsernameValid ? '' : 'outline-red-500'} rounded-[3px]`}
               value={username}
               onChange={(e) => {
                 setUsername(e.target.value);
@@ -117,7 +117,7 @@ export default function Register() {
             Password
             <input
               type="password"
-              className={`outline ${isPasswordValid ? '' : 'border-red-500'}`}
+              className={`outline ${isPasswordValid ? '' : 'outline-red-500'} rounded-[3px]`}
               value={password}
               onChange={(e) => {
                 setPassword(e.target.value);
@@ -132,7 +132,7 @@ export default function Register() {
             Confirm Password
             <input
               type="password"
-              className={`outline ${isConfirmPasswordValid ? '' : 'border-red-500'}`}
+              className={`outline ${isConfirmPasswordValid ? '' : 'outline-red-500'} rounded-[3px]`}
               value={confirmPassword}
               onChange={(e) => {
                 setConfirmPassword(e.target.value)
