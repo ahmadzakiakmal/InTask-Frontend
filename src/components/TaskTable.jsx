@@ -3,7 +3,6 @@ import ToDoItemRow from "./ToDoItemRow";
 export default function TaskTable({ tasks, projectId, onEdit }){
   return (
     <div className="flex flex-col justify-center items-center w-full">
-      <h2 className="text-center">Table & ToDoItemRow & StatusBadge</h2>
       <table className="w-full bg-navy text-yellow">
         <tbody>
           <tr className="border-b border-yellow">

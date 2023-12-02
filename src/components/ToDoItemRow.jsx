@@ -22,7 +22,7 @@ export default function ToDoItemRow({ task, projectId, onSuccess }) {
   };
 
   return (
-    <tr className="mb-2">
+    <tr className="mb-2 bg-white/5">
       <td className="text-center w-[60px] py-2 border-r border-yellow">1</td>
       <td className="px-2 border-r border-yellow">{task?.name ?? "Discussion"}</td>
       <td className="text-center border-r border-yellow">{task?.assignees?.map(as =>("🤡 " + as + " "))}</td>
