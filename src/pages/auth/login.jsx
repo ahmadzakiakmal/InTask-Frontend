@@ -67,7 +67,7 @@ export default function Login() {
             />
           </label>
           <p className="text-[14px]">Don&apos;t have an account? <Link href="/auth/register" className="underline">Register</Link>.</p>
-          <button type="submit" className="outline py-1">Log In</button>
+          <button type="submit" className="outline py-1 rounded-[3px]">Log In</button>
         </form>
       </section>
     </main>

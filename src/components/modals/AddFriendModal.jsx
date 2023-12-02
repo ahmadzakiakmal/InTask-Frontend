@@ -18,6 +18,8 @@ export default function AddFriendModal ({ isOpen, onClose, projectId }) {
         }
       );
       toast.success(response.data.message);
+      setIdentifier("");
+      setOptions([]);
       onClose();
     } catch (error) {
       // console.error(error);

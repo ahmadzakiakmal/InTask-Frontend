@@ -151,7 +151,7 @@ export default function Register() {
             </Link>
             .
           </p>
-          <button type="submit" className="outline py-1">
+          <button type="submit" className="outline py-1 rounded-[3px]">
             Register
           </button>
         </form>

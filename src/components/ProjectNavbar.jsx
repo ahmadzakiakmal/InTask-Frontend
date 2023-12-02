@@ -5,12 +5,38 @@ import { useState } from "react";
 import AddFriendModal from "./modals/AddFriendModal";
 import RemoveFriendModal from "./modals/RemoveFriendModal";
 import { useEffect, useRef } from "react";
+import axios from "axios";
 
 export default function ProjectNavbar({ project }) {
   const [isAddFriendOpen, setIsAddFriendOpen] = useState(false);
   const [isRemoveFriendOpen, setIsRemoveFriendOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [contributors, setContributors] = useState([]);
   const dropdownRef = useRef(null);
+
+  const loadProjectContributors = () => {
+    if (project.projectId !== undefined && project.projectId) {
+      axios
+        .get(process.env.NEXT_PUBLIC_API_URL + "/project/" + project.projectId + "/contributors", {
+          withCredentials: true,
+        })
+        .then((res) => {
+          setContributors(res.data.contributors);
+        })
+        .catch((err) => {
+          if (err.response.status === 401) {
+            localStorage.clear();
+            Cookies.remove("Authorization");
+            router.push("/auth/login");
+            return toast.error("Session Expired! Please login again.");
+          }
+          toast.error("An error occurred!");
+        });
+    }
+  };
+  useEffect(() => {
+    loadProjectContributors();
+  }, [project.projectId]);  
 
   const handleOpenAddFriendModal = () => {
     setIsAddFriendOpen(true);
@@ -22,6 +48,7 @@ export default function ProjectNavbar({ project }) {
 
   const handleOpenRemoveFriendModal = () => {
     setIsRemoveFriendOpen(true);
+    loadProjectContributors();
   };
 
   const handleCloseRemoveFriendModal = () => {
@@ -66,7 +93,7 @@ export default function ProjectNavbar({ project }) {
             <FontAwesomeIcon icon={faUserXmark} />
             <span className="ml-2">Remove Friend</span>
           </button>
-          <RemoveFriendModal isOpen={isRemoveFriendOpen} onClose={handleCloseRemoveFriendModal} projectId={project?.projectId} projectContributor={project?.projectContributor}/>
+          <RemoveFriendModal isOpen={isRemoveFriendOpen} onClose={handleCloseRemoveFriendModal} projectId={project?.projectId} projectContributor={contributors} onUpdateContributors={loadProjectContributors}/>
         </li>
         <li className="hidden lg:block cursor-pointer hover:text-blue-500">
           <FontAwesomeIcon icon={faListUl} />

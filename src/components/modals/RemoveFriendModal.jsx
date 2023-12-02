@@ -4,7 +4,7 @@ import Button from "../Button";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-export default function RemoveFriendModal({ isOpen, onClose, projectId, projectContributor }) {
+export default function RemoveFriendModal({ isOpen, onClose, projectId, projectContributor, onUpdateContributors }) {
   const [selectedFriends, setSelectedFriends] = useState([]);
   const [friends, setFriends] = useState([]);
 
@@ -39,7 +39,6 @@ export default function RemoveFriendModal({ isOpen, onClose, projectId, projectC
   };
 
   const handleRemoveFriend = (e) => {
-    console.log(selectedFriends.toString());
     axios
       .delete(process.env.NEXT_PUBLIC_API_URL + `/project/${projectId}/contributors/${selectedFriends.toString()}`, {
         withCredentials: true,
@@ -52,6 +51,7 @@ export default function RemoveFriendModal({ isOpen, onClose, projectId, projectC
         console.log(err);
         toast.error("An error occurred while deleting contributors");
       });
+    onUpdateContributors();
   };
 
   useEffect(() => {
