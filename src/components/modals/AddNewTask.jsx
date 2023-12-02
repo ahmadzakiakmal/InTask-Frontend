@@ -195,17 +195,16 @@ export default function NewTaskModal({
                       <span>
                         {assignee.emoticon} {assignee.username}
                       </span>
-                      <button
-                        className="hover:text-red-100 px-1"
+                      <div
+                        className="hover:text-red-200 px-1 block w-min cursor-pointer"
                         onClick={() => {
-                          // ! TODO: FIX DELETE ASSIGNEE BUG
                           const newAssignees = [...assignees];
                           newAssignees.splice(index, 1);
                           setAssignees(newAssignees);
                         }}
                       >
                         &times;
-                      </button>
+                      </div>
                     </div>
                   );
                 })}
