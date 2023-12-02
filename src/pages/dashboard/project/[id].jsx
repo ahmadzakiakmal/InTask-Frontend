@@ -43,7 +43,7 @@ export default function Project() {
           withCredentials: true,
         })
         .then((res) => {
-          console.log(res.data.tasks);
+          // console.log(res.data.tasks);
           setTasks(res.data.tasks);
         })
         .catch((err) => {
@@ -58,6 +58,7 @@ export default function Project() {
         });
     }
   };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(loadTaskData, [router, refetch]);
 
   const loadProjectData = () => {
@@ -69,8 +70,9 @@ export default function Project() {
         // console.log(res.data);
         setProject(res.data.project);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
+        // console.log(err);
+        toast.error("An error occurred while fetching project data.");
       });
   };
   useEffect(loadProjectData, [id]);
