@@ -11,11 +11,12 @@ export default function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
-  const [password, setPassowrd] = useState("");
+  const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isEmailValid, setEmailValid] = useState(true);
   const [isUsernameValid, setUsernameValid] = useState(true);
   const [isPasswordValid, setPasswordValid] = useState(true);
+  const [isConfirmPasswordValid, setConfirmPasswordValid] = useState(true)
 
   return (
     <main
@@ -53,7 +54,6 @@ export default function Register() {
               return toast.error("Username must be longer than 8 characters.");
             }
             if(password !== confirmPassword) return toast.error("Passwords don't match!");
-            if((password !== confirmPassword)) return toast.error("Passwords don't match!");
             axios
               .post(process.env.NEXT_PUBLIC_API_URL + "/user/register", {
                 realName : name,
@@ -116,7 +116,7 @@ export default function Register() {
               className={`outline ${isPasswordValid ? '' : 'border-red-500'}`}
               value={password}
               onChange={(e) => {
-                setPassowrd(e.target.value);
+                setPassword(e.target.value);
                 setPasswordValid(e.target.value.length >= 8);
               }}
             />
