@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import Button from "../Button";
 import axios from "axios";
@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 
 export default function AddFriendModal ({ isOpen, onClose, projectId }) {
   const [identifier, setIdentifier] = useState("");
+  const [options, setOptions] = useState([])
 
   const handleAddFriend = async () => {
     try {
@@ -27,6 +28,18 @@ export default function AddFriendModal ({ isOpen, onClose, projectId }) {
       }
     }
   };
+
+  const searchOption = () => {
+    if(!identifier)
+      setOptions([])
+    else
+      axios.get(process.env.NEXT_PUBLIC_API_URL + "/user/search/" + identifier)
+      .then(response =>{
+        setOptions([...response.data, ...response.data]);  
+      })
+      .catch(err => toast.info(err.message))
+  };
+  useEffect(searchOption, [identifier]);
 
   return (
     <Modal
@@ -63,7 +76,14 @@ export default function AddFriendModal ({ isOpen, onClose, projectId }) {
           placeholder="Email Address or Name"
           value={identifier}
           onChange={(e) => setIdentifier(e.target.value)}
+          list="users"
         />
+        {options.map(user=>(
+          <p onClick={()=>setIdentifier(user.username)}
+            className="hover:cursor-pointer hover:font-bold my-1">
+            {user.emoticon} {user.username}
+          </p>
+        ))}
       </body>
       <div className="flex justify-end w-[95%]" onClick={handleAddFriend} >
         <Button className="mr-2" text="Add"/>
