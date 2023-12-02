@@ -8,6 +8,7 @@ export default function ProjectCardComponent({
   projectId,
   projectContributor,
   id,
+  owner
 }) {
   const router = useRouter();
 
@@ -45,7 +46,10 @@ export default function ProjectCardComponent({
         >
           <span className="font-semibold">{title}</span>
         </div>
-        <div className="w-full h-fit px-3 py-4 text-white">{description}</div>
+        <div className="w-full h-fit px-3 py-4 text-white">
+          <p>Owner: {owner}</p>
+          <p>{description}</p>
+        </div>
       </div>
     </Link>
   );

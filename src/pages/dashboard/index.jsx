@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 
 export default function Dashboard() {
   const [projects, setProjects] = useState([]);
+  const [owners, setOwners] = useState([]); 
   const [username, setUsername] = useState("");
   const [openModal, setOpenModal] = useState(false);
   const router = useRouter();
@@ -35,8 +36,9 @@ export default function Dashboard() {
           }
         )
         .then((res) => {
-          // console.log(res.data.projects);
+          console.log(res.data.projects);
           setProjects(res.data.projects);
+          setOwners(res.data.owners);
         })
         .catch((err) => {
           // console.log(err);
@@ -93,6 +95,7 @@ export default function Dashboard() {
                     color={getColor(id)}
                     projectId={project._id}
                     projectContributor={project.contributors}
+                    owner={owners[id]}
                   />
                 );
               })}
