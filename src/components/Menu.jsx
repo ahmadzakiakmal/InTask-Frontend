@@ -21,7 +21,7 @@ export default function MenuComponent() {
         <li>
           <Link
             href="/dashboard"
-            className={`py-2 px-3 cursor-pointer flex items-center gap-4 justify-center md:justify-start rounded-[10px] ${
+            className={`py-2 px-3 cursor-pointer flex items-center gap-4 justify-center md:justify-start rounded-[10px]  transition hover:bg-white/20 ${
               pathname === "/dashboard" ? "bg-white/10" : ""
             }`}
           >
@@ -56,7 +56,7 @@ export default function MenuComponent() {
         <li>
           <Link
             href="/dashboard/user"
-            className={`py-2 px-3 cursor-pointer flex items-center gap-4 justify-center md:justify-start rounded-[10px] ${
+            className={`py-2 px-3 cursor-pointer flex items-center gap-4 justify-center md:justify-start rounded-[10px]  transition hover:bg-white/20 ${
               pathname === "/dashboard/user" ? "bg-white/10" : ""
             }`}
           >
@@ -78,7 +78,7 @@ export default function MenuComponent() {
         <li>
           <Link
             href="/"
-            className="py-2 px-3 cursor-pointer flex items-center gap-4 justify-center md:justify-start rounded-[10px] bg-white/10"
+            className="py-2 px-3 cursor-pointer flex items-center gap-4 justify-center md:justify-start rounded-[10px] transition hover:bg-white/20"
             onClick={() => {
               Cookies.remove("Authorization");
               localStorage.removeItem("username");
