@@ -58,7 +58,6 @@ export default function Register() {
               setConfirmPasswordValid(false);
             }
             if(!name || !email.includes('@') || username.length < 8 || password.length < 8 || confirmPassword !== password) return toast.error("Please fill all the fields!");
-            console.log(name + email + username + password)
             axios
               .post(process.env.NEXT_PUBLIC_API_URL + "/user/register", {
                 realName : name,
