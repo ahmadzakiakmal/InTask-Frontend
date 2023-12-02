@@ -6,6 +6,8 @@ import AddFriendModal from "./modals/AddFriendModal";
 import RemoveFriendModal from "./modals/RemoveFriendModal";
 import { useEffect, useRef } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
 export default function ProjectNavbar({ project }) {
   const [isAddFriendOpen, setIsAddFriendOpen] = useState(false);
@@ -13,6 +15,7 @@ export default function ProjectNavbar({ project }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [contributors, setContributors] = useState([]);
   const dropdownRef = useRef(null);
+  const router = useRouter();
 
   const loadProjectContributors = () => {
     if (project.projectId !== undefined && project.projectId) {
