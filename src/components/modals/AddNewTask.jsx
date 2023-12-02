@@ -48,12 +48,6 @@ export default function NewTaskModal({ isOpen, setOpenModal, id, onClose }) {
   };
 
   const postNewTask = () => {
-    console.log({
-      name,
-      description,
-      assignees: assignees.map((assignee) => assignee.username),
-      status: status.toLowerCase(),
-    });
     axios
       .post(
         process.env.NEXT_PUBLIC_API_URL + "/project/" + id + "/tasks",
@@ -78,7 +72,7 @@ export default function NewTaskModal({ isOpen, setOpenModal, id, onClose }) {
       })
       .catch((e) => {
         toast.error("error " + e.message);
-        console.log(e);
+        // console.log(e);
       });
   };
 
@@ -149,7 +143,7 @@ export default function NewTaskModal({ isOpen, setOpenModal, id, onClose }) {
                       <button
                         className="hover:text-red-100 px-1"
                         onClick={() => {
-                          console.log(assignee, index);
+                          // ! TODO: FIX DELETE ASSIGNEE BUG
                           const newAssignees = [...assignees];
                           newAssignees.splice(index, 1);
                           setAssignees(newAssignees);
