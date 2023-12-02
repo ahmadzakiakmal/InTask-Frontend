@@ -1,7 +1,8 @@
 import { useDraggable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
+import Button from "./Button";
 
-export default function ToDoItem({ taskname, id }) {
+export default function ToDoItem({ taskname, id, desc }) {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: id
   });
@@ -15,7 +16,9 @@ export default function ToDoItem({ taskname, id }) {
       ref={setNodeRef} 
       {...listeners} 
       {...attributes}>
-      <span style = {{ fontSize:"16px", fontWeight:"regular", color: "#D6D5A8" }}>{taskname}</span>
+      <span className="text-[18px] font-semibold">{taskname}</span>
+      <hr className="my-1" />
+      <p>{desc}</p>
     </button>
   );
 }

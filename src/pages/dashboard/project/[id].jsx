@@ -12,7 +12,11 @@ import { DndContext, useDroppable } from "@dnd-kit/core";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 
-function KanbanContainer({ status, tasks, id }) {
+function KanbanContainer({
+  status,
+  tasks,
+  id,
+}) {
   const { setNodeRef } = useDroppable({ id: id });
   return (
     <section
@@ -21,7 +25,7 @@ function KanbanContainer({ status, tasks, id }) {
     >
       <h1 className="text-center text-[22px] font-bold">{status}</h1>
       {tasks.map((task) => (
-        <ToDoItem key={task._id} taskname={task.name} id={task._id} />
+        <ToDoItem key={task._id} taskname={task.name} id={task._id} desc={task.description} />
       ))}
     </section>
   );
