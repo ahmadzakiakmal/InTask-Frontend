@@ -41,7 +41,7 @@ export default function ToDoItemRow({ task, projectId, onSuccess }) {
           taskname={task?.name}
           taskId={task?._id} />
       </td>
-      <td className="mb-2 bg-red-900 border-l border-b border-yellow">
+      <td className="mb-2 bg-red-900 hover:bg-red-800 transition border-l border-b border-yellow cursor-pointer">
         <button className="w-full" onClick={handleDelete}>
           <FontAwesomeIcon icon={faTrashCan} style={{ color: "#ffffff" }} />
         </button>

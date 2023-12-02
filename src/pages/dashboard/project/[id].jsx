@@ -112,8 +112,8 @@ export default function Project() {
             projectId: id,
           }}
         />
-        <h1>Select View: {view}</h1>
-        <div className="flex gap-3 mb-4">
+        <div className="flex items-center gap-3 my-4">
+          <h1 className="font-bold text-[20px]">Select View: </h1>
           <Button text="Kanban" onClick={() => setView("kanban")} />
           <Button text="Table" onClick={() => setView("table")} />
         </div>
