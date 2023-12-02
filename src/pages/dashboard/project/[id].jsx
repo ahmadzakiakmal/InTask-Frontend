@@ -110,7 +110,6 @@ export default function Project() {
           project={{
             title: project.title,
             projectId: id,
-            projectContributor: project.contributors,
           }}
         />
         <h1>Select View: {view}</h1>
