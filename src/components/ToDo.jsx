@@ -12,22 +12,19 @@ export default function ToDoItem({ taskname, id, desc, assignees }) {
   };
   const [users, setUsers] = useState([]);
   useEffect(() => {
-    assignees?.forEach(a => {
-      axios.get(process.env.NEXT_PUBLIC_API_URL + "/user/search/" + a, {
+    // call api to get users with params id1/id2/id3
+    axios
+      .get(process.env.NEXT_PUBLIC_API_URL + "/user/search/" + assignees.join("%7C"), {
         withCredentials: true,
-      }).then(res => {
-        // console.log(res.data);
-        res.data?.users?.forEach(user => {
-          // prevent duplicate
-          if (!users.includes(`${user.emoticon} ${user.username}`)) {
-            setUsers([...users, `${user.emoticon} ${user.username}`]);
-          }
-        });
-      }).catch(err => {
+      })
+      .then((res) => {
+        console.log(res.data.users);
+        setUsers(res.data.users);
+      })
+      .catch((err) => {
         console.log(err);
       });
-    });
-  }, [users]);
+  }, []);
   return (
     <button
       className="w-full py-2 text-left top-0 px-5 rounded-[10px] bg-[#4B4B4B] shadow-navy shadow-lg"
@@ -44,7 +41,7 @@ export default function ToDoItem({ taskname, id, desc, assignees }) {
         {users?.map((a, index) => {
           return (
             <span key={index} className="bg-purple-100 rounded-[5px] px-2 py-1 text-white">
-              {a}
+              {a.emoticon} {a.username}
             </span>
           );
         })}
