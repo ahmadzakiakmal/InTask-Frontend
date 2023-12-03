@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { LoadingContext } from "@/context/LoadingContext";
 import EmojiPicker from "emoji-picker-react";
+import Cookies from "js-cookie";
 
 export default function UserPage() {
   const initialProfile = {
@@ -64,9 +65,25 @@ export default function UserPage() {
     if (
       profile.username === "" ||
       profile.email === "" ||
-      profile.phoneNumber === ""
+      profile.realName === ""
     )
-      return toast.error("Cannot edit profile");
+      return toast.error("Please fill all the fields to save");
+    axios.put(process.env.NEXT_PUBLIC_API_URL + "/user/update-profile", {
+      username: profile.username,
+      realName: profile.realName,
+      emoticon: emoji,
+    }, {
+      withCredentials: true,
+    })
+      .then(() => {
+        
+        toast.success("Profile updated successfully");
+        setRefetch(!refetch);
+      })
+      .catch((e) => {
+        console.log(e);
+        toast.error("Error updating profile");
+      });
     setIsEditing(true);
   };
 
@@ -127,9 +144,9 @@ export default function UserPage() {
               <span className="ml-1 hidden xs:block">:</span>
             </div>
             <input
-              class="bg-neutral w-full md:max-w-[300px] disabled:bg-slate-500/10 py-1 px-2 rounded-md border border-purple-200 focus:outline-purple-200"
-              placeholder="Enter your answer here"
+              class="bg-neutral w-full md:max-w-[300px] disabled:bg-slate-500/10 disabled:cursor-not-allowed py-1 px-2 rounded-md border border-purple-200 focus:outline-purple-200"
               disabled
+              value={profile.username}
             />
           </div>
           <div className="flex flex-col xs:flex-row sm:justify-center md:items-center mb-1.5 w-full">
@@ -140,9 +157,9 @@ export default function UserPage() {
               <span className="ml-1 hidden xs:block">:</span>
             </div>
             <input
-              class="bg-neutral w-full md:max-w-[300px] disabled:bg-slate-500/10 py-1 px-2 rounded-md border border-purple-200 focus:outline-purple-200"
-              placeholder="Enter your answer here"
+              class="bg-neutral w-full md:max-w-[300px] disabled:bg-slate-500/10 disabled:cursor-not-allowed py-1 px-2 rounded-md border border-purple-200 focus:outline-purple-200"
               disabled
+              value={profile.email}
             />
           </div>
           <div className="flex flex-col xs:flex-row sm:justify-center md:items-center mb-1.5 w-full">
@@ -153,8 +170,11 @@ export default function UserPage() {
               <span className="ml-1 hidden xs:block">:</span>
             </div>
             <input
-              class="bg-neutral w-full md:max-w-[300px] disabled:bg-slate-500/10 py-1 px-2 rounded-md border border-purple-200 focus:outline-purple-200"
-              placeholder="Enter your answer here"
+              class="bg-neutral w-full md:max-w-[300px] disabled:bg-slate-500/10 disabled:cursor-not-allowed py-1 px-2 rounded-md border border-purple-200 focus:outline-purple-200"
+              placeholder="Enter real name here"
+              value={profile.realName}
+              name="realName"
+              onChange={handleInputChange}
               disabled={isEditing}
             />
           </div>
