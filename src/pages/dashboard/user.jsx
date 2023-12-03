@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Layout from "@/components/dashboard/Layout";
 import TextInput1 from "@/components/TextInput1";
+import Button from "@/components/Button";
 
 export default function UserPage() {
   const initialProfile = {
@@ -81,12 +82,12 @@ export default function UserPage() {
             </>
           )}          
 
-          <button
+          <Button
             className={"btn btn-sm lg:btn-lg bg-[#816797] rounded-[10px] font-medium text-white border-[#5F4C6F] w-44 lg:w-28 capitalize py-2"}
             style={{ marginTop: "1.5rem" }}
-            onClick={isEditing ? handleSaveProfile : handleEditProfile}>
-            {isEditing ? "Save Profile" : "Edit Profile"}
-          </button>
+            onClick={isEditing ? handleSaveProfile : handleEditProfile}
+            text={isEditing ? "Save Profile" : "Edit Profile"}>
+          </Button>
         </div>
       </main>
     </Layout>
