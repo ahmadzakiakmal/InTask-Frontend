@@ -1,7 +1,3 @@
-import Image from "next/image";
-import InTaskLogo from "@/../public/InTaskLogo.png";
-import InTaskLogoDark from "@/../public/InTaskLogoCircle.png";
-import textInTaskLogo from "@/../public/textLogo.png";
 import { useState } from "react";
 
 export default function LandingPage() {

@@ -56,12 +56,12 @@ export default function RemoveFriendModal({ isOpen, onClose, projectId, projectC
 
   useEffect(() => {
     // Menyimpan data contributor yang dipilih ke session storage
-    sessionStorage.setItem('selectedFriends', JSON.stringify(selectedFriends));
+    sessionStorage.setItem("selectedFriends", JSON.stringify(selectedFriends));
   }, [selectedFriends]);
 
   useEffect(() => {
     // Mengambil data contributor yang dipilih dari session storage saat komponen dimount
-    const storedSelectedFriends = sessionStorage.getItem('selectedFriends');
+    const storedSelectedFriends = sessionStorage.getItem("selectedFriends");
     if (storedSelectedFriends) {
       setSelectedFriends(JSON.parse(storedSelectedFriends));
     }
