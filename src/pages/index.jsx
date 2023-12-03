@@ -165,33 +165,33 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-16 py-10 lg:py-20">
             <div className="flex flex-col gap-5 ">
               <Image src={Jaki} alt="Ahmad Zaki Akmal"/>
-              <p className="text-2xl font-semibold">Ahmad Zaki Akmal</p>
-              <div className="flex items-center gap-2">
-                <p className="text-gray-500">21/480179/TK/52981</p>
+              <p className="text-2xl font-semibold  text-center">Ahmad Zaki Akmal</p>
+              <div className="flex items-center gap-2 justify-center">
+                <p className="text-gray-500" style={{marginTop:"-1rem"}}>21/480179/TK/52981</p>
               </div>
             </div>
               
             <div className="flex flex-col gap-5 ">
               <Image src={Salwa} alt="Salwa Maharani" />
-              <p className="text-2xl font-semibold">Salwa Maharani</p>
-              <div className="flex items-center gap-2">
-                <p className="text-gray-500">21/481194/TK/53113</p>
+              <p className="text-2xl font-semibold text-center">Salwa Maharani</p>
+              <div className="flex items-center justify-center gap-2 ">
+                <p className="text-gray-500 " style={{marginTop:"-1rem"}}>21/481194/TK/53113</p>
               </div>
             </div>
 
             <div className="flex flex-col gap-5 ">
               <Image src={Duta} alt="Duta Pradana"/>
-              <p className="text-2xl font-semibold">Diestra Pradana</p>
-              <div className="flex items-center gap-2">
-                <p className="text-gray-500">21/478179/TK/52693</p>
+              <p className="text-2xl font-semibold  text-center">Diestra Pradana</p>
+              <div className="flex items-center gap-2 justify-center">
+                <p className="text-gray-500" style={{marginTop:"-1rem"}}>21/478179/TK/52693</p>
               </div>
             </div>
 
             <div className="flex flex-col gap-5 ">
-              <Image src={Galih} alt="Nicholas Galis"/>
-              <p className="text-2xl font-semibold">Nicholas Galih</p>
-              <div className="flex items-center gap-2">
-                <p className="text-gray-500">21/482747/TK/53361</p>
+              <Image src={Galih} alt="Nicholas Galih"/>
+              <p className="text-2xl font-semibold  text-center">Nicholas Galih</p>
+              <div className="flex items-center gap-2 justify-center">
+                <p className="text-gray-500" style={{marginTop:"-1rem"}}>21/482747/TK/53361</p>
               </div>
             </div>
           </div>
