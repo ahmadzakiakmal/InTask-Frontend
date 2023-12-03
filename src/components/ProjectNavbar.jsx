@@ -29,13 +29,13 @@ export default function ProjectNavbar({ project, onEdit }) {
           setContributors(res.data.contributors);
         })
         .catch((err) => {
-          if (err.response.status === 401) {
+          if (err?.response?.status === 401) {
             localStorage.clear();
             Cookies.remove("Authorization");
-            router.push("/auth/login");
-            return toast.error("Session Expired! Please login again.");
+            toast.error("Session Expired! Please login again.");
           }
           toast.error("An error occurred!");
+          router.push("/auth/login");
         });
     }
   };
