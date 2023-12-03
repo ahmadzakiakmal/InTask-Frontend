@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Layout from "@/components/dashboard/Layout";
-import TextInput1 from "@/components/TextInput1";
 import Button from "@/components/Button";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { LoadingContext } from "@/context/LoadingContext";
 import EmojiPicker from "emoji-picker-react";
-import TextInput from "@/components/TextInput";
 
 export default function UserPage() {
   const initialProfile = {
@@ -115,8 +113,12 @@ export default function UserPage() {
           )}
         </div>
 
-        {/* buat bagian setelah save */}
-        <form className="relative flex flex-col w-full bg-blue-500/20">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+          }}
+          className="relative flex flex-col w-full gap-1"
+        >
           <div className="flex flex-col xs:flex-row sm:justify-center md:items-center mb-1.5 w-full">
             <div className="w-full xs:max-w-[200px] flex-shrink-0 pr-2 flex justify-start xs:justify-between items-center">
               <span className="text-black font-semibold sm:text-sm whitespace-nowrap">
@@ -125,8 +127,9 @@ export default function UserPage() {
               <span className="ml-1 hidden xs:block">:</span>
             </div>
             <input
-              class="bg-neutral w-full md:max-w-[300px] py-1 px-2 rounded-md border border-purple-200 focus:outline-purple-200"
+              class="bg-neutral w-full md:max-w-[300px] disabled:bg-slate-500/10 py-1 px-2 rounded-md border border-purple-200 focus:outline-purple-200"
               placeholder="Enter your answer here"
+              disabled
             />
           </div>
           <div className="flex flex-col xs:flex-row sm:justify-center md:items-center mb-1.5 w-full">
@@ -137,8 +140,9 @@ export default function UserPage() {
               <span className="ml-1 hidden xs:block">:</span>
             </div>
             <input
-              class="bg-neutral w-full md:max-w-[300px] py-1 px-2 rounded-md border border-purple-200 focus:outline-purple-200"
+              class="bg-neutral w-full md:max-w-[300px] disabled:bg-slate-500/10 py-1 px-2 rounded-md border border-purple-200 focus:outline-purple-200"
               placeholder="Enter your answer here"
+              disabled
             />
           </div>
           <div className="flex flex-col xs:flex-row sm:justify-center md:items-center mb-1.5 w-full">
@@ -149,21 +153,21 @@ export default function UserPage() {
               <span className="ml-1 hidden xs:block">:</span>
             </div>
             <input
-              class="bg-neutral w-full md:max-w-[300px] py-1 px-2 rounded-md border border-purple-200 focus:outline-purple-200"
+              class="bg-neutral w-full md:max-w-[300px] disabled:bg-slate-500/10 py-1 px-2 rounded-md border border-purple-200 focus:outline-purple-200"
               placeholder="Enter your answer here"
+              disabled={isEditing}
             />
           </div>
           <Button
             className={
               "bg-[#816797] rounded-[10px] font-medium text-white border-[#5F4C6F] capitalize mx-auto mt-2"
             }
+            type="button"
             onClick={isEditing ? handleSaveProfile : handleEditProfile}
-            text={isEditing ? "Save Profile" : "Edit Profile"}
+            text={!isEditing ? "Save Profile" : "Edit Profile"}
             disabled={profile.username === "" || profile.email === ""}
           ></Button>
-
         </form>
-
       </main>
     </Layout>
   );
