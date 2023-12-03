@@ -117,7 +117,7 @@ export default function UserPage() {
 
         {/* buat bagian setelah save */}
         <form className="relative flex flex-col w-full bg-blue-500/20">
-          <div className="flex flex-col xs:flex-row sm:justify-center md:items-center mb-1.5 w-full bg-red-500/20">
+          <div className="flex flex-col xs:flex-row sm:justify-center md:items-center mb-1.5 w-full">
             <div className="w-full xs:max-w-[200px] flex-shrink-0 pr-2 flex justify-start xs:justify-between items-center">
               <span className="text-black font-semibold sm:text-sm whitespace-nowrap">
                 Username
@@ -129,44 +129,41 @@ export default function UserPage() {
               placeholder="Enter your answer here"
             />
           </div>
-          {/* <div
-                className="flex items-center"
-                style={{ marginBottom: "1.5rem" }}
-              >
-                <div className="w-40 flex-shrink-0 pr-2 flex justify-between items-center">
-                  <span className="text-black font-semibold sm:text-sm whitespace-nowrap">
-                      Email{" "}
-                  </span>
-                  <span className="ml-1">:</span>
-                </div>
-                <div className="flex-grow h-[30px] bg-slate-500/20 cursor-not-allowed pl-2 py-1 w-[300px] rounded-md border border-purple-200 focus:outline-purple-200 text-black font-medium sm:text-sm">
-                  {profile.email}
-                </div>
-              </div>
-              <div
-                className="flex items-center"
-                style={{ marginBottom: "1.5rem" }}
-              >
-                <div className="w-40 flex-shrink-0 pr-2 flex justify-between items-center">
-                  <span className="text-black font-semibold sm:text-sm whitespace-nowrap">
-                      Name{" "}
-                  </span>
-                  <span className="ml-1">:</span>
-                </div>
-                <div className="flex-grow h-[30px] bg-slate-500/20 cursor-not-allowed pl-2 py-1 w-[300px] rounded-md border border-purple-200 focus:outline-purple-200 text-black font-medium sm:text-sm">
-                  {profile.realName}
-                </div>
-              </div> */}
+          <div className="flex flex-col xs:flex-row sm:justify-center md:items-center mb-1.5 w-full">
+            <div className="w-full xs:max-w-[200px] flex-shrink-0 pr-2 flex justify-start xs:justify-between items-center">
+              <span className="text-black font-semibold sm:text-sm whitespace-nowrap">
+                Email
+              </span>
+              <span className="ml-1 hidden xs:block">:</span>
+            </div>
+            <input
+              class="bg-neutral w-full md:max-w-[300px] py-1 px-2 rounded-md border border-purple-200 focus:outline-purple-200"
+              placeholder="Enter your answer here"
+            />
+          </div>
+          <div className="flex flex-col xs:flex-row sm:justify-center md:items-center mb-1.5 w-full">
+            <div className="w-full xs:max-w-[200px] flex-shrink-0 pr-2 flex justify-start xs:justify-between items-center">
+              <span className="text-black font-semibold sm:text-sm whitespace-nowrap">
+                Real Name
+              </span>
+              <span className="ml-1 hidden xs:block">:</span>
+            </div>
+            <input
+              class="bg-neutral w-full md:max-w-[300px] py-1 px-2 rounded-md border border-purple-200 focus:outline-purple-200"
+              placeholder="Enter your answer here"
+            />
+          </div>
+          <Button
+            className={
+              "bg-[#816797] rounded-[10px] font-medium text-white border-[#5F4C6F] capitalize mx-auto mt-2"
+            }
+            onClick={isEditing ? handleSaveProfile : handleEditProfile}
+            text={isEditing ? "Save Profile" : "Edit Profile"}
+            disabled={profile.username === "" || profile.email === ""}
+          ></Button>
+
         </form>
 
-        <Button
-          className={
-            "bg-[#816797] rounded-[10px] font-medium text-white border-[#5F4C6F] capitalize "
-          }
-          onClick={isEditing ? handleSaveProfile : handleEditProfile}
-          text={isEditing ? "Save Profile" : "Edit Profile"}
-          disabled={profile.username === "" || profile.email === ""}
-        ></Button>
       </main>
     </Layout>
   );
