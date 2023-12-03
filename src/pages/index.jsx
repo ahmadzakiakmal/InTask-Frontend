@@ -199,14 +199,23 @@ export default function Home() {
       </section>
 
       {/* //? footer */}
-      <div id="section_footer" style={{ marginTop:"-7rem", }}>
-        <div className='text-center py-4'>
-          <Link href="https://github.com/ahmadzaki2975/InTask-Frontend.git" target="_blank" className='btn btn-link'>
-            <span className="font-bold hover:text-blue-500">Our Github repository</span>
-          </Link>
-          <p style={{ marginBottom:"2rem" }}>Infinite Task | Kelompok 1</p>
+      <div id="section_footer" style={{ marginTop: "-7rem" }} className="w-full bg-navy">
+        <div className="flex items-center justify-between py-4 px-[5%] xs:px-4 sm:px-7" style={{ marginBottom: "0.3rem" }}>
+          <div className="flex items-center cursor-pointer">
+            <Image src={InTaskLogo} alt="InTask Logo" className="w-[50px] py-2 hidden xs:block" />
+            <Image src={textInTaskLogo} alt="TextInTask Logo" className="w-[80px] py-3" />
+          </div>
+          <div className="text-center">
+            <Link href="https://github.com/ahmadzaki2975/InTask-Frontend.git" target="_blank" className="btn btn-link">
+              <span className="font-bold hover:text-blue-500 text-white">Our Github repository</span>
+            </Link>
+            <p className="text-white">
+              Infinite Task | Kelompok 1
+            </p>
+          </div>
         </div>
       </div>
+
 
     </main>
   );
