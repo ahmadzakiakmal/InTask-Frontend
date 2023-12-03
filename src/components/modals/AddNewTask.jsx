@@ -25,6 +25,13 @@ export default function NewTaskModal({
   }, [isOpen]);
 
   const searchUser = () => {
+    // prevent duplicate
+    if (
+      assignees.some((assignee) => {
+        return assignee.username === searchQuery;
+      })
+    )
+      return toast.error("User already added!");
     axios
       .post(
         process.env.NEXT_PUBLIC_API_URL + "/user/search",
@@ -56,6 +63,9 @@ export default function NewTaskModal({
       .catch(() => {
         toast.error("User not found!");
         // console.log(err);
+      })
+      .finally(() => {
+        setSearchQuery("");
       });
   };
 
@@ -143,15 +153,9 @@ export default function NewTaskModal({
               }}
             >
               <p>
-                {
-                  status.toLowerCase() === "todo" && "To Do"
-                }
-                {
-                  status.toLowerCase() === "ongoing" && "Doing"
-                }
-                {
-                  status.toLowerCase() === "done" && "Done"
-                }
+                {status.toLowerCase() === "todo" && "To Do"}
+                {status.toLowerCase() === "ongoing" && "Doing"}
+                {status.toLowerCase() === "done" && "Done"}
               </p>
               <div
                 className={
@@ -183,7 +187,7 @@ export default function NewTaskModal({
           <label className="flex flex-col gap-2.5">
             <div>
               Assignees
-              <div className="flex gap-3">
+              <div className="flex gap-3 flex-wrap">
                 {assignees.map((assignee, index) => {
                   return (
                     <div
@@ -196,7 +200,7 @@ export default function NewTaskModal({
                         {assignee.emoticon} {assignee.username}
                       </span>
                       <div
-                        className="hover:text-red-200 px-1 block w-min cursor-pointer"
+                        className="hover:text-red-200 px-1 block w-min cursor-pointer select-none"
                         onClick={() => {
                           const newAssignees = [...assignees];
                           newAssignees.splice(index, 1);
