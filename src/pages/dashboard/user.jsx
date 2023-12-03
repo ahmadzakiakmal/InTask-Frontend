@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { LoadingContext } from "@/context/LoadingContext";
 import EmojiPicker from "emoji-picker-react";
-import Cookies from "js-cookie";
+import { useRouter } from "next/router";
 
 export default function UserPage() {
   const initialProfile = {
@@ -20,6 +20,7 @@ export default function UserPage() {
   const [emoji, setEmoji] = useState("🙂");
   const [openEmoji, setOpenEmoji] = useState(false);
   const { setLoading } = React.useContext(LoadingContext);
+  const router = useRouter();
 
   useEffect(() => {
     setLoading(true);
@@ -47,6 +48,10 @@ export default function UserPage() {
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [refetch]);
+  
+  useEffect(() => {
+    setIsEditing(true);
+  }, [router]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
