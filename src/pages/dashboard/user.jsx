@@ -23,7 +23,6 @@ export default function UserPage() {
   };
 
   const handleSaveProfile = () => {
-    console.log("Profile saved:", profile);
     setIsEditing(false);
   };
 
@@ -54,7 +53,7 @@ export default function UserPage() {
                     <span className="text-black font-semibold sm:text-sm whitespace-nowrap">Name </span>
                     <span className="ml-1">:</span>
                   </div>
-                  <div className="flex-grow bg-neutral pl-2 py-1 w-[300px] rounded-md border border-purple-200 focus:outline-purple-200 text-black font-medium sm:text-sm">
+                  <div className="flex-grow bg-slate-500/20 cursor-not-allowed pl-2 py-1 w-[300px] rounded-md border border-purple-200 focus:outline-purple-200 text-black font-medium sm:text-sm">
                     {profile.name}
                   </div>
                 </div>
@@ -64,7 +63,7 @@ export default function UserPage() {
                     <span className="text-black font-semibold sm:text-sm whitespace-nowrap">Email </span>
                     <span className="ml-1">:</span>
                   </div>
-                  <div className="flex-grow bg-neutral pl-2 py-1 w-[300px] rounded-md border border-purple-200 focus:outline-purple-200 text-black font-medium sm:text-sm">
+                  <div className="flex-grow bg-slate-500/20 cursor-not-allowed pl-2 py-1 w-[300px] rounded-md border border-purple-200 focus:outline-purple-200 text-black font-medium sm:text-sm">
                     {profile.email}
                   </div>
                 </div>
@@ -74,7 +73,7 @@ export default function UserPage() {
                     <span className="text-black font-semibold sm:text-sm whitespace-nowrap">Phone Number </span>
                     <span className="ml-1">:</span>
                   </div>
-                  <div className="flex-grow bg-neutral pl-2 py-1 w-[300px] rounded-md border border-purple-200 focus:outline-purple-200 text-black font-medium sm:text-sm">
+                  <div className="flex-grow bg-slate-500/20 cursor-not-allowed pl-2 py-1 w-[300px] rounded-md border border-purple-200 focus:outline-purple-200 text-black font-medium sm:text-sm">
                     {profile.phoneNumber}
                   </div>
                 </div>
