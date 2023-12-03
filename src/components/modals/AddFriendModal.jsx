@@ -36,10 +36,10 @@ export default function AddFriendModal ({ isOpen, onClose, projectId }) {
       setOptions([]);
     else
       axios.get(process.env.NEXT_PUBLIC_API_URL + "/user/search/" + identifier)
-      .then(response =>{
-        setOptions(response.data);  
-      })
-      .catch(err => toast.info(err.message));
+        .then(response =>{
+          setOptions(response.data);  
+        })
+        .catch(err => toast.info(err.message));
   };
   useEffect(searchOption, [identifier]);
 

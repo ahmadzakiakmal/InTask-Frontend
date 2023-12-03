@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { faPersonWalkingWithCane } from "@fortawesome/free-solid-svg-icons";
 
 export default function Register() {
   const router = useRouter();
@@ -17,7 +16,7 @@ export default function Register() {
   const [isEmailValid, setEmailValid] = useState(true);
   const [isUsernameValid, setUsernameValid] = useState(true);
   const [isPasswordValid, setPasswordValid] = useState(true);
-  const [isConfirmPasswordValid, setConfirmPasswordValid] = useState(true)
+  const [isConfirmPasswordValid, setConfirmPasswordValid] = useState(true);
 
   return (
     <main
@@ -45,7 +44,7 @@ export default function Register() {
           className="flex flex-col gap-2"
           onSubmit={(e) => {
             e.preventDefault();
-            if(!email.includes('@')) {
+            if(!email.includes("@")) {
               setEmailValid(false);
             }
             if(username.length < 8) {
@@ -57,7 +56,7 @@ export default function Register() {
             if(password !== confirmPassword) {
               setConfirmPasswordValid(false);
             }
-            if(!name || !email.includes('@') || username.length < 8 || password.length < 8 || confirmPassword !== password) return toast.error("Please fill all the fields!");
+            if(!name || !email.includes("@") || username.length < 8 || password.length < 8 || confirmPassword !== password) return toast.error("Please fill all the fields!");
             axios
               .post(process.env.NEXT_PUBLIC_API_URL + "/user/register", {
                 realName : name,
@@ -88,11 +87,11 @@ export default function Register() {
             Email
             <input
               type="email"
-              className={`outline ${isEmailValid ? '' : 'outline-red-500'} rounded-[3px]`}
+              className={`outline ${isEmailValid ? "" : "outline-red-500"} rounded-[3px]`}
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
-                setEmailValid(e.target.value.includes('@'));
+                setEmailValid(e.target.value.includes("@"));
               }}
             />
             {!isEmailValid && (
@@ -102,7 +101,7 @@ export default function Register() {
           <label className="flex flex-col gap-1">
             Username
             <input
-              className={`outline ${isUsernameValid ? '' : 'outline-red-500'} rounded-[3px]`}
+              className={`outline ${isUsernameValid ? "" : "outline-red-500"} rounded-[3px]`}
               value={username}
               onChange={(e) => {
                 setUsername(e.target.value);
@@ -117,7 +116,7 @@ export default function Register() {
             Password
             <input
               type="password"
-              className={`outline ${isPasswordValid ? '' : 'outline-red-500'} rounded-[3px]`}
+              className={`outline ${isPasswordValid ? "" : "outline-red-500"} rounded-[3px]`}
               value={password}
               onChange={(e) => {
                 setPassword(e.target.value);
@@ -132,11 +131,11 @@ export default function Register() {
             Confirm Password
             <input
               type="password"
-              className={`outline ${isConfirmPasswordValid ? '' : 'outline-red-500'} rounded-[3px]`}
+              className={`outline ${isConfirmPasswordValid ? "" : "outline-red-500"} rounded-[3px]`}
               value={confirmPassword}
               onChange={(e) => {
-                setConfirmPassword(e.target.value)
-                setConfirmPasswordValid(e.target.value === password)
+                setConfirmPassword(e.target.value);
+                setConfirmPasswordValid(e.target.value === password);
               }}
             />
             {!isConfirmPasswordValid && (
