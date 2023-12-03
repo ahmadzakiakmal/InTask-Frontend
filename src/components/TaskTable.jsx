@@ -13,6 +13,15 @@ export default function TaskTable({ tasks, projectId, onEdit }){
             <th className="w-24"></th>
           </tr>
           {tasks?.map(task => (<ToDoItemRow key={task._id} task={task} projectId={projectId} onSuccess={onEdit} />))}
+          {
+            tasks.length === 0  && (
+              <tr className="border-b border-yellow">
+                <td className="text-center py-5 border-r border-yellow"  colSpan={5}>
+                  This project has no tasks yet
+                </td>
+              </tr>
+            )
+          }
         </tbody>
       </table>
     </div>
