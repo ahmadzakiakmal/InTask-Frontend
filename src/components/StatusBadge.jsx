@@ -1,7 +1,7 @@
 export default function StatusBadge({ status }) {
   if (status === "ongoing")
     return (
-      <div className="w-fit px-2 outline outline-[0.2px] rounded-[5px] outline-[#A3E9FF] bg-[rgba(163, 233, 255, 0.15)] text-[#94FFFF]">
+      <div className="w-fit px-2 outline outline-[0.2px] rounded-[5px] outline-[#A3E9FF] bg-[rgba(163,233,255,0.15)] text-[#94FFFF]">
         In Progress
       </div>
     );

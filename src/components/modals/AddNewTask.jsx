@@ -16,7 +16,7 @@ export default function NewTaskModal({
   const [assignees, setAssignees] = useState([]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [status, setStatus] = useState(initialStatus);
+  const [status, setStatus] = useState("todo");
   const [openDropdown, setOpenDropdown] = useState(false);
 
   useEffect(() => {
@@ -137,26 +137,32 @@ export default function NewTaskModal({
           </label>
           <label className="flex flex-col gap-2.5">
             Task Status
-            {/* <select
-              className="focus:outline px-2 py-1 rounded-[4px]"
-              value={status}
-              onChange={(e) => setStatus(e.target.value)}
-            >
-              <option value="ToDo">To Do</option>
-              <option value="OnGoing">Doing</option>
-              <option value="Done">Done</option>
-            </select> */}
             <div
-              className="bg-white w-full rounded-[4px] px-2 py-1 relative cursor-pointer select-none"
+              className="bg-navy w-full rounded-[4px] relative cursor-pointer select-none"
               onClick={() => {
                 setOpenDropdown(!openDropdown);
               }}
             >
-              <p>
-                {status.toLowerCase() === "todo" && "To Do"}
-                {status.toLowerCase() === "ongoing" && "Doing"}
-                {status.toLowerCase() === "done" && "Done"}
-              </p>
+              {status && (
+                <p
+                  className={
+                    "px-2 py-1 " +
+                    (status.toLowerCase() === "todo"
+                      ? " outline-green outline outline-[0.2px] bg-[rgba(94,238,126,0.15)] text-green"
+                      : "") +
+                    (status.toLowerCase() === "ongoing"
+                      ? " outline-[#A3E9FF] outline outline-[0.2px] bg-[rgba(163,233,255,0.15)] text-[#94FFFF]"
+                      : "") +
+                    (status.toLowerCase() === "done"
+                      ? " outline-[#D2C5FF] outline outline-[0.2px] bg-[rgba(150,119,255,0.15)] text-[#D2C5FF]"
+                      : "")
+                  }
+                >
+                  {status.toLowerCase() === "todo" && "To Do"}
+                  {status.toLowerCase() === "ongoing" && "Doing"}
+                  {status.toLowerCase() === "done" && "Done"}
+                </p>
+              )}
               <div
                 className={
                   "bg-white shadow-[0_0_5px_rgba(0,0,0,.6)] rounded-[5px] absolute top-[calc(100%+10px)] left-0 " +
