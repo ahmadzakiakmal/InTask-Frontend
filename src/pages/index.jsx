@@ -120,9 +120,9 @@ export default function Home() {
       {/* //? section fitur */}
       <section className="pt-10 mb-10 lg:pt-0 lg:mb-10 md:px-10 xl:px-auto flex flex-col-reverse w-full lg:flex-row justify-center lg:justify-evenly max-w-[1600px] items-center gap-10 xl:gap-0 min-h-screen">
         <div className="container mx-auto py-20">
-          <p className="text-3xl lg:text-5xl font-semibold text-navy mt-3">Our Fitur</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-16 py-10 lg:py-20">
-            <div className="flex flex-col gap-5 ">
+          <p className="text-3xl lg:text-5xl font-semibold text-navy" style={{ marginBottom: "-3rem", marginTop:"-3rem"}}>Our Fitur</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-16 py-10 lg:py-20 mt-0">
+            <div className="flex flex-col gap-5 mt-0.1 ">
               <Image src={DashboardPict} alt="Project Picture" className="shadow-[0_0_8px_rgba(0,0,0,.5)] rounded-[10px]" />
               <p className="text-2xl font-semibold">Project</p>
               <div className="flex items-center gap-2">
@@ -134,7 +134,7 @@ export default function Home() {
             </div>
 
             <div className="flex flex-col gap-5 ">
-              <img src={ProjectPict} alt="Isi Project" />
+              <Image src={ProjectPict} alt="Isi Project" className="shadow-[0_0_8px_rgba(0,0,0,.5)] rounded-[10px]"/>
               <p className="text-2xl font-semibold">Isi dari project</p>
               <div className="flex items-center gap-2">            
                 <p className="text-base text-justify sm:text-lg text-gray-500 text-center lg:text-[15px] mb-10">
@@ -145,7 +145,7 @@ export default function Home() {
             </div>
         
             <div className="flex flex-col gap-5 ">
-              <img src={TaskPict} alt="Fitur Task" />
+              <Image src={TaskPict} alt="Fitur Task" className="shadow-[0_0_8px_rgba(0,0,0,.5)] rounded-[10px]"/>
               <p className="text-2xl font-semibold">Task</p>
               <div className="flex items-center gap-2">
                 <p className="text-base text-justify sm:text-lg text-gray-500 text-center lg:text-[15px] mb-10">
@@ -160,11 +160,11 @@ export default function Home() {
       {/* //? section anggota */}
       <section className="pt-10 mb-10 lg:pt-0 lg:mb-10 md:px-10 xl:px-auto flex flex-col-reverse w-full lg:flex-row justify-center lg:justify-evenly max-w-[1600px] items-center gap-10 xl:gap-0 min-h-screen">
         <div className="container mx-auto py-20">
-          <p className="text-base lg:text-xl font-medium text-gray-500 uppercase">Kelompok 1</p>
-          <p className="text-3xl lg:text-5xl font-semibold text-navy mt-3">Meet our member!</p>
+          <p className="text-base lg:text-xl font-medium text-gray-500 uppercase" style={{ marginTop:"-9rem"}}>Kelompok 1</p>
+          <p className="text-3xl lg:text-5xl font-semibold text-navy mt-3"  style={{ marginBottom:"-3rem"}}>Meet our member!</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-16 py-10 lg:py-20">
             <div className="flex flex-col gap-5 ">
-              <img src={Jaki} alt="Ahmad Zaki Akmal"/>
+              <Image src={Jaki} alt="Ahmad Zaki Akmal"/>
               <p className="text-2xl font-semibold">Ahmad Zaki Akmal</p>
               <div className="flex items-center gap-2">
                 <p className="text-gray-500">21/480179/TK/52981</p>
@@ -172,7 +172,7 @@ export default function Home() {
             </div>
               
             <div className="flex flex-col gap-5 ">
-              <img src={Salwa} alt="Salwa Maharani" />
+              <Image src={Salwa} alt="Salwa Maharani" />
               <p className="text-2xl font-semibold">Salwa Maharani</p>
               <div className="flex items-center gap-2">
                 <p className="text-gray-500">21/481194/TK/53113</p>
@@ -180,7 +180,7 @@ export default function Home() {
             </div>
 
             <div className="flex flex-col gap-5 ">
-              <img src={Duta} alt="Duta Pradana"/>
+              <Image src={Duta} alt="Duta Pradana"/>
               <p className="text-2xl font-semibold">Diestra Pradana</p>
               <div className="flex items-center gap-2">
                 <p className="text-gray-500">21/478179/TK/52693</p>
@@ -188,7 +188,7 @@ export default function Home() {
             </div>
 
             <div className="flex flex-col gap-5 ">
-              <img src={Galih} alt="Nicholas Galis"/>
+              <Image src={Galih} alt="Nicholas Galis"/>
               <p className="text-2xl font-semibold">Nicholas Galih</p>
               <div className="flex items-center gap-2">
                 <p className="text-gray-500">21/482747/TK/53361</p>
