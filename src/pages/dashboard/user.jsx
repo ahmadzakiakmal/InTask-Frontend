@@ -100,7 +100,7 @@ export default function UserPage() {
             }}
           >
             <div className="text-[100px] cursor-pointer">{emoji}</div>
-            <div className="absolute bg-navy rounded-full p-2 right-0 bottom-0 cursor-pointer">
+            <div className={"absolute bg-navy rounded-full p-2 right-0 bottom-0 cursor-pointer " + (!isEditing ? "" : "hidden")}>
               <svg
                 width="30"
                 height="30"
@@ -116,7 +116,7 @@ export default function UserPage() {
             </div>
           </div>
           {openEmoji && (
-            <div className="absolute top-[20px] left-[calc(100%+20px)] z-[10]">
+            <div className={"absolute top-[20px] left-[calc(100%+20px)] z-[10] " + (!isEditing ? "" : "hidden")}>
               <EmojiPicker
                 emojiStyle="facebook"
                 theme="dark"
