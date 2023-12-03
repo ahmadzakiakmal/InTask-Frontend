@@ -11,6 +11,8 @@ import ProjectNavbar from "@/components/ProjectNavbar";
 import { DndContext, useDroppable } from "@dnd-kit/core";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
+import { useContext } from "react";
+import { LoadingContext } from "@/context/LoadingContext";
 
 function KanbanContainer({ status, tasks, id, initialStatus, setInitialStatus, openModal }) {
   const { setNodeRef } = useDroppable({ id: id });
@@ -61,11 +63,13 @@ export default function Project() {
   const [openNewTaskModal, setOpenNewTaskModal] = useState(false);
   const [refetch, setRefetch] = useState(false);
   const [initialStatus, setInitialStatus] = useState("todo");
+  const { setLoading } = useContext(LoadingContext);
 
   const router = useRouter();
   const { id } = router.query;
 
   const loadTaskData = () => {
+    setLoading(true);
     if (id !== undefined && id) {
       axios
         .get(process.env.NEXT_PUBLIC_API_URL + "/project/" + id + "/tasks", {
@@ -83,6 +87,9 @@ export default function Project() {
             return toast.error("Session Expired! Please login again.");
           }
           toast.error("An error occurred!");
+        })
+        .finally(() => {
+          setLoading(false);
         });
     }
   };
