@@ -1,27 +1,12 @@
 import Link from "next/link";
-import { useRouter } from "next/router";
 
 export default function ProjectCardComponent({
   title,
   color,
   description,
-  projectId,
-  projectContributor,
   id,
   owner
 }) {
-  const router = useRouter();
-
-  const handleProjectClick = () => {
-    router.push({
-      pathname: `/dashboard/project/${title}`,
-      query: {
-        projectId: projectId,
-        projectContributor: projectContributor,
-      },
-    });
-  };
-
   const colors = {
     yellow: "bg-yellow",
     purple: "bg-[#C9A2EA]",
