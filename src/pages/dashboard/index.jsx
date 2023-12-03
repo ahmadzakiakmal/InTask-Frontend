@@ -39,7 +39,6 @@ export default function Dashboard() {
           }
         )
         .then((res) => {
-          console.log(res.data.projects);
           setProjects(res.data.projects);
           setOwners(res.data.owners);
         })

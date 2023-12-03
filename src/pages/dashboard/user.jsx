@@ -36,10 +36,10 @@ export default function UserPage() {
       .finally(() => {
         setLoading(false);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [refetch]);
 
   const handleInputChange = (e) => {
-    console.log("Input changed:", e.target.name, e.target.value);
     const { name, value } = e.target;
     setProfile((prevProfile) => ({
       ...prevProfile,
@@ -49,6 +49,7 @@ export default function UserPage() {
 
   const handleSaveProfile = () => {
     setIsEditing(false);
+    setRefetch(!refetch);
   };
 
   const handleEditProfile = () => {

@@ -2,6 +2,7 @@ import { useDraggable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 export default function ToDoItem({ taskname, id, desc, assignees }) {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
@@ -18,12 +19,12 @@ export default function ToDoItem({ taskname, id, desc, assignees }) {
         withCredentials: true,
       })
       .then((res) => {
-        console.log(res.data.users);
         setUsers(res.data.users);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
+        toast.error("Error fetching assignees");
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <button

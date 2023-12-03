@@ -27,12 +27,12 @@ export default function ToDoItemRow({ task, projectId, onSuccess, index }) {
       withCredentials: true,
     })
       .then((res) => {
-        console.log(res.data);
         setAssignees(res.data.users);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
+        toast.error("Error fetching assignees");
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

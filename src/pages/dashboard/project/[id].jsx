@@ -120,7 +120,7 @@ export default function Project() {
       .then(() => {
         loadTaskData();
       })
-      .catch((e) => {
+      .catch(() => {
         toast.error("An error occurred while updating task status.");
       });
   };
