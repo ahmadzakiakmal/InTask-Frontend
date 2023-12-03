@@ -9,14 +9,14 @@ export default function EditTaskStatusModal({ isOpen, taskstatus, taskname, proj
   const [status, setStatus] = useState(taskstatus ?? "todo");
   const editStatus = () => {
     axios.patch(process.env.NEXT_PUBLIC_API_URL + "/project/" + projectId + "/tasks/" + taskId, 
-    { status: status }, 
-    { withCredentials: true})
+      { status: status }, 
+      { withCredentials: true })
       .then(()=>{
         onSuccess();
         onClose();
       })
       .catch(e => {
-        toast.error('error ' + e.message)
+        toast.error("error " + e.message);
       });
   };
   return (

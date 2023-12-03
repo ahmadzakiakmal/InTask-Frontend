@@ -7,9 +7,6 @@ import { toast } from "react-toastify";
 export default function CreateNewProjectModal({
   isOpen,
   setOpenModal,
-  onClose,
-  setProjectName,
-  setName,
 }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");

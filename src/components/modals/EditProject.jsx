@@ -16,26 +16,26 @@ export default function EditProjectModal({
 
   useEffect(()=>{
     if(project){
-        setTitle(project.title);
-        setDescription(project.description); 
+      setTitle(project.title);
+      setDescription(project.description); 
     }
-  },[project])
+  },[project]);
 
   function updateProject(e) {
     e.preventDefault();
     axios.put(process.env.NEXT_PUBLIC_API_URL + "/project/" + project.projectId, {
-        title, description
+      title, description
     }, {
-        withCredentials: true
+      withCredentials: true
     })
-    .then((res) => {
+      .then((res) => {
         onEdit();
         setOpenModal(false);
-        toast.success("Project updated")
-    })
-    .catch((err) => {
+        toast.success("Project updated");
+      })
+      .catch((err) => {
         toast.error("An error occurred while updating project");
-    });
+      });
   }
 
   return (
@@ -49,8 +49,8 @@ export default function EditProjectModal({
           Edit Project
         </h1>
         <form 
-            onSubmit={updateProject} 
-            className="bg-yellow p-8 rounded-[5px] text-[20px] flex flex-col gap-4">
+          onSubmit={updateProject} 
+          className="bg-yellow p-8 rounded-[5px] text-[20px] flex flex-col gap-4">
           <label className="flex flex-col gap-2.5">
             Project Title
             <input
