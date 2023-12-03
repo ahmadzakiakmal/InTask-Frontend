@@ -2,12 +2,13 @@ import StatusBadge from "./StatusBadge";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import EditTaskStatusModal from "./modals/EditTaskStatus";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 
 export default function ToDoItemRow({ task, projectId, onSuccess }) {
   const [editStatusOpen, setStatusOpen] = useState(false);
+  const [assignees, setAssignees] = useState([]);
 
   const handleDelete = () => {
     axios.delete(process.env.NEXT_PUBLIC_API_URL + "/project/" + projectId + "/tasks/" + task._id, 
@@ -21,11 +22,32 @@ export default function ToDoItemRow({ task, projectId, onSuccess }) {
       });
   };
 
+  useEffect(() => {
+    axios.get(process.env.NEXT_PUBLIC_API_URL + "/user/search/" + task.assignees.join("%7C"), {
+      withCredentials: true,
+    })
+      .then((res) => {
+        console.log(res.data);
+        setAssignees(res.data.users);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <tr className="mb-2 bg-white/5">
       <td className="text-center w-[60px] py-2 border-r border-yellow">1</td>
       <td className="px-2 border-r border-yellow">{task?.name ?? "Discussion"}</td>
-      <td className="text-center border-r border-yellow">{task?.assignees?.map(as =>("🤡 " + as + " "))}</td>
+      <td className="text-center border-r border-yellow">
+        <div className="flex flex-wrap gap-2 justify-center items-center">
+          {assignees?.map(as => (
+            <span key={as.username} className="bg-purple-100 rounded-[5px] px-2 py-1 text-white">
+              {as.emoticon} {as.username}
+            </span>
+          ))}
+        </div>
+      </td>
       <td className="px-2">
         <div className="flex justify-center items-center">
           <button onClick={()=>setStatusOpen(true)}>

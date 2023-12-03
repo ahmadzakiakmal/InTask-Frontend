@@ -188,6 +188,7 @@ export default function Project() {
                 tasks={tasks}
                 onEdit={() => loadTaskData()}
                 projectId={id}
+                setTasks={setTasks}
               />
             </section>
           )}
