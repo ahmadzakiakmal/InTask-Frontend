@@ -100,12 +100,11 @@ export default function UserPage() {
         </h1>
         <div className="mb-4 relative">
           <div
-            onClick={() => {
-              setOpenEmoji(!openEmoji);
-            }}
           >
-            <div className="text-[100px] cursor-pointer">{emoji}</div>
-            <div className={"absolute bg-navy rounded-full p-2 right-0 bottom-0 cursor-pointer " + (!isEditing ? "" : "hidden")}>
+            <div className="text-[100px]">{emoji}</div>
+            <div className={"absolute bg-navy rounded-full p-2 right-0 bottom-0 cursor-pointer " + (!isEditing ? "" : "hidden")} onClick={() => {
+              setOpenEmoji(!openEmoji);
+            }}>
               <svg
                 width="30"
                 height="30"
