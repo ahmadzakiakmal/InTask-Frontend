@@ -109,11 +109,6 @@ export default function Dashboard() {
             <h1 className="text-[20px] leading-[100%]">
               Create your own or join other&apos;s projects
             </h1>
-            {/* <Link href="/dashboard/create-project">
-                <button type="button" className="bg-yellow text-navy px-4 py-2 rounded-[10px] hover:bg-yellow-500 transition-[background-color]">
-                  Create a project
-                </button>
-              </Link> */}
           </div>
         )}
         <div
