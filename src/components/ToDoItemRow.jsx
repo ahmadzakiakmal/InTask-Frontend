@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-export default function ToDoItemRow({ task, projectId, onSuccess }) {
+export default function ToDoItemRow({ task, projectId, onSuccess, index }) {
   const [editStatusOpen, setStatusOpen] = useState(false);
   const [assignees, setAssignees] = useState([]);
 
@@ -37,7 +37,7 @@ export default function ToDoItemRow({ task, projectId, onSuccess }) {
 
   return (
     <tr className="mb-2 bg-white/5">
-      <td className="text-center w-[60px] py-2 border-r border-yellow">1</td>
+      <td className="text-center w-[60px] py-2 border-r border-yellow">{index + 1}</td>
       <td className="px-2 border-r border-yellow">{task?.name ?? "Discussion"}</td>
       <td className="text-center border-r border-yellow">
         <div className="flex flex-wrap gap-2 justify-center items-center">

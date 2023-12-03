@@ -49,7 +49,7 @@ export default function TaskTable({ tasks, projectId, onEdit , setTasks }){
             </th>
             <th className="w-24"></th>
           </tr>
-          {tasks?.map(task => (<ToDoItemRow key={task._id} task={task} projectId={projectId} onSuccess={onEdit} />))}
+          {tasks?.map((task, index) => (<ToDoItemRow key={task._id} index={index} task={task} projectId={projectId} onSuccess={onEdit} />))}
           {
             tasks.length === 0  && (
               <tr className="border-b border-yellow">
