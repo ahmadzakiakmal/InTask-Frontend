@@ -5,8 +5,9 @@ import ProjectCardComponent from "@/components/ProjectCard";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { LoadingContext } from "@/context/LoadingContext";
 
 export default function Dashboard() {
   const [projects, setProjects] = useState([]);
@@ -14,12 +15,14 @@ export default function Dashboard() {
   const [username, setUsername] = useState("");
   const [openModal, setOpenModal] = useState(false);
   const router = useRouter();
+  const { setLoading } = useContext(LoadingContext);
 
   useEffect(() => {
     if (!Cookies.get("Authorization")) {
       router.replace("/");
       return;
     }
+    setLoading(true);
     setUsername(localStorage.getItem("username"));
     if (localStorage.getItem("username")) {
       axios
@@ -44,6 +47,9 @@ export default function Dashboard() {
           // console.log(err);
           if (err.response) return toast.error(err.response.data.message);
           toast.error("An error occurred while fetching projects!");
+        })
+        .finally(() => {
+          setLoading(false);
         });
     }
   }, [openModal]);
