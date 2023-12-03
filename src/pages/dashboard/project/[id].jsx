@@ -11,7 +11,6 @@ import ProjectNavbar from "@/components/ProjectNavbar";
 import { DndContext, useDroppable } from "@dnd-kit/core";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
-import EditProjectModal from "@/components/modals/EditProject";
 
 function KanbanContainer({ status, tasks, id, initialStatus, setInitialStatus, openModal }) {
   const { setNodeRef } = useDroppable({ id: id });
@@ -27,6 +26,7 @@ function KanbanContainer({ status, tasks, id, initialStatus, setInitialStatus, o
           taskname={task.name}
           id={task._id}
           desc={task.description}
+          assignees={task.assignees}
         />
       ))}
       <button className="flex items-center gap-2 p-[10px] hover:bg-yellow/10 w-full rounded-[10px] transition" onClick={() => {
@@ -43,9 +43,9 @@ function KanbanContainer({ status, tasks, id, initialStatus, setInitialStatus, o
           <path
             d="M12.5 5.25V18.75M19.25 12H5.75"
             stroke="#D6D5A8"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </svg>
         <span>Add a task</span>
@@ -60,7 +60,7 @@ export default function Project() {
   const [project, setProject] = useState({});
   const [openNewTaskModal, setOpenNewTaskModal] = useState(false);
   const [refetch, setRefetch] = useState(false);
-  const [initialStatus, setInitialStatus] = useState("apcb");
+  const [initialStatus, setInitialStatus] = useState("todo");
 
   const router = useRouter();
   const { id } = router.query;
@@ -72,12 +72,11 @@ export default function Project() {
           withCredentials: true,
         })
         .then((res) => {
-          // console.log(res.data.tasks);
           setTasks(res.data.tasks);
         })
         .catch((err) => {
           // console.log("API Error for id:", id, err);
-          if (err.response.status === 401) {
+          if (err?.response?.status === 401) {
             localStorage.clear();
             Cookies.remove("Authorization");
             router.push("/auth/login");
@@ -145,7 +144,7 @@ export default function Project() {
           }}
         />
         <div className="flex items-center gap-3 my-4">
-          <h1 className="font-bold text-[20px]">{initialStatus} Select View: </h1>
+          <h1 className="font-bold text-[20px]">Select View: </h1>
           <Button text="Kanban" onClick={() => setView("kanban")} />
           <Button text="Table" onClick={() => setView("table")} />
         </div>
