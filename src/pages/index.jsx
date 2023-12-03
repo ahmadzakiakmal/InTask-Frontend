@@ -161,7 +161,7 @@ export default function Home() {
       <section className="pt-10 mb-10 lg:pt-0 lg:mb-10 md:px-10 xl:px-auto flex flex-col-reverse w-full lg:flex-row justify-center lg:justify-evenly max-w-[1600px] items-center gap-10 xl:gap-0 min-h-screen">
         <div className="container mx-auto py-20">
           <p className="text-base lg:text-xl font-medium text-gray-500 uppercase" style={{ marginTop:"-9rem" }}>Kelompok 1</p>
-          <p className="text-3xl lg:text-5xl font-semibold text-navy mt-3"  style={{ marginBottom:"-3rem" }}>Meet our member!</p>
+          <p className="text-3xl lg:text-5xl font-semibold text-navy mt-3"  style={{ marginBottom:"-2rem" }}>Meet our member!</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-16 py-10 lg:py-20">
             <div className="flex flex-col gap-5 ">
               <Image src={Jaki} alt="Ahmad Zaki Akmal"/>
@@ -199,7 +199,7 @@ export default function Home() {
       </section>
 
       {/* //? footer */}
-      <div id="section_footer" style={{ marginTop:"-7rem" }}>
+      <div id="section_footer" style={{ marginTop:"-7rem", }}>
         <div className='text-center py-4'>
           <Link href="https://github.com/ahmadzaki2975/InTask-Frontend.git" target="_blank" className='btn btn-link'>
             <span className="font-bold hover:text-blue-500">Our Github repository</span>
