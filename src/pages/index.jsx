@@ -18,7 +18,7 @@ import React from "react";
 export default function Home() {
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
   return (
-    <main className="flex flex-col justify-center items-center min-h-screen bg-neutral font-poppins">
+    <main className="flex flex-col justify-center items-center min-h-screen bg-white font-poppins">
       <nav className="fixed top-0 w-full bg-navy z-10 flex justify-between px-[5%] xs:px-4 sm:px-7">
         <div className="flex items-center cursor-pointer">
           <Image
@@ -120,7 +120,7 @@ export default function Home() {
       {/* //? section fitur */}
       <section className="pt-10 mb-10 lg:pt-0 lg:mb-10 md:px-10 xl:px-auto flex flex-col-reverse w-full lg:flex-row justify-center lg:justify-evenly max-w-[1600px] items-center gap-10 xl:gap-0 min-h-screen">
         <div className="container mx-auto py-20">
-          <p className="text-3xl lg:text-5xl font-semibold text-navy" style={{ marginBottom: "-3rem", marginTop:"-3rem"}}>Our Fitur</p>
+          <p className="text-3xl lg:text-5xl font-semibold text-navy" style={{ marginBottom: "-2rem", marginTop:"-3rem"}}>Our Fitur</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-16 py-10 lg:py-20 mt-0">
             <div className="flex flex-col gap-5 mt-0.1 ">
               <Image src={DashboardPict} alt="Project Picture" className="shadow-[0_0_8px_rgba(0,0,0,.5)] rounded-[10px]" />
@@ -149,7 +149,7 @@ export default function Home() {
               <p className="text-2xl font-semibold">Task</p>
               <div className="flex items-center gap-2">
                 <p className="text-base text-justify sm:text-lg text-gray-500 text-center lg:text-[15px] mb-10">
-            Pada fitur Task, pengguna dapat membuat dan mengelola tugas-tugas individual dengan memberikan status tugas, seperti Todo, In Progress, dan Done. 
+                Pada fitur Task, pengguna dapat membuat dan mengelola tugas-tugas individual dengan memberikan status tugas, seperti Todo, In Progress, dan Done. 
                 </p>
               </div>
             </div>
@@ -197,6 +197,16 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* //? footer */}
+      <div id="section_footer" style={{marginTop:"-7rem"}}>
+        <div className='text-center py-4'>
+        <Link href="https://github.com/ahmadzaki2975/InTask-Frontend.git" target="_blank" className='btn btn-link'>
+          <span className="font-bold hover:text-blue-500">Our Github repository</span>
+        </Link>
+        <p style={{marginBottom:"2rem"}}>Infinite Task | Kelompok 1</p>
+        </div>
+      </div>
 
     </main>
   );
