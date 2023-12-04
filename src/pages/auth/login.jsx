@@ -106,7 +106,6 @@ export default function Login() {
                 type="password"
                 value={password}
                 onChange={(e) => {
-                  console.log(validateInput(e.target.value));
                   setPassword(e.target.value);
                   setPasswordValid(validateInput(e.target.value));
                 }}
@@ -120,6 +119,9 @@ export default function Login() {
               .
             </p>
             <Button type="submit" text="Login" className="!w-full !mt-3" />
+            <Link href="/">
+              <Button type="button" text="Back to Home" className="!w-full !bg-neutral/50 hover:!bg-neutral/30 text-purple-100" />
+            </Link>
           </form>
         </div>
       </section>

@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import Cookies from "js-cookie";
 import Button from "@/components/Button";
 
 export default function Register() {
@@ -169,7 +168,6 @@ export default function Register() {
                 type="password"
                 value={password}
                 onChange={(e) => {
-                  console.log(validatePassword(e.target.value));
                   setPassword(e.target.value);
                   setPasswordValid(validatePassword(e.target.value));
                   setConfirmPasswordValid(validateConfirmPassword(confirmPassword, e.target.value));
@@ -201,6 +199,9 @@ export default function Register() {
               .
             </p>
             <Button type="submit" text="Register" className="!w-full mt-3" />
+            <Link href="/">
+              <Button type="button" text="Back to Home" className="!w-full !bg-neutral/50 hover:!bg-neutral/30 text-purple-100" />
+            </Link>
           </form>
         </div>
       </section>
