@@ -76,7 +76,13 @@ export default function Project() {
           withCredentials: true,
         })
         .then((res) => {
-          setTasks(res.data.tasks);
+          const assignees = res.data.assignees;
+          const tasks = res.data.tasks
+            .map((task, id)=>({
+              ...task, 
+              assignees: assignees[id]
+            }))
+          setTasks(tasks);
         })
         .catch((err) => {
           // console.log("API Error for id:", id, err);

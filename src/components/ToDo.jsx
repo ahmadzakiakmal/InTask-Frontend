@@ -12,7 +12,7 @@ export default function ToDoItem({ taskname, id, desc, assignees }) {
     transform: CSS.Translate.toString(transform),
   };
   const [users, setUsers] = useState([]);
-  useEffect(() => {
+/*  useEffect(() => {
     if(assignees.length > 0) {
       // call api to get users with params id1/id2/id3
       axios
@@ -27,7 +27,7 @@ export default function ToDoItem({ taskname, id, desc, assignees }) {
         });
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }
-  }, []);
+  }, []);*/
   return (
     <button
       className="w-full py-2 text-left top-0 px-5 rounded-[10px] bg-[#4B4B4B] shadow-navy shadow-lg"
@@ -41,10 +41,11 @@ export default function ToDoItem({ taskname, id, desc, assignees }) {
       <p>{desc}</p>
       <h1 className="mt-3">Assignees</h1>
       <div className="flex gap-2">
-        {users?.map((a, index) => {
+        {assignees?.map((as, index) => {
+          if(!as) return;
           return (
             <span key={index} className="bg-purple-100 rounded-[5px] px-2 py-1 text-white">
-              {a.emoticon} {a.username}
+              {as.emoticon} {as.username}
             </span>
           );
         })}

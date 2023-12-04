@@ -37,7 +37,7 @@ export default function ToDoItemRow({ task, projectId, onSuccess, index }) {
         toast.error("Failed to Delete " + e.message);
       });
   };
-
+/*
   useEffect(() => {
     if(task.assignees.length > 0) {
       axios.get(process.env.NEXT_PUBLIC_API_URL + "/user/search/" + task.assignees.join("%7C"), {
@@ -51,18 +51,20 @@ export default function ToDoItemRow({ task, projectId, onSuccess, index }) {
         });    
     }
   }, []);
-
+*/
   return (
     <tr className="mb-2 bg-white/5">
       <td className="text-center w-[60px] py-2 border-r border-yellow">{index + 1}</td>
       <td className="px-2 border-r border-yellow">{task?.name ?? "Discussion"}</td>
       <td className="text-center border-r border-yellow">
         <div className="flex flex-wrap gap-2 justify-center items-center">
-          {assignees?.map(as => (
-            <span key={as.username} className="bg-purple-100 rounded-[5px] px-2 py-1 text-white">
-              {as.emoticon} {as.username}
-            </span>
-          ))}
+          {task?.assignees?.map(as => {
+            if(!as) return <></>;
+            return (
+              <span key={as.username} className="bg-purple-100 rounded-[5px] px-2 py-1 text-white">
+                {as.emoticon} {as.username}
+              </span>)
+          })}
         </div>
       </td>
       <td className="px-2">
