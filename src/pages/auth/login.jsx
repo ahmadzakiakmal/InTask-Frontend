@@ -72,13 +72,13 @@ export default function Login() {
           </p>
 
           <form
-            className="flex flex-col gap-[0.8rem] mt-5 md:mt-10 text-yellow"
+            className="flex flex-col gap-[0.8rem] mt-5 md:mt-8 text-yellow w-[100vw] max-w-[300px]"
             onSubmit={(e) => {
               e.preventDefault();
               Login();
             }}
           >
-            <label className="flex flex-col gap-3">
+            <label className="flex flex-col gap-[0.4rem]">
               Username / Email
               <input
                 className={
@@ -94,7 +94,7 @@ export default function Login() {
                 }}
               />
             </label>
-            <label className="flex flex-col gap-3">
+            <label className="flex flex-col gap-[0.4rem]">
               Password
               <input
                 className={
@@ -114,12 +114,12 @@ export default function Login() {
             </label>
             <p className="text-[14px]">
               Don&apos;t have an account?{" "}
-              <Link href="/auth/register" className="underline">
+              <Link href="/auth/register" className="underline font-semibold">
                 Register
               </Link>
               .
             </p>
-            <Button type="submit" text="Login" className="!w-full" />
+            <Button type="submit" text="Login" className="!w-full !mt-3" />
           </form>
         </div>
       </section>
