@@ -78,7 +78,7 @@ export default function AddFriendModal ({ isOpen, onClose, projectId, setOpenMod
         }
         <div className="flex gap-2 justify-end">
           <Button text="Add" onClick={handleAddFriend} className="!px-5" />
-          <Button text="Cancel" className="!bg-neutral hover:!bg-neutral/90 text-purple-100" onClick={onClose} />
+          <Button text="Cancel" className="!bg-neutral/50 hover:!bg-neutral/30 text-purple-100" onClick={onClose} />
         </div>
       </main>
     </Modal>
