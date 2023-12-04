@@ -4,7 +4,7 @@ import Button from "../Button";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-export default function AddFriendModal ({ isOpen, onClose, projectId }) {
+export default function AddFriendModal ({ isOpen, onClose, projectId, setOpenModal }) {
   const [identifier, setIdentifier] = useState("");
   const [options, setOptions] = useState([]);
 
@@ -47,50 +47,40 @@ export default function AddFriendModal ({ isOpen, onClose, projectId }) {
     <Modal
       isOpen={isOpen}
       onRequestClose={onClose}
-      style={{
-        overlay: {
-          zIndex: 1000,
-          backgroundColor: "rgba(255, 255, 255, 0.4)",
-        },
-        content: {
-          position: "fixed",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          width: "80%",
-          maxWidth: 500,
-          maxHeight: 175,
-          backgroundColor:"#1B2430",
-          borderRadius: 10,
-          color: "#B6C2CF",
-          padding: "20px 40px",
-        },
-      }}
+      className="w-screen h-screen flex justify-center items-center absolute z-[10] backdrop-blur-[8px] bg-navy/30 overflow-visible"
     >
-      <header className="flex items-center m-0 mb-4">
-        <h2 className="float-left text-xl">Add Friend to Project</h2>
-        <button className="ml-auto font-bold text-base hover:text-red-500" type="button" onClick={onClose}>╳</button>
-      </header>
-      <body className="flex flex-col">
+      <div
+        className="w-full h-full absolute top-0"
+        onClick={() => setOpenModal(false)}
+      ></div>
+      <main className="bg-navy w-[90%] max-h-[90vh] overflow-y-visible md:w-1/2 md:max-w-[600px] lg:max-w-[800px] p-8 rounded-[10px] relative z-[10] text-yellow">
+        <h1 className="text-xl">Add Contributor</h1>
         <input
-          className="bg-gray-800 border border-white focus:border-sky-300 px-4 py-2 text-white outline-none w-[95%] mb-2 rounded-[10px]"
+          className="bg-gray-800 my-2 border border-white focus:border-sky-300 px-4 py-2 text-white outline-none w-full mb-2 rounded-[10px]"
           type="text"
           placeholder="Email Address or Name"
           value={identifier}
           onChange={(e) => setIdentifier(e.target.value)}
           list="users"
         />
-        {options.map(user=>(
-          <p key={user._id}
-            onClick={()=>setIdentifier(user.username)}
-            className="hover:cursor-pointer hover:font-bold my-1">
-            {user.emoticon} {user.username}
-          </p>
-        ))}
-      </body>
-      <div className="flex justify-end w-[95%]" onClick={handleAddFriend} >
-        <Button className="mr-2" text="Add"/>
-      </div>
+        {
+          options.length > 0 &&
+          <div className="text-yellow flex flex-col gap-2 absolute bg-navy p-3 shadow-yellow outline outline-1 outline-yellow rounded-[10px] min-w-[215px]">
+            {
+              options.map((user, index) => (
+                <div onClick={() => {
+                  setIdentifier(user.email);
+                  setOptions([]);
+                }} className="bg-yellow/20 hover:bg-yellow/40 p-1 rounded-[5px] cursor-pointer" key={index} value={user.email}>{user.emoticon} {user.username}</div>
+              ))
+            }
+          </div>
+        }
+        <div className="flex gap-2 justify-end">
+          <Button text="Add" onClick={handleAddFriend} className="!px-5" />
+          <Button text="Cancel" className="!bg-neutral hover:!bg-neutral/90 text-purple-100" onClick={onClose} />
+        </div>
+      </main>
     </Modal>
   );
 };

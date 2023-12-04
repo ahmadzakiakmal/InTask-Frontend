@@ -98,7 +98,7 @@ export default function ProjectNavbar({ project, onEdit }) {
             <FontAwesomeIcon icon={faUserPlus} />
             <span className="ml-2">Add Friend</span>
           </button>
-          <AddFriendModal isOpen={isAddFriendOpen} onClose={handleCloseAddFriendModal} projectId={project?.projectId}/>
+          <AddFriendModal isOpen={isAddFriendOpen} onClose={handleCloseAddFriendModal} setOpenModal={setIsAddFriendOpen} projectId={project?.projectId}/>
         </li>
         <li className="hidden lg:block cursor-pointer hover:text-blue-500">
           <button type="button" onClick={handleOpenRemoveFriendModal}>
