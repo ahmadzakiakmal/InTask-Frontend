@@ -1,10 +1,12 @@
 import Image from "next/image";
-import InTaskLogo from "@/../public/InTaskLogo.png";
+import InTaskLogin from "@/../public/InTaskLogo.png";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import Cookies from "js-cookie";
+import Button from "@/components/Button";
 
 export default function Register() {
   const router = useRouter();
@@ -17,143 +19,190 @@ export default function Register() {
   const [isUsernameValid, setUsernameValid] = useState(true);
   const [isPasswordValid, setPasswordValid] = useState(true);
   const [isConfirmPasswordValid, setConfirmPasswordValid] = useState(true);
+  const [isNameValid, setNameValid] = useState(true);
+
+  const validateInput = (input) => {
+    if (input == "") {
+      return false;
+    } 
+    return true;
+  };
+
+  const validateEmail = (email) => {
+    if (email == "" || !email.includes("@") || !email.includes(".")) return false;
+    return true;
+  };
+
+  const validateUsername = (username) => {
+    const specialChars = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+    if (username == "" || specialChars.test(username) || username.includes("%") || username.length < 4) return false;
+    return true;
+  };
+
+  const validatePassword = (password) => {
+    if (password == "" || password.length < 8) return false;
+    return true;
+  };
+
+  const validateConfirmPassword = (password, confirmPassword) => {
+    if (password != confirmPassword) return false;
+    return true;
+  };
+
+  const Login = () => {
+    if(!isNameValid) {
+      return toast.error("Please fill your name.");
+    }
+    if(!isEmailValid) {
+      return toast.error("Email is not valid.");
+    }
+    if(!isUsernameValid) {
+      return toast.error("Username must be at least 4 characters and not contain special characters.");
+    }
+    if(!isPasswordValid) {
+      return toast.error("Password must be at least 8 characters.");
+    }
+    if(!isConfirmPasswordValid) {
+      return toast.error("Password and confirm password must be the same.");
+    }
+
+    axios
+      .post(process.env.NEXT_PUBLIC_API_URL + "/user/register", {
+        realName: name,
+        email,
+        username,
+        password,
+      })
+      .then(() => {
+        toast.success(
+          "Account created successfully! Verify your email to login."
+        );
+        router.replace("/");
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+      });
+  };
 
   return (
-    <main
-      className="flex flex-col justify-center items-center min-h-screen px-[5%] xs:px-auto"
-      style={{ backgroundColor: "#1B2430" }}
-    >
-      <section className="py-10 xs:px-12 bg-yellow rounded-[20px] w-full xs:w-fit xs:min-w-[350px] flex flex-col gap-4 justify-center items-center my-10">
-        <div className="h-full py-10">
-          <Image src={InTaskLogin} alt="InTask Logo" className="object-cover w-full h-full rounded-[20px] mt-[-40px]" />
+    <main className="flex flex-col justify-center items-center min-h-screen bg-neutral font-poppins px-[5%] md:px-0">
+      <section className="flex flex-col items-center justify-center md:flex-row md:gap-[100px] bg-navy rounded-[20px] p-8 md:p-10">
+        <div className="flex-shrink-0 w-[150px] md:w-auto">
+          <Image
+            src={InTaskLogin}
+            alt="InTask Logo"
+            className="object-cover w-full h-full rounded-[20px]"
+          />
         </div>
-        <p
-          className="text-[20px] font-bold mt-0"
-          style={{ color: "#1B2430", marginTop: "-0.4rem" }}
-        >
-          Register
-        </p>
-        <p
-          className="text-[12px] mt-0"
-          style={{ color: "#1B2430", marginTop: "-0.9rem" }}
-        >
-          Great idea to create your account now!
-        </p>
-
-        <form
-          className="flex flex-col gap-2"
-          onSubmit={(e) => {
-            e.preventDefault();
-            if(!email.includes("@")) {
-              setEmailValid(false);
-            }
-            if(username.length < 8) {
-              setUsernameValid(false);
-            }
-            if(password.length < 8) {
-              setPasswordValid(false);
-            }
-            if(password !== confirmPassword) {
-              setConfirmPasswordValid(false);
-            }
-            if(!name || !email.includes("@") || username.length < 8 || password.length < 8 || confirmPassword !== password) return toast.error("Please fill all the fields!");
-            axios
-              .post(process.env.NEXT_PUBLIC_API_URL + "/user/register", {
-                realName : name,
-                email,
-                username,
-                password,
-              })
-              .then(() => {
-                toast.success(
-                  "Account created successfully! Verify your email to login."
-                );
-                router.replace("/");
-              })
-              .catch((err) => {
-                toast.error(err.response.data.message);
-              });
-          }}
-        >
-          <label className="flex flex-col gap-1">
-            Name
-            <input
-              className="outline rounded-[3px]"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </label>
-          <label className="flex flex-col gap-1">
-            Email
-            <input
-              type="email"
-              className={`outline ${isEmailValid ? "" : "outline-red-500"} rounded-[3px]`}
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-                setEmailValid(e.target.value.includes("@"));
-              }}
-            />
-            {!isEmailValid && (
-              <p className="text-red-500 text-[11px]">Invalid email format.</p>
-            )}
-          </label>
-          <label className="flex flex-col gap-1">
-            Username
-            <input
-              className={`outline ${isUsernameValid ? "" : "outline-red-500"} rounded-[3px]`}
-              value={username}
-              onChange={(e) => {
-                setUsername(e.target.value);
-                setUsernameValid(e.target.value.length >= 8);
-              }}
-            />
-            {!isUsernameValid && (
-              <p className="text-red-500 text-[11px]">Username must be at least 8 characters long.</p>
-            )}
-          </label>
-          <label className="flex flex-col gap-1">
-            Password
-            <input
-              type="password"
-              className={`outline ${isPasswordValid ? "" : "outline-red-500"} rounded-[3px]`}
-              value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-                setPasswordValid(e.target.value.length >= 8);
-              }}
-            />
-            {!isPasswordValid && (
-              <p className="text-red-500 text-[11px]">Password must be at least 8 characters long.</p>
-            )}
-          </label>
-          <label type="password" className="flex flex-col gap-1">
-            Confirm Password
-            <input
-              type="password"
-              className={`outline ${isConfirmPasswordValid ? "" : "outline-red-500"} rounded-[3px]`}
-              value={confirmPassword}
-              onChange={(e) => {
-                setConfirmPassword(e.target.value);
-                setConfirmPasswordValid(e.target.value === password);
-              }}
-            />
-            {!isConfirmPasswordValid && (
-              <p className="text-red-500 text-[11px]">Password must match.</p>
-            )}
-          </label>
-          <p className="text-[14px]">
-            {" "}
-            Already have an account?{" "}
-            <Link href="/auth/login" className="underline">
-              Log in
-            </Link>
-            .
-          </p>
-          <button type="submit" className="outline py-1 rounded-[3px]">
+        <div>
+          <p className="flex flex-col text-[30px] font-semibold justify-center items-center text-yellow">
             Register
-          </button>
-        </form>
+          </p>
+          <p className="flex flex-col text-[12px] font-regular justify-center items-center text-center text-yellow">
+            Register a new account to get started!
+          </p>
+
+          <form
+            className="flex flex-col gap-[0.8rem] mt-5 md:mt-8 text-yellow w-[100vw] max-w-[300px]"
+            onSubmit={(e) => {
+              e.preventDefault();
+              Login();
+            }}
+          >
+            <label className="flex flex-col gap-[0.4rem]">
+              Full Name
+              <input
+                className={
+                  "outline outline-1 focus:outline-2 rounded-[3px] text-black py-1 px-1.5 w-full " +
+                  (isNameValid
+                    ? "outline-yellow"
+                    : "outline outline-2 outline-red-500")
+                }
+                value={name}
+                onChange={(e) => {
+                  setName(e.target.value);
+                  setNameValid(validateInput(e.target.value));
+                }}
+              />
+            </label>
+            <label className="flex flex-col gap-[0.4rem]">
+              Email
+              <input
+                className={
+                  "outline outline-1 focus:outline-2 rounded-[3px] text-black py-1 px-1.5 w-full " +
+                  (isEmailValid
+                    ? "outline-yellow"
+                    : "outline outline-2 outline-red-500")
+                }
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  setEmailValid(validateEmail(e.target.value));
+                }}
+              />
+            </label>
+            <label className="flex flex-col gap-[0.4rem]">
+              Username
+              <input
+                className={
+                  "outline outline-1 focus:outline-2 rounded-[3px] text-black py-1 px-1.5 w-full " +
+                  (isUsernameValid
+                    ? "outline-yellow"
+                    : "outline outline-2 outline-red-500")
+                }
+                value={username}
+                onChange={(e) => {
+                  setUsername(e.target.value);
+                  setUsernameValid(validateUsername(e.target.value));
+                }}
+              />
+            </label>
+            <label className="flex flex-col gap-[0.4rem]">
+              Password
+              <input
+                className={
+                  "outline outline-1 focus:outline-2 rounded-[3px] text-black py-1 px-1.5 w-full " +
+                  (isPasswordValid
+                    ? "outline-yellow"
+                    : "outline outline-2 outline-red-500")
+                }
+                type="password"
+                value={password}
+                onChange={(e) => {
+                  console.log(validatePassword(e.target.value));
+                  setPassword(e.target.value);
+                  setPasswordValid(validatePassword(e.target.value));
+                  setConfirmPasswordValid(validateConfirmPassword(confirmPassword, e.target.value));
+                }}
+              />
+            </label>
+            <label className="flex flex-col gap-[0.4rem]">
+              Confirm Password
+              <input
+                className={
+                  "outline outline-1 focus:outline-2 rounded-[3px] text-black py-1 px-1.5 w-full " +
+                  (isConfirmPasswordValid
+                    ? "outline-yellow"
+                    : "outline outline-2 outline-red-500")
+                }
+                type="password"
+                value={confirmPassword}
+                onChange={(e) => {
+                  setConfirmPassword(e.target.value);
+                  setConfirmPasswordValid(validateConfirmPassword(e.target.value, password));
+                }}
+              />
+            </label>
+            <p className="text-[14px]">
+              Registered before?{" "}
+              <Link href="/auth/login" className="underline font-semibold">
+                Login
+              </Link>
+              .
+            </p>
+            <Button type="submit" text="Register" className="!w-full mt-3" />
+          </form>
+        </div>
       </section>
     </main>
   );
