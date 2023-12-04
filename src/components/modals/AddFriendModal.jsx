@@ -37,7 +37,7 @@ export default function AddFriendModal ({ isOpen, onClose, projectId }) {
     else
       axios.get(process.env.NEXT_PUBLIC_API_URL + "/user/search/" + identifier)
         .then(response =>{
-          setOptions(response.data);  
+          setOptions(response.data.users);  
         })
         .catch(err => toast.info(err.message));
   };
