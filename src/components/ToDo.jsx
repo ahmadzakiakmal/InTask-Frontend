@@ -13,18 +13,20 @@ export default function ToDoItem({ taskname, id, desc, assignees }) {
   };
   const [users, setUsers] = useState([]);
   useEffect(() => {
-    // call api to get users with params id1/id2/id3
-    axios
-      .get(process.env.NEXT_PUBLIC_API_URL + "/user/search/" + assignees.join("%7C"), {
-        withCredentials: true,
-      })
-      .then((res) => {
-        setUsers(res.data.users);
-      })
-      .catch(() => {
-        toast.error("Error fetching assignees");
-      });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    if(assignees.length > 0) {
+      // call api to get users with params id1/id2/id3
+      axios
+        .get(process.env.NEXT_PUBLIC_API_URL + "/user/search/" + assignees.join("%7C"), {
+          withCredentials: true,
+        })
+        .then((res) => {
+          setUsers(res.data.users);
+        })
+        .catch(() => {
+          toast.error("Error fetching assignees");
+        });
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }
   }, []);
   return (
     <button

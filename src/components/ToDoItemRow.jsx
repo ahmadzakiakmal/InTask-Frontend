@@ -23,16 +23,17 @@ export default function ToDoItemRow({ task, projectId, onSuccess, index }) {
   };
 
   useEffect(() => {
-    axios.get(process.env.NEXT_PUBLIC_API_URL + "/user/search/" + task.assignees.join("%7C"), {
-      withCredentials: true,
-    })
-      .then((res) => {
-        setAssignees(res.data.users);
+    if(task.assignees.length > 0) {
+      axios.get(process.env.NEXT_PUBLIC_API_URL + "/user/search/" + task.assignees.join("%7C"), {
+        withCredentials: true,
       })
-      .catch(() => {
-        toast.error("Error fetching assignees");
-      });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        .then((res) => {
+          setAssignees(res.data.users);
+        })
+        .catch(() => {
+          toast.error("Error fetching assignees");
+        });    
+    }
   }, []);
 
   return (
