@@ -9,6 +9,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import EditProjectModal from "./modals/EditProject";
+import Cookies from "js-cookie";
 
 export default function ProjectNavbar({ project, onEdit }) {
   const [isAddFriendOpen, setIsAddFriendOpen] = useState(false);
