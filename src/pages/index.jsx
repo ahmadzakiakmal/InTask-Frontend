@@ -119,7 +119,7 @@ export default function Home() {
 
       {/* //? section fitur */}
       <section className="pt-10 mb-10 lg:pt-0 lg:mb-10 md:px-10 xl:px-auto flex flex-col-reverse w-full lg:flex-row justify-center lg:justify-evenly max-w-[1600px] items-center gap-10 xl:gap-0 min-h-screen">
-        <div className="container mx-auto py-20">
+        <div className="container gap-5 lg:gap-10 px-8 mx-auto py-20">
           <p className="text-3xl lg:text-5xl font-semibold text-navy" style={{ marginBottom: "-2rem", marginTop:"-3rem" }}>Our Fitur</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-16 py-10 lg:py-20 mt-0">
             <div className="flex flex-col gap-5 mt-0.1 ">
@@ -159,7 +159,7 @@ export default function Home() {
 
       {/* //? section anggota */}
       <section className="pt-10 mb-10 lg:pt-0 lg:mb-10 md:px-10 xl:px-auto flex flex-col-reverse w-full lg:flex-row justify-center lg:justify-evenly max-w-[1600px] items-center gap-10 xl:gap-0 min-h-screen">
-        <div className="container mx-auto py-20">
+        <div className="container mx-auto py-20 gap-5 lg:gap-10 px-8">
           <p className="text-base lg:text-xl font-medium text-gray-500 uppercase" style={{ marginTop:"-9rem" }}>Kelompok 1</p>
           <p className="text-3xl lg:text-5xl font-semibold text-navy mt-3"  style={{ marginBottom:"-2rem" }}>Meet our member!</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-16 py-10 lg:py-20">
@@ -199,8 +199,8 @@ export default function Home() {
       </section>
 
       {/* //? footer */}
-      <div id="section_footer" style={{ marginTop: "-7rem" }} className="w-full bg-navy">
-        <div className="flex items-center justify-between py-4 px-[5%] xs:px-4 sm:px-7" style={{ marginBottom: "0.3rem" }}>
+      <div id="section_footer" style={{ marginTop: "-7rem"}} className="w-full bg-navy">
+        <div className="flex items-center justify-between py-4 px-[5%] xs:px-4 sm:px-7" style={{ marginBottom: "0rem", marginTop:"-1rem" }}>
           <div className="flex items-center cursor-pointer">
             <Image src={InTaskLogo} alt="InTask Logo" className="w-[50px] py-2 hidden xs:block" />
             <Image src={textInTaskLogo} alt="TextInTask Logo" className="w-[80px] py-3" />
