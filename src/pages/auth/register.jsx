@@ -24,8 +24,8 @@ export default function Register() {
       style={{ backgroundColor: "#1B2430" }}
     >
       <section className="py-10 xs:px-12 bg-yellow rounded-[20px] w-full xs:w-fit xs:min-w-[350px] flex flex-col gap-4 justify-center items-center my-10">
-        <div className="p-2 bg-navy rounded-[10px] grid place-items-center">
-          <Image src={InTaskLogo} alt="InTask Logo" className="max-w-[135px]" />
+        <div className="h-full py-10">
+          <Image src={InTaskLogin} alt="InTask Logo" className="object-cover w-full h-full rounded-[20px] mt-[-40px]" />
         </div>
         <p
           className="text-[20px] font-bold mt-0"

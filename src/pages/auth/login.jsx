@@ -14,13 +14,13 @@ export default function Login() {
 
   return (
     <main className="flex flex-col justify-center items-center min-h-screen bg-white font-poppins">
-        <section className="flex flex-col bg-navy rounded-[20px] w-[680px] h-[400px] mb-3">
+        <section className="flex flex-col bg-navy rounded-[20px] w-[680px] h-[400px] mb-3 ">
             <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-2 gap-6 lg:gap-10 py-10 lg:py-20 mt-[-25px]">
-                <div className="h-full">
+                <div className="h-full py-10">
                 <Image src={InTaskLogin} alt="InTask Logo" className="object-cover w-full h-full rounded-[20px] mt-[-40px]" />
                 </div>
 
-                <div style={{marginRight:"3rem", marginLeft:"-1rem"}}>
+                <div className="py-5 pt-5" style={{ marginRight:"3rem", marginLeft:"-1rem", marginTop:"-1.5rem"}}>
                     <p className="flex flex-col text-[30px] font-semibold justify-center items-center px-6 pt-6 pr-6" style = {{ color:  "#FBFACC" ,marginTop: "-3rem", marginRight:"2rem",marginBottom:"0.7rem"}}>Login</p>
                     <p className="flex flex-col text-[12px] font-regular justify-center items-center px-6" style = {{ color:  "#FBFACC", marginTop: "0.5rem", marginRigt:"2rem", marginBottom:"0.7rem" }}>Welcome back! Enter your details here!</p>
 
