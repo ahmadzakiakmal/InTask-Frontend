@@ -8,10 +8,10 @@ export default function TextInput({ label, ...prop }){
         </div>
         <input 
           class="bg-neutral py-1 pl-32 rounded-md border border-purple-200 focus:outline-purple-200" 
-        name={label}
-        placeholder="Enter your answer here"
-        {...prop}
-      />
+          name={label}
+          placeholder="Enter your answer here"
+          {...prop}
+        />
       </div>
     </div>);
 }
