@@ -10,15 +10,31 @@ export default function ToDoItemRow({ task, projectId, onSuccess, index }) {
   const [editStatusOpen, setStatusOpen] = useState(false);
   const [assignees, setAssignees] = useState([]);
 
+  const showDeleteConfirmationToast = () => {
+    toast.warning(`Are you sure, you want to delete "${task.name}"?`, {
+      position: "top-center",
+      autoClose: false, 
+      closeOnClick: false,
+      closeButton: <button className="text-red-500 font-light" onClick={handleDelete}>Delete</button>, 
+      style: {
+        color: "black",
+        backgroundColor: "#E3E3ED",
+        border: "2px solid #FF3E3E",
+        fontWeight: "500",
+        borderRadius: "10px"
+      },
+    });
+  };
   const handleDelete = () => {
     axios.delete(process.env.NEXT_PUBLIC_API_URL + "/project/" + projectId + "/tasks/" + task._id, 
       { withCredentials: true })
       .then(()=>{
         onSuccess();
-        toast.info(`deleted ${task.name}`);
+        toast.dismiss();
+        toast.success(`${task.name} Successfully Deleted`);
       })
       .catch(e => {
-        toast.error("failed to delete " + e.message);
+        toast.error("Failed to Delete " + e.message);
       });
   };
 
@@ -65,7 +81,7 @@ export default function ToDoItemRow({ task, projectId, onSuccess, index }) {
           taskId={task?._id} />
       </td>
       <td className="mb-2 bg-red-900 hover:bg-red-800 transition border-l border-b border-yellow cursor-pointer">
-        <button className="w-full" onClick={handleDelete}>
+        <button className="w-full" onClick={showDeleteConfirmationToast}>
           <FontAwesomeIcon icon={faTrashCan} style={{ color: "#ffffff" }} />
         </button>
       </td>
