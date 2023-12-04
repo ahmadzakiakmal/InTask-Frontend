@@ -1,11 +1,13 @@
 import Link from "next/link";
+import StatusBadge from "./StatusBadge";
 
 export default function ProjectCardComponent({
   title,
   color,
   description,
   id,
-  owner
+  owner,
+  tasks
 }) {
   const colors = {
     yellow: "bg-yellow",
@@ -34,6 +36,12 @@ export default function ProjectCardComponent({
         <div className="w-full h-fit px-3 py-4 text-white">
           <p>Owner: {owner}</p>
           <p>{description}</p>
+          <p className="text-green">
+            todo task : {tasks?.filter(t => t.status === "todo")?.length}
+          </p>
+          <p className="text-[#94FFFF]">
+            doing task : {tasks?.filter(t => t.status === "ongoing")?.length}
+          </p>
         </div>
       </div>
     </Link>

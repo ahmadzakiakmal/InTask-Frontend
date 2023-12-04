@@ -102,6 +102,7 @@ export default function Dashboard() {
                     projectId={project._id}
                     projectContributor={project.contributors}
                     owner={owners[id]}
+                    tasks={project.tasks}
                   />
                 );
               })}
