@@ -1,83 +1,128 @@
 import Image from "next/image";
-import InTaskLogin from "@/../public/InTaskLogin.png";
+import InTaskLogin from "@/../public/InTaskLogo.png";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
+import Button from "@/components/Button";
 
 export default function Login() {
   const router = useRouter();
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
+  const [isIdentifierValid, setEmailValid] = useState(true);
+  const [isPasswordValid, setPasswordValid] = useState(true);
+
+  const validateInput = (input) => {
+    if (input == "") {
+      return false;
+    }
+    return true;
+  };
+
+  const Login = () => {
+    if (isIdentifierValid == false || isPasswordValid == false) {
+      return toast.error("Please fill all the fields!");
+    }
+    axios
+      .post(process.env.NEXT_PUBLIC_API_URL + "/user/login", {
+        identifier,
+        password,
+      })
+      .then((res) => {
+        toast.success("Logged in successfully!");
+        Cookies.set("Authorization", res.data.token, {
+          path: "/",
+          domain:
+            process.env.NEXT_PUBLIC_API_URL === "http://localhost:5000"
+              ? "localhost"
+              : process.env.NEXT_PUBLIC_DEPLOYMENT_URL,
+        });
+        const id = res.data.data.id;
+        const username = res.data.data.username;
+        localStorage.setItem("userId", id);
+        localStorage.setItem("username", username);
+        router.replace("/dashboard");
+      })
+      .catch((err) => {
+        if (err.response) return toast.error(err.response.data.message);
+        toast.error("An error occurred while logging in!");
+      });
+  };
 
   return (
-    <main className="flex flex-col justify-center items-center min-h-screen bg-white font-poppins">
-        <section className="flex flex-col bg-navy rounded-[20px] w-[680px] h-[400px] mb-3 ">
-            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-2 gap-6 lg:gap-10 py-10 lg:py-20 mt-[-25px]">
-                <div className="h-full py-10">
-                <Image src={InTaskLogin} alt="InTask Logo" className="object-cover w-full h-full rounded-[20px] mt-[-40px]" />
-                </div>
+    <main className="flex flex-col justify-center items-center min-h-screen bg-neutral font-poppins px-[5%] md:px-0">
+      <section className="flex flex-col items-center justify-center md:flex-row md:gap-[100px] bg-navy rounded-[20px] p-8 md:p-10">
+        <div className="flex-shrink-0 w-[150px] md:w-auto">
+          <Image
+            src={InTaskLogin}
+            alt="InTask Logo"
+            className="object-cover w-full h-full rounded-[20px]"
+          />
+        </div>
 
-                <div className="py-5 pt-5" style={{ marginRight:"3rem", marginLeft:"-1rem", marginTop:"-1.5rem"}}>
-                    <p className="flex flex-col text-[30px] font-semibold justify-center items-center px-6 pt-6 pr-6" style = {{ color:  "#FBFACC" ,marginTop: "-3rem", marginRight:"2rem",marginBottom:"0.7rem"}}>Login</p>
-                    <p className="flex flex-col text-[12px] font-regular justify-center items-center px-6" style = {{ color:  "#FBFACC", marginTop: "0.5rem", marginRigt:"2rem", marginBottom:"0.7rem" }}>Welcome back! Enter your details here!</p>
+        <div>
+          <p className="flex flex-col text-[30px] font-semibold justify-center items-center text-yellow">
+            Login
+          </p>
+          <p className="flex flex-col text-[12px] font-regular justify-center items-center text-center text-yellow">
+            Welcome back! Enter your details here!
+          </p>
 
-                    <form className="flex flex-col gap-2" 
-                    onSubmit={(e) => {
-                        e.preventDefault();
-                        if(!identifier || !password) return toast.error("Please fill all the fields!");
-                        axios.post(process.env.NEXT_PUBLIC_API_URL + "/user/login", {
-                        identifier,
-                        password,
-                        }).then((res) => {
-                        toast.success("Logged in successfully!");
-                        Cookies.set("Authorization", res.data.token, {
-                            path: "/",
-                            domain:
-                            process.env.NEXT_PUBLIC_API_URL === "http://localhost:5000"
-                                ? "localhost"
-                                : process.env.NEXT_PUBLIC_DEPLOYMENT_URL,
-                        });
-                        const id = res.data.data.id;
-                        const username = res.data.data.username;
-                        localStorage.setItem("userId", id);
-                        localStorage.setItem("username", username);
-                        router.replace("/dashboard");
-                        }).catch((err) => {
-                        if(err.response) return toast.error(err.response.data.message);
-                        toast.error("An error occurred while logging in!");
-                        // router.replace("/dashboard");
-                        });
-                    }}
-                    >
-                    <label className="flex flex-col gap-3" style = {{ color:  "#FFFFFF", marginTop:"0.5rem"}}>
-                        Username / Email
-                        <input 
-                        className="outline rounded-[3px] text-black h-[30px] px-1.5" 
-                        value={identifier}
-                        onChange={(e) => setIdentifier(e.target.value)} 
-                        />
-                    </label>
-                    <label className="flex flex-col gap-3" style = {{ color:  "#FFFFFF", marginTop:"0.5em" }}>
-                        Password
-                        <input 
-                        className="outline rounded-[3px] text-black h-[30px] px-1.5" 
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        />
-                    </label>
-                    <p className="text-[14px]" style = {{ color:  "#FFFFFF", marginTop:"0.8rem" }}>Don&apos;t have an account? <Link href="/auth/register" className="underline">Register</Link>.</p>
-                    <button type="submit" className="bg-[#816797] text-white border-[#5F4C6F] py-1 rounded-[5px]">Log In</button>
-                    </form>
-                </div>
-            </div>
-        </section>
-
+          <form
+            className="flex flex-col gap-[0.8rem] mt-5 md:mt-10 text-yellow"
+            onSubmit={(e) => {
+              e.preventDefault();
+              Login();
+            }}
+          >
+            <label className="flex flex-col gap-3">
+              Username / Email
+              <input
+                className={
+                  "outline outline-1 focus:outline-2 rounded-[3px] text-black py-1 px-1.5 " +
+                  (isIdentifierValid
+                    ? "outline-yellow"
+                    : "outline outline-2 outline-red-500")
+                }
+                value={identifier}
+                onChange={(e) => {
+                  setIdentifier(e.target.value);
+                  setEmailValid(validateInput(e.target.value));
+                }}
+              />
+            </label>
+            <label className="flex flex-col gap-3">
+              Password
+              <input
+                className={
+                  "outline outline-1 focus:outline-2 rounded-[3px] text-black py-1 px-1.5 " +
+                  (isPasswordValid
+                    ? "outline-yellow"
+                    : "outline outline-2 outline-red-500")
+                }
+                type="password"
+                value={password}
+                onChange={(e) => {
+                  console.log(validateInput(e.target.value));
+                  setPassword(e.target.value);
+                  setPasswordValid(validateInput(e.target.value));
+                }}
+              />
+            </label>
+            <p className="text-[14px]">
+              Don&apos;t have an account?{" "}
+              <Link href="/auth/register" className="underline">
+                Register
+              </Link>
+              .
+            </p>
+            <Button type="submit" text="Login" className="!w-full" />
+          </form>
+        </div>
+      </section>
     </main>
-    
-  
-)};
-    
+  );
+}
