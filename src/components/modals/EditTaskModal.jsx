@@ -17,7 +17,7 @@ export default function EditTaskModal({
   Modal.setAppElement("#__next");
   const [searchQuery, setSearchQuery] = useState("");
   const [assignees, setAssignees] = useState(project.contributors);
-  const [selectedAssignees, setSelectedAssignees] = useState(task.assignees);
+  const [selectedAssignees, setSelectedAssignees] = useState(task.assignees.map((a) => a.username));
   const [name, setName] = useState(task.name);
   const [description, setDescription] = useState(task.description);
   const [status, setStatus] = useState(task.status);
@@ -25,13 +25,18 @@ export default function EditTaskModal({
 
   useEffect(() => {
     setStatus(task.status);
-    console.log(project.contributors);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
   const putUpdatedTask = () => {
+    console.log({
+      name,
+      description,
+      assignees: selectedAssignees,
+      status: status.toLowerCase(),
+    });
     axios
-      .put(
+      .patch(
         process.env.NEXT_PUBLIC_API_URL +
           "/project/" +
           projectId +
@@ -40,9 +45,7 @@ export default function EditTaskModal({
         {
           name,
           description,
-          assignees: assignees.map((a) => {
-            return a.username;
-          }),
+          assignees: selectedAssignees,
           status: status.toLowerCase(),
         },
         { withCredentials: true }
@@ -53,15 +56,15 @@ export default function EditTaskModal({
         onClose();
       })
       .catch((e) => {
-        toast.error("error " + e.message);
-        // console.log(e);
+        toast.error("An error occurred while updating task.");
+        console.log(e);
       });
   };
 
   return (
     <Modal
       isOpen={isOpen}
-      // onClose={onClose}
+      onClose={onClose}
       className="w-screen h-screen flex justify-center items-center rounded-[10px] absolute !z-[11] backdrop-blur-[8px] bg-navy/30"
     >
       <div
@@ -159,7 +162,7 @@ export default function EditTaskModal({
                     <AssigneeOption
                       key={assignee}
                       assignee={assignee}
-                      selectedAssignees={selectedAssignees.map((a) => a.username)}
+                      selectedAssignees={selectedAssignees}
                       setSelectedAssignees={setSelectedAssignees}
                       index={index}
                     />
@@ -177,15 +180,15 @@ export default function EditTaskModal({
 
 function AssigneeOption({ assignee, selectedAssignees, setSelectedAssignees }) {
   const [selected, setSelected] = useState(
-    selectedAssignees.includes(assignee.username)
+    selectedAssignees.includes(assignee)
   );
   useEffect(() => {
-    console.log("selected", selectedAssignees);
-    console.log("assignees", assignee);
+    // console.log("selected", selectedAssignees);
+    // console.log("assignees", assignee);
     // log whether selectedAssignees includes assignee
     setSelected(selectedAssignees.includes(assignee));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [selected]);
   return (
     <div
       className={
@@ -199,7 +202,7 @@ function AssigneeOption({ assignee, selectedAssignees, setSelectedAssignees }) {
         setSelected(!selected);
         setSelectedAssignees((prev) => {
           if (selected) {
-            return prev.filter((p) => p !== assignee);
+            return prev.filter((a) => a !== assignee);
           } else {
             return [...prev, assignee];
           }
