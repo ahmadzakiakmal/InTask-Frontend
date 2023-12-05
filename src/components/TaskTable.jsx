@@ -6,7 +6,7 @@ export default function TaskTable({ tasks, projectId, onEdit, setTasks, project 
   const [sortStatusAsc, setSortStatusAsc] = useState(true);
 
   return (
-    <div className="w-full overflow-x-auto pb-5">
+    <div className="w-full overflow-x-auto mb-20 sm:mb-0 pb-5">
       <table className="w-full sm:min-w-fit bg-navy text-yellow">
         <tbody>
           <tr className="border-b border-yellow">

@@ -212,7 +212,7 @@ export default function Project() {
         </section>
         <div
           className={
-            "absolute bottom-[50px] sm:bottom-[40px] right-[20px] sm:right-[40px] shadow-[0_0_10px_rgba(0,0,0,.9)] rounded-full z-[10]"
+            "fixed bottom-[100px] sm:bottom-[40px] right-[10px] sm:right-[40px] shadow-[0_0_10px_rgba(0,0,0,.9)] rounded-full "
           }
           onClick={() => setOpenNewTaskModal(true)}
         >
