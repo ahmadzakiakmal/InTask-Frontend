@@ -107,7 +107,7 @@ export default function Project() {
         withCredentials: true,
       })
       .then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         setProject(res.data.project);
       })
       .catch(() => {
@@ -148,6 +148,7 @@ export default function Project() {
         id={id}
         onClose={() => setRefetch(!refetch)}
         initialStatus={initialStatus}
+        assigneesOptions={project?.contributors}
       />
       <main className="relative flex flex-col h-full min-h-[90vh]">
         <ProjectNavbar
