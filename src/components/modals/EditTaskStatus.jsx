@@ -45,7 +45,7 @@ export default function EditTaskStatusModal({ isOpen, taskstatus, taskname, proj
       </div>
       <div className="flex mt-4 flex-row justify-end w-full space-x-4">
         <button onClick={onClose} className="text-gray-300">Cancel</button>
-        <Button onClick={editStatus} text="udpate" />
+        <Button onClick={editStatus} text="Update" />
       </div>
     </Modal>
   );
