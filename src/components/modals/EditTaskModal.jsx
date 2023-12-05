@@ -5,7 +5,6 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckSquare, faSquare } from "@fortawesome/free-solid-svg-icons";
-import { useRouter } from "next/router";
 
 export default function EditTaskModal({
   isOpen,
@@ -13,19 +12,20 @@ export default function EditTaskModal({
   task,
   onClose,
   projectId,
+  project,
 }) {
   Modal.setAppElement("#__next");
   const [searchQuery, setSearchQuery] = useState("");
-  const [assignees, setAssignees] = useState();
+  const [assignees, setAssignees] = useState(project.contributors);
   const [selectedAssignees, setSelectedAssignees] = useState(task.assignees);
   const [name, setName] = useState(task.name);
   const [description, setDescription] = useState(task.description);
   const [status, setStatus] = useState(task.status);
   const [openDropdown, setOpenDropdown] = useState(false);
-  const router = useRouter();
 
   useEffect(() => {
     setStatus(task.status);
+    console.log(project.contributors);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
@@ -153,10 +153,16 @@ export default function EditTaskModal({
           <label className="flex flex-col gap-2.5">
             <div>
               Assignees
-              <div className="flex gap-3 flex-wrap">
+              <div className="flex gap-3 flex-wrap mt-1">
                 {assignees?.map((assignee, index) => {
                   return (
-                    <AssigneeOption key={assignee} assignee={assignee} selectedAssignees={selectedAssignees} setSelectedAssignees={setSelectedAssignees} index={index} />
+                    <AssigneeOption
+                      key={assignee}
+                      assignee={assignee}
+                      selectedAssignees={selectedAssignees.map((a) => a.username)}
+                      setSelectedAssignees={setSelectedAssignees}
+                      index={index}
+                    />
                   );
                 })}
               </div>
@@ -169,8 +175,17 @@ export default function EditTaskModal({
   );
 }
 
-function AssigneeOption({ assignee, selectedAssignees, setSelectedAssignees, index }) {
-  const [selected, setSelected] = useState(selectedAssignees.includes(assignee));
+function AssigneeOption({ assignee, selectedAssignees, setSelectedAssignees }) {
+  const [selected, setSelected] = useState(
+    selectedAssignees.includes(assignee.username)
+  );
+  useEffect(() => {
+    console.log("selected", selectedAssignees);
+    console.log("assignees", assignee);
+    // log whether selectedAssignees includes assignee
+    setSelected(selectedAssignees.includes(assignee));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <div
       className={

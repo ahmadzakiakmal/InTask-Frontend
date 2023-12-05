@@ -107,7 +107,7 @@ export default function Project() {
         withCredentials: true,
       })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data.project);
         setProject(res.data.project);
       })
       .catch(() => {
@@ -205,6 +205,7 @@ export default function Project() {
                 onEdit={() => loadTaskData()}
                 projectId={id}
                 setTasks={setTasks}
+                project={project}
               />
             </section>
           )}
