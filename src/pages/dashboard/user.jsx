@@ -94,7 +94,7 @@ export default function UserPage() {
 
   return (
     <Layout>
-      <main className="flex flex-col items-center justify-start h-full">
+      <main className="flex flex-col items-center justify-center gap-8 sm:gap-5 h-full min-h-[90vh]">
         <h1 className="font-semibold text-[42px] sm:text-xl lg:text-2xl">
           Your Profile
         </h1>

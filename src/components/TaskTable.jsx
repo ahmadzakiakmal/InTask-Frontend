@@ -6,11 +6,11 @@ export default function TaskTable({ tasks, projectId, onEdit, setTasks }) {
   const [sortStatusAsc, setSortStatusAsc] = useState(true);
 
   return (
-    <div className="flex flex-col justify-center items-center w-full">
-      <table className="w-full bg-navy text-yellow">
+    <div className="w-full overflow-x-auto pb-5">
+      <table className="w-full sm:min-w-fit bg-navy text-yellow">
         <tbody>
           <tr className="border-b border-yellow">
-            <th className="text-center py-2 border-r border-yellow">No</th>
+            <th className="text-center py-2 border-r border-yellow min-w-[40px]">No</th>
             <th
               className="border-r border-yellow cursor-pointer !select-none"
               onClick={() => {
@@ -24,7 +24,7 @@ export default function TaskTable({ tasks, projectId, onEdit, setTasks }) {
                 setTasks(newTasks);
               }}
             >
-              <div className="flex justify-center items-center gap-2">
+              <div className="flex justify-center items-center gap-2 min-w-[200px]">
                 Title
                 <svg
                   className={
@@ -58,7 +58,7 @@ export default function TaskTable({ tasks, projectId, onEdit, setTasks }) {
                 setTasks(newTasks);
               }}
             >
-              <div className="flex justify-center items-center gap-2">
+              <div className="flex justify-center items-center gap-2 min-w-[125px]">
                 Status
                 <svg
                   className={
