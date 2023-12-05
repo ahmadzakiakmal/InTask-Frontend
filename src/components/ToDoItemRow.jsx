@@ -57,7 +57,7 @@ export default function ToDoItemRow({ task, projectId, onSuccess, index }) {
         <td className="px-2 border-r border-yellow">
           {task?.name ?? "Discussion"}
         </td>
-        <td className="text-center border-r border-yellow">
+        <td className="text-center border-r border-yellow p-2">
           <div className="flex flex-wrap gap-2 justify-center items-center">
             {task?.assignees?.map((as) => {
               if (!as) return <></>;
@@ -89,7 +89,7 @@ export default function ToDoItemRow({ task, projectId, onSuccess, index }) {
           />
         </td>
         <td className="border-l border-b border-yellow cursor-pointer">
-          <div className="grid grid-cols-2">
+          <div className="grid grid-cols-1 md:grid-cols-2">
             <button
               className="w-full h-full transition bg-blue-900 hover:bg-blue-800 py-2"
               onClick={() => {
