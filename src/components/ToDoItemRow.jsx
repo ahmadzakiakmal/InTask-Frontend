@@ -16,21 +16,7 @@ export default function ToDoItemRow({
 }) {
   const [editStatusOpen, setStatusOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
-  const Container = (props) => (
-    <button className="text-red-500 font-light bg-white hover:bg-white/80 transition rounded-[5px] px-2">
-      {props.children}
-    </button>
-  );
 
-  const showDeleteConfirmationToast = () => {
-    toast.warning(`Are you sure you want to delete "${task.name}"?`, {
-      position: "top-center",
-      autoClose: true,
-      closeOnClick: false,
-      closeButton: <Container>Delete</Container>,
-      className: "delete-toast",
-    });
-  };
   const handleDelete = () => {
     axios
       .delete(
@@ -49,6 +35,25 @@ export default function ToDoItemRow({
       .catch((e) => {
         toast.error("Failed to Delete " + e.message);
       });
+  };
+
+  const Container = (props) => (
+    <button
+      className="text-red-500 font-light bg-white hover:bg-white/80 transition rounded-[5px] px-2"
+      onClick={() => handleDelete()}
+    >
+      {props.children}
+    </button>
+  );
+
+  const showDeleteConfirmationToast = () => {
+    toast.warning(`Are you sure you want to delete "${task.name}"?`, {
+      position: "top-center",
+      autoClose: true,
+      closeOnClick: false,
+      closeButton: <Container>Delete</Container>,
+      className: "delete-toast",
+    });
   };
 
   return (
