@@ -81,11 +81,10 @@ export default function Project() {
             .map((task, id)=>({
               ...task, 
               assignees: assignees[id]
-            }))
+            }));
           setTasks(tasks);
         })
         .catch((err) => {
-          // console.log("API Error for id:", id, err);
           if (err?.response?.status === 401) {
             localStorage.clear();
             Cookies.remove("Authorization");
@@ -112,10 +111,13 @@ export default function Project() {
         setProject(res.data.project);
       })
       .catch(() => {
-        // console.log(err);
         toast.error("An error occurred while fetching project data.");
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(loadProjectData, [id]);
 
   const updateTaskStatus = ({ active, over }) => {
