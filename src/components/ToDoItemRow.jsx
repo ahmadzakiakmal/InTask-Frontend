@@ -7,23 +7,27 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import EditTaskModal from "./modals/EditTaskModal";
 
-export default function ToDoItemRow({ task, projectId, onSuccess, index, project }) {
+export default function ToDoItemRow({
+  task,
+  projectId,
+  onSuccess,
+  index,
+  project,
+}) {
   const [editStatusOpen, setStatusOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
+  const Container = (props) => (
+    <button className="text-red-500 font-light bg-white hover:bg-white/80 transition rounded-[5px] px-2">
+      {props.children}
+    </button>
+  );
 
   const showDeleteConfirmationToast = () => {
     toast.warning(`Are you sure you want to delete "${task.name}"?`, {
       position: "top-center",
       autoClose: true,
       closeOnClick: false,
-      closeButton: (
-        <button
-          className="text-red-500 font-light bg-white hover:bg-white/80 transition rounded-[5px] px-2"
-          onClick={handleDelete}
-        >
-          Delete
-        </button>
-      ),
+      closeButton: <Container>Delete</Container>,
       className: "delete-toast",
     });
   };
@@ -49,7 +53,14 @@ export default function ToDoItemRow({ task, projectId, onSuccess, index, project
 
   return (
     <>
-      <EditTaskModal task={task} projectId={projectId} isOpen={editModalOpen} setOpenModal={setEditModalOpen} onClose={onSuccess} project={project}/>
+      <EditTaskModal
+        task={task}
+        projectId={projectId}
+        isOpen={editModalOpen}
+        setOpenModal={setEditModalOpen}
+        onClose={onSuccess}
+        project={project}
+      />
       <tr className="mb-2 bg-white/5">
         <td className="text-center w-[60px] border-r border-yellow">
           {index + 1}
