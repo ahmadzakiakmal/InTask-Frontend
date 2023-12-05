@@ -7,7 +7,7 @@ export default function Layout({ children }) {
         <MenuComponent />
       </aside>
 
-      <section className="text-navy w-full py-10 min-h-screen relative z-0 overflow-x-auto">{children}</section>
+      <section className="text-navy w-full py-10 min-h-screen relative z-0 overflow-x-auto px-4">{children}</section>
     </main>
   );
 }
