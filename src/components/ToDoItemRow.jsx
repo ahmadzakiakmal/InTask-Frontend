@@ -7,7 +7,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import EditTaskModal from "./modals/EditTaskModal";
 
-export default function ToDoItemRow({ task, projectId, onSuccess, index, refetch }) {
+export default function ToDoItemRow({ task, projectId, onSuccess, index }) {
   const [editStatusOpen, setStatusOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
 
@@ -49,7 +49,7 @@ export default function ToDoItemRow({ task, projectId, onSuccess, index, refetch
 
   return (
     <>
-      <EditTaskModal task={task} projectId={projectId} isOpen={editModalOpen} setOpenModal={setEditModalOpen} onClose={refetch}/>
+      <EditTaskModal task={task} projectId={projectId} isOpen={editModalOpen} setOpenModal={setEditModalOpen} onClose={onSuccess}/>
       <tr className="mb-2 bg-white/5">
         <td className="text-center w-[60px] border-r border-yellow">
           {index + 1}
