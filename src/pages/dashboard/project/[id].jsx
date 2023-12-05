@@ -166,7 +166,7 @@ export default function Project() {
         <section>
           {/* //? Kanban View */}
           {view === "kanban" && (
-            <section className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 xl:gap-10">
+            <section className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5 xl:gap-10">
               <DndContext onDragEnd={updateTaskStatus}>
                 <KanbanContainer
                   status="To Do"
