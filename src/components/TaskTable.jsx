@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ToDoItemRow from "./ToDoItemRow";
 
-export default function TaskTable({ tasks, projectId, onEdit, setTasks }) {
+export default function TaskTable({ tasks, projectId, onEdit, setTasks, refetch }) {
   const [sortTitleAsc, setSortTitleAsc] = useState(true);
   const [sortStatusAsc, setSortStatusAsc] = useState(true);
 
@@ -87,6 +87,7 @@ export default function TaskTable({ tasks, projectId, onEdit, setTasks }) {
               task={task}
               projectId={projectId}
               onSuccess={onEdit}
+              refetch={refetch}
             />
           ))}
           {tasks && tasks.length === 0 && (
