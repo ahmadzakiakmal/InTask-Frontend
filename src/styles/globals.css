@@ -23,6 +23,17 @@
   border-radius: 10px;
 }
 
+/* Delete Toast Pop Up */
+.delete-toast {
+  color: white !important;
+  background: rgba(255, 0, 0, 0.555) !important;
+  border: "2px solid #FF3E3E";
+  font-weight: "500";
+  border-radius: "10px";
+  padding: 0 5px;
+  
+}
+
 body {
   font-family: "Poppins", "sans-serif";
 }

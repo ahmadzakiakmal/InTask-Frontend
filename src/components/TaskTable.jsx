@@ -47,7 +47,7 @@ export default function TaskTable({ tasks, projectId, onEdit , setTasks }){
                 </svg>
               </div>
             </th>
-            <th className="w-24"></th>
+            <th className="w-24">Actions</th>
           </tr>
           {tasks?.map((task, index) => (<ToDoItemRow key={task._id} index={index} task={task} projectId={projectId} onSuccess={onEdit} />))}
           {
