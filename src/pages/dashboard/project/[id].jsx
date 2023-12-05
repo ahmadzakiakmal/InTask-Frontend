@@ -204,6 +204,7 @@ export default function Project() {
                 onEdit={() => loadTaskData()}
                 projectId={id}
                 setTasks={setTasks}
+                refetch={() => setRefetch(!refetch)}
               />
             </section>
           )}
