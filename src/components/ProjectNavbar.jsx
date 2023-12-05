@@ -133,8 +133,10 @@ export default function ProjectNavbar({ project, onEdit }) {
             </button>
           </li>
           <li className="block cursor-pointer hover:text-blue-500">
-            <FontAwesomeIcon icon={faListUl} />
-            <span className="ml-2">Add another list</span>
+            <button onClick={() => setOpenEditProject(true)}>
+              <FontAwesomeIcon icon={faListUl} />
+              <span className="ml-2">Edit Project</span>
+            </button>
           </li>
         </ul>
       )}
