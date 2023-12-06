@@ -116,7 +116,7 @@ export default function Project() {
         toast.error("An error occurred while fetching project data.");
       })
       .finally(() => {
-        if(id === undefined || !id) return;
+        if(!project) return;
         setLoading(false);
       });
   };
