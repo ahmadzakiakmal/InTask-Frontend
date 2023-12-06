@@ -103,6 +103,7 @@ export default function Project() {
 
   const loadProjectData = () => {
     setLoading(true);
+    if (id === undefined || !id) return;
     axios
       .get(process.env.NEXT_PUBLIC_API_URL + "/project/id/" + id, {
         withCredentials: true,
@@ -115,6 +116,7 @@ export default function Project() {
         toast.error("An error occurred while fetching project data.");
       })
       .finally(() => {
+        if(id === undefined || !id) return;
         setLoading(false);
       });
   };
