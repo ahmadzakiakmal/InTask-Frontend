@@ -132,7 +132,7 @@ export default function UserPage() {
           {openEmoji && (
             <div
               className={
-                "sm:absolute top-[20px] left-[calc(100%+20px)] z-[10] " +
+                "xl:absolute mt-5 xl:mt-0 top-[20px] left-[calc(100%+20px)] z-[10] " +
                 (!isEditing ? "" : "hidden")
               }
             >
