@@ -84,7 +84,7 @@ export default function Register() {
   };
 
   return (
-    <main className="flex flex-col justify-center items-center min-h-screen bg-neutral font-poppins px-[5%] md:px-0">
+    <main className="py-20 sm:py-10 flex flex-col justify-center items-center min-h-screen bg-neutral font-poppins px-[5%] md:px-0">
       <section className="flex flex-col items-center justify-center md:flex-row md:gap-[100px] bg-navy rounded-[20px] p-8 md:p-10">
         <div className="flex-shrink-0 w-[150px] md:w-auto">
           <Image
