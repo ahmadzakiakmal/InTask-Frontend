@@ -38,7 +38,7 @@ export default function Login() {
           domain:
             process.env.NEXT_PUBLIC_API_URL === "http://localhost:5000"
               ? "localhost"
-              : process.env.NEXT_PUBLIC_DEPLOYMENT_URL,
+              : "vertech.id",
           expires: 1/3,
         });
         const id = res.data.data.id;
