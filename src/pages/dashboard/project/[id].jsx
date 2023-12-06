@@ -94,6 +94,7 @@ export default function Project() {
           toast.error("An error occurred!");
         })
         .finally(() => {
+          if(id === undefined || !id) return;
           setLoading(false);
         });
     }
@@ -109,15 +110,11 @@ export default function Project() {
         withCredentials: true,
       })
       .then((res) => {
-        // console.log(res.data.project);
+        console.log("project");
         setProject(res.data.project);
       })
       .catch(() => {
         toast.error("An error occurred while fetching project data.");
-      })
-      .finally(() => {
-        if(!project) return;
-        setLoading(false);
       });
   };
   // eslint-disable-next-line react-hooks/exhaustive-deps
