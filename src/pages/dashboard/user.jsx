@@ -102,7 +102,7 @@ export default function UserPage() {
         <h1 className="font-semibold text-[42px] sm:text-xl lg:text-2xl">
           Your Profile
         </h1>
-        <div className="mb-4 relative bg-blue-500/20">
+        <div className="mb-4 relative">
           <div className="flex flex-col justify-center items-center">
             <div className="text-[100px] relative">{emoji}
               <div
