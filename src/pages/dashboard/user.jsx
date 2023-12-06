@@ -148,7 +148,7 @@ export default function UserPage() {
               <span className="ml-1 hidden xs:block">:</span>
             </div>
             <input
-              class="bg-neutral w-full md:max-w-[300px] disabled:bg-slate-500/10 disabled:cursor-not-allowed py-1 px-2 rounded-md border border-purple-200 focus:outline-purple-200"
+              className="bg-neutral w-full md:max-w-[300px] disabled:bg-slate-500/10 disabled:cursor-not-allowed py-1 px-2 rounded-md border border-purple-200 focus:outline-purple-200"
               disabled
               value={profile.username}
             />
@@ -161,7 +161,7 @@ export default function UserPage() {
               <span className="ml-1 hidden xs:block">:</span>
             </div>
             <input
-              class="bg-neutral w-full md:max-w-[300px] disabled:bg-slate-500/10 disabled:cursor-not-allowed py-1 px-2 rounded-md border border-purple-200 focus:outline-purple-200"
+              className="bg-neutral w-full md:max-w-[300px] disabled:bg-slate-500/10 disabled:cursor-not-allowed py-1 px-2 rounded-md border border-purple-200 focus:outline-purple-200"
               disabled
               value={profile.email}
             />
@@ -174,7 +174,7 @@ export default function UserPage() {
               <span className="ml-1 hidden xs:block">:</span>
             </div>
             <input
-              class="bg-neutral w-full md:max-w-[300px] disabled:bg-slate-500/10 disabled:cursor-not-allowed py-1 px-2 rounded-md border border-purple-200 focus:outline-purple-200"
+              className="bg-neutral w-full md:max-w-[300px] disabled:bg-slate-500/10 disabled:cursor-not-allowed py-1 px-2 rounded-md border border-purple-200 focus:outline-purple-200"
               placeholder="Enter real name here"
               value={profile.realName}
               name="realName"
