@@ -4,7 +4,7 @@ import Button from "../Button";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-export default function RemoveFriendModal({ isOpen, onClose, projectId, projectContributor, onUpdateContributors }) {
+export default function RemoveFriendModal({ isOpen, onClose, projectId, projectContributor }) {
   const [selectedFriends, setSelectedFriends] = useState([]);
   const [friends, setFriends] = useState([]);
 
@@ -15,16 +15,6 @@ export default function RemoveFriendModal({ isOpen, onClose, projectId, projectC
   useEffect(() => {
     setSelectedFriends([]);
   }, [friends]);
-
-  const handleToggleAllFriends = () => {
-    if (friends && friends.length > 0) {
-      if (selectedFriends.length === friends.length) {
-        setSelectedFriends([]);
-      } else {
-        setSelectedFriends([...friends]);
-      } 
-    }
-  };
 
   const handleToggleFriend = (friend) => {
     if (friends && friends.length > 0) {
@@ -51,7 +41,7 @@ export default function RemoveFriendModal({ isOpen, onClose, projectId, projectC
         console.log(err);
         toast.error("An error occurred while deleting contributors");
       });
-    onUpdateContributors();
+    // onUpdateContributors();
   };
 
   useEffect(() => {
@@ -98,19 +88,6 @@ export default function RemoveFriendModal({ isOpen, onClose, projectId, projectC
         <button className="ml-auto font-bold text-base hover:text-red-500" type="button" onClick={onClose}>╳</button>
       </header>
       <section className="border border-white focus:border-sky-300 px-4 py-2 outline-none w-full mb-2 mt-7 text-base rounded-[10px]">
-        <div className="flex justify-end">
-          <input
-            className="opacity-0 focus:outline-none"
-            type="checkbox"
-            id="selectAllFriends"
-            checked={friends && friends.length > 0 && selectedFriends.length === friends.length}d
-            onChange={handleToggleAllFriends}
-          />
-          <label htmlFor="selectAllFriends" className="ml-2 cursor-pointer hover:text-sky-400">
-            Select All Friends
-          </label>
-        </div>
-
         <form>
           {friends && friends.length > 0 ? (
             friends.map((friend) => (

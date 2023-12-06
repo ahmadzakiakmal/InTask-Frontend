@@ -170,7 +170,7 @@ export default function Project() {
             {
               project?.contributors?.map((c) => {
                 return (
-                  <div key={c._id} className="flex items-center gap-2">
+                  <div key={c} className="flex items-center gap-2">
                     <div className="rounded-[5px] bg-purple-100 px-2 py-1 text-white">
                       {c}
                     </div>
