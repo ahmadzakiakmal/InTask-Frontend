@@ -37,6 +37,21 @@ export default function EditProjectModal({
         toast.error("An error occurred while updating project");
       });
   }
+  
+  function deleteProject() {
+    axios
+      .delete(process.env.NEXT_PUBLIC_API_URL + "/project/" + project.projectId, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        setOpenModal(false);
+        toast.success("Project deleted");
+      })
+      .catch((err) => {
+        console.error("Error deleting project:", err);
+        toast.error("An error occurred while deleting project");
+      });
+  }  
 
   return (
     <Modal
@@ -67,10 +82,14 @@ export default function EditProjectModal({
               onChange={(e) => setDescription(e.target.value)}
             />
           </label>
-          <Button
-            text="Update"
-            type="submit"
-          />
+          <div className="button-container">
+            <Button text="Update" 
+            type="submit" />
+            <Button text="Delete" 
+            className="bg-[#EC001E]" 
+            onClick={deleteProject} />
+          </div>
+
         </form>
       </div>
     </Modal>

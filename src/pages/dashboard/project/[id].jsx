@@ -71,33 +71,33 @@ export default function Project() {
   const loadTaskData = () => {
     setLoading(true);
     if (id !== undefined && id) {
-      axios
-        .get(process.env.NEXT_PUBLIC_API_URL + "/project/" + id + "/tasks", {
-          withCredentials: true,
-        })
-        .then((res) => {
-          const assignees = res.data.assignees;
-          const tasks = res.data.tasks
-            .map((task, id)=>({
-              ...task, 
-              assignees: assignees[id]
-            }));
-          setTasks(tasks);
-        })
-        .catch((err) => {
-          if (err?.response?.status === 401) {
-            localStorage.clear();
-            Cookies.remove("Authorization");
-            router.push("/auth/login");
-            return toast.error("Session Expired! Please login again.");
-          }
-          toast.error("An error occurred!");
-        })
-        .finally(() => {
-          if(id === undefined || !id) return;
-          setLoading(false);
-        });
-    }
+       axios
+         .get(process.env.NEXT_PUBLIC_API_URL + "/project/" + id + "/tasks", {
+           withCredentials: true,
+         })
+         .then((res) => {
+           const assignees = res.data.assignees;
+           const tasks = res.data.tasks
+             .map((task, id)=>({
+               ...task, 
+               assignees: assignees[id]
+             }));
+           setTasks(tasks);
+         })
+         .catch((err) => {
+           if (err?.response?.status === 401) {
+             localStorage.clear();
+             Cookies.remove("Authorization");
+             // router.push("/auth/login");
+             return toast.error("Session Expired! Please login again.");
+           }
+           toast.error("An error occurred!");
+         })
+         .finally(() => {
+           if(id === undefined || !id) return;
+           setLoading(false);
+         });
+     }
   };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(loadTaskData, [router, refetch]);
