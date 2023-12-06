@@ -110,7 +110,7 @@ export default function Project() {
         withCredentials: true,
       })
       .then((res) => {
-        console.log("project");
+        console.log(res.data.project.contributors);
         setProject(res.data.project);
       })
       .catch(() => {
@@ -159,10 +159,26 @@ export default function Project() {
             description: project.description
           }}
         />
-        <div className="flex items-center gap-3 my-4">
+        <div className="flex items-center gap-3 mt-4 mb-2">
           <h1 className="font-bold text-[20px]">Select View: </h1>
           <Button text="Kanban" onClick={() => setView("kanban")} />
           <Button text="Table" onClick={() => setView("table")} />
+        </div>
+        <div className="mb-4">
+          <h1>Project Contributors</h1>
+          <div className="flex gap-2 flex-wrap">
+            {
+              project?.contributors?.map((c) => {
+                return (
+                  <div key={c._id} className="flex items-center gap-2">
+                    <div className="rounded-[5px] bg-purple-100 px-2 py-1 text-white">
+                      {c}
+                    </div>
+                  </div>
+                );
+              })
+            }
+          </div>
         </div>
         <section>
           {/* //? Kanban View */}

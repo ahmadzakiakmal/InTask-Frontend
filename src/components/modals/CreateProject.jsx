@@ -19,13 +19,12 @@ export default function CreateNewProjectModal({
       title, description
     }, {
       withCredentials: true
-    }).then((res) => {
-      // console.log(res.data);
+    }).then(() => {
       setOpenModal(false);
+      toast.success("Project Created Successfully");
     })
-      .catch((err) => {
+      .catch(() => {
         toast.error("An error occurred while creating project");
-        // console.log(err);
       });
   }
 
