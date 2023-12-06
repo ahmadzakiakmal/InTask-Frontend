@@ -29,6 +29,7 @@ export default function NewTaskModal({
   }, [isOpen]);
 
   const postNewTask = () => {
+    if(!name || !description || !status || !selectedAssignees) return toast.error("Please fill all the fields");
     axios
       .post(
         process.env.NEXT_PUBLIC_API_URL + "/project/" + id + "/tasks",
