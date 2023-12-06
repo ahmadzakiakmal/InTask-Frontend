@@ -14,6 +14,7 @@ export default function CreateNewProjectModal({
 
   function createProject(e) {
     e.preventDefault();
+    if(!title || !description) return toast.error("Please fill all the fields");
     axios.post(process.env.NEXT_PUBLIC_API_URL + "/project/", {
       title, description
     }, {
