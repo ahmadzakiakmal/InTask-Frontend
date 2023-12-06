@@ -102,6 +102,7 @@ export default function Project() {
   useEffect(loadTaskData, [router, refetch]);
 
   const loadProjectData = () => {
+    setLoading(true);
     axios
       .get(process.env.NEXT_PUBLIC_API_URL + "/project/id/" + id, {
         withCredentials: true,
