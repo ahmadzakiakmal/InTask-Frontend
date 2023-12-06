@@ -93,27 +93,27 @@ export default function ProjectNavbar({ project, onEdit }) {
         </Link>
       </div>
       <ul className="font-extralight ml-auto flex gap-5 xl:gap-6 text-[#5F5858]">
-        <li className="hidden lg:block cursor-pointer hover:text-blue-500">
+        <li className="hidden xl:block cursor-pointer hover:text-blue-500">
           <button type="button" onClick={handleOpenAddFriendModal}>
             <FontAwesomeIcon icon={faUserPlus} />
-            <span className="ml-2">Add Friend</span>
+            <span className="ml-2">Add Contributor</span>
           </button>
           <AddFriendModal isOpen={isAddFriendOpen} onClose={handleCloseAddFriendModal} setOpenModal={setIsAddFriendOpen} projectId={project?.projectId}/>
         </li>
-        <li className="hidden lg:block cursor-pointer hover:text-blue-500">
+        <li className="hidden xl:block cursor-pointer hover:text-blue-500">
           <button type="button" onClick={handleOpenRemoveFriendModal}>
             <FontAwesomeIcon icon={faUserXmark} />
-            <span className="ml-2">Remove Friend</span>
+            <span className="ml-2">Remove Contributor</span>
           </button>
           <RemoveFriendModal isOpen={isRemoveFriendOpen} onClose={handleCloseRemoveFriendModal} projectId={project?.projectId} projectContributor={contributors} onUpdateContributors={loadProjectContributors}/>
         </li>
-        <li className="hidden lg:block cursor-pointer hover:text-blue-500">
+        <li className="hidden xl:block cursor-pointer hover:text-blue-500">
           <button onClick={() => setOpenEditProject(true)}>
             <FontAwesomeIcon icon={faListUl} />
-            <span className="ml-2">Edit Project</span>
+            <span className="ml-2">Project Settings</span>
           </button>
         </li>
-        <li className="lg:hidden cursor-pointer text-[18px]" onClick={handleToggleDropdown} ref={dropdownRef}>
+        <li className="xl:hidden cursor-pointer text-[18px]" onClick={handleToggleDropdown} ref={dropdownRef}>
           <FontAwesomeIcon icon={faBars} className="text-[22px] xs:text-[16px]"/>
           <span className="ml-2 hidden xs:inline">Menu</span>
         </li>
