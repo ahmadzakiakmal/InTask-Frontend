@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserPlus, faUserXmark, faListUl, faBars } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import AddFriendModal from "./modals/AddFriendModal";
 import RemoveFriendModal from "./modals/RemoveFriendModal";
 import { useEffect, useRef } from "react";
@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import EditProjectModal from "./modals/EditProject";
 import Cookies from "js-cookie";
+import { LoadingContext } from "@/context/LoadingContext";
 
 export default function ProjectNavbar({ project, onEdit }) {
   const [isAddFriendOpen, setIsAddFriendOpen] = useState(false);
@@ -18,9 +19,11 @@ export default function ProjectNavbar({ project, onEdit }) {
   const [isEditProjectOpen, setOpenEditProject] = useState(false);
   const [contributors, setContributors] = useState([]);
   const dropdownRef = useRef(null);
+  const { setLoading } = useContext(LoadingContext);
   const router = useRouter();
 
   const loadProjectContributors = () => {
+    setLoading(true);
     if (project.projectId !== undefined && project.projectId) {
       axios
         .get(process.env.NEXT_PUBLIC_API_URL + "/project/" + project.projectId + "/contributors", {
@@ -28,6 +31,7 @@ export default function ProjectNavbar({ project, onEdit }) {
         })
         .then((res) => {
           setContributors(res.data.contributors);
+          setLoading(false);
         })
         .catch((err) => {
           if (err?.response?.status === 401) {
@@ -40,9 +44,6 @@ export default function ProjectNavbar({ project, onEdit }) {
         });
     }
   };
-  useEffect(() => {
-    loadProjectContributors();
-  }, [project.projectId]);  
 
   const handleOpenAddFriendModal = () => {
     setIsAddFriendOpen(true);
@@ -59,6 +60,7 @@ export default function ProjectNavbar({ project, onEdit }) {
 
   const handleCloseRemoveFriendModal = () => {
     setIsRemoveFriendOpen(false);
+    loadProjectContributors();
   };
 
   const handleToggleDropdown = () => {
@@ -105,7 +107,7 @@ export default function ProjectNavbar({ project, onEdit }) {
             <FontAwesomeIcon icon={faUserXmark} />
             <span className="ml-2">Remove Contributor</span>
           </button>
-          <RemoveFriendModal isOpen={isRemoveFriendOpen} onClose={handleCloseRemoveFriendModal} projectId={project?.projectId} projectContributor={contributors} onUpdateContributors={loadProjectContributors}/>
+          <RemoveFriendModal isOpen={isRemoveFriendOpen} onClose={handleCloseRemoveFriendModal} projectId={project?.projectId} projectContributor={contributors} />
         </li>
         <li className="hidden xl:block cursor-pointer hover:text-blue-500">
           <button onClick={() => setOpenEditProject(true)}>
