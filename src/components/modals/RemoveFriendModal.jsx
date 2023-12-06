@@ -97,7 +97,7 @@ export default function RemoveFriendModal({ isOpen, onClose, projectId, projectC
         <h2 className="float-left text-xl xs:text-lg">Remove Friend from Project</h2>
         <button className="ml-auto font-bold text-base hover:text-red-500" type="button" onClick={onClose}>╳</button>
       </header>
-      <body className="border border-white focus:border-sky-300 px-4 py-2 outline-none w-full mb-2 mt-7 text-base rounded-[10px]">
+      <section className="border border-white focus:border-sky-300 px-4 py-2 outline-none w-full mb-2 mt-7 text-base rounded-[10px]">
         <div className="flex justify-end">
           <input
             className="opacity-0 focus:outline-none"
@@ -130,7 +130,7 @@ export default function RemoveFriendModal({ isOpen, onClose, projectId, projectC
             <p>No friends available.</p>
           )}
         </form>
-      </body>
+      </section>
       <div className="mt-3 flex justify-end">
         <Button onClick={handleRemoveFriend} className="mr-2" text="Delete"/>
       </div>
