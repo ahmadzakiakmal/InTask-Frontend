@@ -7,6 +7,12 @@ PAW Project - Frontend for InTask Web Application
 3. [Information about InTask](#information)
 4. [Main Features](#main-feature)
 5. [Tech Stack](#tech-stack)
+6. [Documentation](#documentation)
+   a. [How to Run Intask](#how-to-run)
+   b. [Screenshots](#screenshots)
+7. [Project Status](#project-status)
+8. [Acknowledgements](#acknowledgement)
+9. [Copyright](#copyright)
 
 <a name="team-members"></a>
 
@@ -51,7 +57,12 @@ Pengguna dapat membuat dan mengelola tugas-tugas individual dengan memberikan st
 - Vertech
 - Tailwind CSS
 
+<a name="documentation"></a>
+
 ## Documentation 📌
+
+<a name="how-to-run"></a>
+
 ### How to run InTask
 1. You need to clone this repository. Use the command below
    ````````````
@@ -70,4 +81,30 @@ Pengguna dapat membuat dan mengelola tugas-tugas individual dengan memberikan st
    ````````````
    http://localhost:3000/
    ````````````
+
+<a name="screenshots"></a>
+### Screenshots
+<p float="left">
+</p>
+
+<a name="project-status">
+
+## Project Status
+Status Proyek: _on finished_
+
+<a name="acknowledgements">
+
+## Acknowledgements
+- Terima kasih kepada Tuhan Yang Maha Esa
+- Bapak Bimo Sunarfri Hantono selaku Dosen mata kuliah Pengembangan Aplikasi Web
+- Mas Richard Harryson selaku Assisten Dosen  
+
+<a name="copyright"></a>
+
+## Copyright
+<h4 align="center">
+  Copyrights @2023
+</h4>
+
+
 
