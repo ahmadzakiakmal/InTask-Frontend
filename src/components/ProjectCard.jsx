@@ -8,6 +8,7 @@ export default function ProjectCardComponent({
   id,
   owner,
   tasks,
+  index
 }) {
   const colors = {
     yellow: "bg-yellow",
@@ -21,7 +22,7 @@ export default function ProjectCardComponent({
     orange: "bg-[#FFC5A8]",
   };
   return (
-    <Link href={`/dashboard/project/${id}`}>
+    <Link href={`/dashboard/project/${id}`} data-aos="fade-up" data-aos-delay={index*100}>
       <div className="relative w-full rounded-[15px] bg-navy cursor-pointer transition duration-200 hover:shadow-[0_0_8px_rgb(27,36,48,.9)]">
         <div
           className={
