@@ -3,9 +3,10 @@ import InTaskLogin from "@/../public/InTaskLogo.png";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { toast } from "react-toastify";
 import Button from "@/components/Button";
+import { LoadingContext } from "@/context/LoadingContext";
 
 export default function Register() {
   const router = useRouter();
@@ -19,22 +20,30 @@ export default function Register() {
   const [isPasswordValid, setPasswordValid] = useState(true);
   const [isConfirmPasswordValid, setConfirmPasswordValid] = useState(true);
   const [isNameValid, setNameValid] = useState(true);
+  const { setLoading } = useContext(LoadingContext);
 
   const validateInput = (input) => {
     if (input == "") {
       return false;
-    } 
+    }
     return true;
   };
 
   const validateEmail = (email) => {
-    if (email == "" || !email.includes("@") || !email.includes(".")) return false;
+    if (email == "" || !email.includes("@") || !email.includes("."))
+      return false;
     return true;
   };
 
   const validateUsername = (username) => {
     const specialChars = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
-    if (username == "" || specialChars.test(username) || username.includes("%") || username.length < 4) return false;
+    if (
+      username == "" ||
+      specialChars.test(username) ||
+      username.includes("%") ||
+      username.length < 4
+    )
+      return false;
     return true;
   };
 
@@ -48,23 +57,30 @@ export default function Register() {
     return true;
   };
 
-  const Login = () => {
-    if(!isNameValid) {
+  const Register = () => {
+    if(!name || !email || !username || !password || !confirmPassword) {
+      return toast.error("Please fill all the fields!");
+    }
+    
+    if (!isNameValid) {
       return toast.error("Please fill your name.");
     }
-    if(!isEmailValid) {
+    if (!isEmailValid) {
       return toast.error("Email is not valid.");
     }
-    if(!isUsernameValid) {
-      return toast.error("Username must be at least 4 characters and not contain special characters.");
+    if (!isUsernameValid) {
+      return toast.error(
+        "Username must be at least 4 characters and not contain special characters."
+      );
     }
-    if(!isPasswordValid) {
+    if (!isPasswordValid) {
       return toast.error("Password must be at least 8 characters.");
     }
-    if(!isConfirmPasswordValid) {
+    if (!isConfirmPasswordValid) {
       return toast.error("Password and confirm password must be the same.");
     }
 
+    setLoading(true);
     axios
       .post(process.env.NEXT_PUBLIC_API_URL + "/user/register", {
         realName: name,
@@ -80,6 +96,9 @@ export default function Register() {
       })
       .catch((err) => {
         toast.error(err.response.data.message);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
@@ -105,7 +124,7 @@ export default function Register() {
             className="flex flex-col gap-[0.8rem] mt-5 md:mt-8 text-yellow w-[100vw] max-w-[300px]"
             onSubmit={(e) => {
               e.preventDefault();
-              Login();
+              Register();
             }}
           >
             <label className="flex flex-col gap-[0.4rem]">
@@ -170,7 +189,9 @@ export default function Register() {
                 onChange={(e) => {
                   setPassword(e.target.value);
                   setPasswordValid(validatePassword(e.target.value));
-                  setConfirmPasswordValid(validateConfirmPassword(confirmPassword, e.target.value));
+                  setConfirmPasswordValid(
+                    validateConfirmPassword(confirmPassword, e.target.value)
+                  );
                 }}
               />
             </label>
@@ -187,7 +208,9 @@ export default function Register() {
                 value={confirmPassword}
                 onChange={(e) => {
                   setConfirmPassword(e.target.value);
-                  setConfirmPasswordValid(validateConfirmPassword(e.target.value, password));
+                  setConfirmPasswordValid(
+                    validateConfirmPassword(e.target.value, password)
+                  );
                 }}
               />
             </label>
@@ -200,7 +223,11 @@ export default function Register() {
             </p>
             <Button type="submit" text="Register" className="!w-full mt-3" />
             <Link href="/">
-              <Button type="button" text="Back to Home" className="!w-full !bg-neutral/50 hover:!bg-neutral/30 text-purple-100" />
+              <Button
+                type="button"
+                text="Back to Home"
+                className="!w-full !bg-neutral/50 hover:!bg-neutral/30 text-purple-100"
+              />
             </Link>
           </form>
         </div>

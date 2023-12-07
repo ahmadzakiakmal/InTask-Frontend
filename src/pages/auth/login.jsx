@@ -3,10 +3,11 @@ import InTaskLogin from "@/../public/InTaskLogo.png";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 import Button from "@/components/Button";
+import { LoadingContext } from "@/context/LoadingContext";
 
 export default function Login() {
   const router = useRouter();
@@ -14,6 +15,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [isIdentifierValid, setEmailValid] = useState(true);
   const [isPasswordValid, setPasswordValid] = useState(true);
+  const { setLoading } = useContext(LoadingContext);
 
   const validateInput = (input) => {
     if (input == "") {
@@ -23,9 +25,12 @@ export default function Login() {
   };
 
   const Login = () => {
+    if (!identifier || !password)
+      return toast.error("Please fill all the fields!");
     if (isIdentifierValid == false || isPasswordValid == false) {
       return toast.error("Please fill all the fields!");
     }
+    setLoading(true);
     axios
       .post(process.env.NEXT_PUBLIC_API_URL + "/user/login", {
         identifier,
@@ -39,7 +44,7 @@ export default function Login() {
             process.env.NEXT_PUBLIC_API_URL === "http://localhost:5000"
               ? "localhost"
               : "vertech.id",
-          expires: 1/3,
+          expires: 1 / 3,
         });
         const id = res.data.data.id;
         const username = res.data.data.username;
@@ -50,6 +55,9 @@ export default function Login() {
       .catch((err) => {
         if (err.response) return toast.error(err.response.data.message);
         toast.error("An error occurred while logging in!");
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
@@ -121,7 +129,11 @@ export default function Login() {
             </p>
             <Button type="submit" text="Login" className="!w-full !mt-3" />
             <Link href="/">
-              <Button type="button" text="Back to Home" className="!w-full !bg-neutral/50 hover:!bg-neutral/30 text-purple-100" />
+              <Button
+                type="button"
+                text="Back to Home"
+                className="!w-full !bg-neutral/50 hover:!bg-neutral/30 text-purple-100"
+              />
             </Link>
           </form>
         </div>
