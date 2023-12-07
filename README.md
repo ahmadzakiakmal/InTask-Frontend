@@ -21,14 +21,21 @@ PAW Project - Frontend for InTask Web Application
 ## More information about InTask ❗
 InTask (Infinite Task) merupakan aplikasi web manajemen tugas yang membantu pengguna untuk membuat, mengelola, dan memonitor project atau tugas dengan lebih efisien.
 
-## Our main fitur
+## Our main features
 ### Project 📃
 Pengguna dapat membuat serta mengelola project-project yang akan atau sedang dilakukan. Pengguna dapat mengisi tugas tugas atau task yang akan dilakukan (to do), yang sedang dikerjakan (doing), dan yang sudah selesai dikerjakan (done).
 ### Task 📝
 Pengguna dapat membuat dan mengelola tugas-tugas individual dengan memberikan status tugas, seperti Todo, In Progress, dan Done.
 
+## Tech Stack
+- Node.js
+- Next.js
+- React.js
+- Vercel
+- Tailwind CSS
+
 ## Documentation 📌
-# How to run InTask
+### How to run InTask
 1. You need to clone this repository. Use the command below
    ````````````
    git clone https://github.com/ahmadzaki2975/InTask-Frontend.git
