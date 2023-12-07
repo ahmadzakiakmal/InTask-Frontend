@@ -31,7 +31,7 @@ Pengguna dapat membuat dan mengelola tugas-tugas individual dengan memberikan st
 - Node.js
 - Next.js
 - React.js
-- Vercel
+- Vertech
 - Tailwind CSS
 
 ## Documentation 📌
