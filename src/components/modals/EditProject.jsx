@@ -30,12 +30,12 @@ export default function EditProjectModal({
     }, {
       withCredentials: true
     })
-      .then((res) => {
+      .then(() => {
         onEdit();
         setOpenModal(false);
         toast.success("Project updated");
       })
-      .catch((err) => {
+      .catch(() => {
         toast.error("An error occurred while updating project");
       });
   }
@@ -45,13 +45,12 @@ export default function EditProjectModal({
       .delete(process.env.NEXT_PUBLIC_API_URL + "/project/" + project.projectId, {
         withCredentials: true,
       })
-      .then((res) => {
+      .then(() => {
         setOpenModal(false);
         toast.success("Project deleted");
         router.replace("/dashboard");
       })
       .catch((err) => {
-        console.error("Error deleting project");
         if(err?.response?.status === 403) {
           toast.error("Only owner can delete the project.");
         } else {

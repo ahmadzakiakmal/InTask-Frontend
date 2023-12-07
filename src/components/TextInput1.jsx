@@ -1,7 +1,6 @@
 import React from "react";
 
 export default function TextInput1({ label, value, onChange, ...prop }) {
-  console.log("Rendering TextInput1 for ${label}:", value);
   return (
     <div className="mb-4 relative flex flex-col">
       <div className="flex items-center mb-2">
@@ -15,7 +14,6 @@ export default function TextInput1({ label, value, onChange, ...prop }) {
           placeholder={`Enter your ${label} here`}
           value={value}
           onChange={(e) => {
-            console.log(`Input changed for ${label}:`, e.target.value);
             onChange(e);
           }}
           {...prop}

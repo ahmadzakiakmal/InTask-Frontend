@@ -1,5 +1,4 @@
 import Link from "next/link";
-import StatusBadge from "./StatusBadge";
 
 export default function ProjectCardComponent({
   title,

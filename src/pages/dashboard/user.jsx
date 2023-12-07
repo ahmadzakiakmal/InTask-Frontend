@@ -94,8 +94,7 @@ export default function UserPage() {
         toast.success("Profile updated successfully");
         setRefetch(!refetch);
       })
-      .catch((e) => {
-        console.log(e);
+      .catch(() => {
         toast.error("Error updating profile");
       });
     setIsEditing(true);
@@ -145,8 +144,7 @@ export default function UserPage() {
                 emojiStyle="facebook"
                 theme="dark"
                 skinTonesDisabled={true}
-                onEmojiClick={(e) => {
-                  console.log(e);
+                onEmojiClick={() => {
                   setEmoji(e.emoji);
                 }}
               />

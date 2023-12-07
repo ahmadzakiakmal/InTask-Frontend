@@ -19,7 +19,6 @@ import { LoadingContext } from "@/context/LoadingContext";
 
 export default function ProjectNavbar({
   project,
-  onEdit,
   refetch,
   setRefetch,
 }) {
@@ -46,7 +45,6 @@ export default function ProjectNavbar({
           }
         )
         .then((res) => {
-          console.log(res);
           setContributors(res.data.contributors);
           setLoading(false);
         })
@@ -77,7 +75,6 @@ export default function ProjectNavbar({
   };
 
   const handleCloseRemoveFriendModal = () => {
-    console.log(refetch);
     setRefetch(!refetch);
     setIsRemoveFriendOpen(false);
     loadProjectContributors();

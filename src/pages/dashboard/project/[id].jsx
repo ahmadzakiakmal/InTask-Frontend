@@ -119,7 +119,6 @@ export default function Project() {
         withCredentials: true,
       })
       .then((res) => {
-        console.log(res.data.project.contributors);
         setProject(res.data.project);
       })
       .catch(() => {

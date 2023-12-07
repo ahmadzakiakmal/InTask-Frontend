@@ -1,3 +1,4 @@
+/* eslint no-unused-vars: 0 */
 import Modal from "react-modal";
 import Button from "../Button";
 import { useEffect, useState } from "react";
@@ -15,7 +16,6 @@ export default function EditTaskModal({
   project,
 }) {
   Modal.setAppElement("#__next");
-  const [searchQuery, setSearchQuery] = useState("");
   const [assignees, setAssignees] = useState(project.contributors);
   const [selectedAssignees, setSelectedAssignees] = useState(task.assignees.map((a) => a.username));
   const [name, setName] = useState(task.name);
@@ -29,12 +29,6 @@ export default function EditTaskModal({
   }, [isOpen]);
 
   const putUpdatedTask = () => {
-    console.log({
-      name,
-      description,
-      assignees: selectedAssignees,
-      status: status.toLowerCase(),
-    });
     axios
       .patch(
         process.env.NEXT_PUBLIC_API_URL +
@@ -57,7 +51,6 @@ export default function EditTaskModal({
       })
       .catch((e) => {
         toast.error("An error occurred while updating task.");
-        console.log(e);
       });
   };
 

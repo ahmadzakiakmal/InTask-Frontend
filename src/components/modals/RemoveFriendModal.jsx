@@ -28,17 +28,16 @@ export default function RemoveFriendModal({ isOpen, onClose, projectId, projectC
     }
   };
 
-  const handleRemoveFriend = (e) => {
+  const handleRemoveFriend = () => {
     axios
       .delete(process.env.NEXT_PUBLIC_API_URL + `/project/${projectId}/contributors/${selectedFriends.toString()}`, {
         withCredentials: true,
       })
-      .then((res) => {
+      .then(() => {
         toast.success(`Successfully Removed ${selectedFriends.toString()} from Project`);
         onClose();
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
         toast.error("An error occurred while deleting contributors");
       });
     // onUpdateContributors();
