@@ -1,4 +1,5 @@
 <h1 align="center"> Infinite Task (InTask) 📄 </h1>
+PAW Project - Frontend for InTask Web Application
 
 ## 👩🏻 Kelompok 1's Member 👦🏻 
 - Ahmad Zaki Akmal - 21/480179/TK/52981
@@ -11,9 +12,10 @@
 | --- | --- |
 | Slide Presentasi | |
 | Video Presentasi | |
-| API Documentaion Postman | |
-| Web Deployed | |
-| Backend Github | |
+| API Documentaion Postman | https://bit.ly/InTaskPostman |
+| Backend Web Deployed | https://in-task-api.vertech.id |
+| Frontend Web Deployed | https://in-task.vertech.id |
+| Backend Github | https://github.com/ahmadzaki2975/InTask-Backend |
 
 ## More information about InTask ❗
 InTask (Infinite Task) merupakan aplikasi web manajemen tugas yang membantu pengguna untuk membuat, mengelola, dan memonitor project atau tugas dengan lebih efisien.
