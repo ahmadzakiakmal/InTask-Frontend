@@ -103,7 +103,7 @@ export default function UserPage() {
 
   return (
     <Layout>
-      <main className="flex flex-col items-center justify-center gap-8 sm:gap-5 h-full min-h-[90vh] py-[80px]">
+      <main data-aos="fade-right" className="flex flex-col items-center justify-center gap-8 sm:gap-5 h-full min-h-[90vh] py-[80px]">
         <h1 className="font-semibold text-[42px] sm:text-xl lg:text-2xl">
           Your Profile
         </h1>
