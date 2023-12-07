@@ -6,6 +6,7 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 import { AuthProvider } from "@/components/AuthProvider";
 import { useState } from "react";
 import { LoadingContext } from "@/context/LoadingContext";
+import Head from "next/head";
 config.autoAddCss = false;
 
 function Loading({ open }) {
@@ -19,14 +20,20 @@ function Loading({ open }) {
 export default function App({ Component, pageProps }) {
   const [loading, setLoading] = useState(false);
   return (
-    <main>
-      <LoadingContext.Provider value={{ loading, setLoading }}>
-        <Loading open={loading} />
-        <AuthProvider>
-          <ToastContainer position="bottom-right" />
-          <Component {...pageProps} />
-        </AuthProvider>
-      </LoadingContext.Provider>
-    </main>
+    <>
+      <Head>
+        <title>InTask - Project Management Web</title>
+        <meta name="description" content="InTask - Project management web application to help manage your projects and assignments while collaborating with others" />
+        <link rel="icon" href="/InTaskLogo.png" />
+      </Head>
+      <main>
+        <LoadingContext.Provider value={{ loading, setLoading }}>
+          <Loading open={loading} />
+          <AuthProvider>
+            <ToastContainer position="bottom-right" />
+            <Component {...pageProps} />
+          </AuthProvider>
+        </LoadingContext.Provider>
+      </main></>
   );
 }
