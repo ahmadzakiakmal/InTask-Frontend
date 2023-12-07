@@ -8,11 +8,13 @@ PAW Project - Frontend for InTask Web Application
 4. [Main Features](#main-feature)
 5. [Tech Stack](#tech-stack)
 6. [Documentation](#documentation)
+
    a. [How to Run Intask](#how-to-run)
+
    b. [Screenshots](#screenshots)
-7. [Project Status](#project-status)
-8. [Acknowledgements](#acknowledgement)
-9. [Copyright](#copyright)
+8. [Project Status](#project-status)
+9. [Acknowledgements](#acknowledgement)
+10. [Copyright](#copyright)
 
 <a name="team-members"></a>
 
