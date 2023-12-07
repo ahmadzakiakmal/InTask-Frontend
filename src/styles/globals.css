@@ -24,6 +24,39 @@
   border-radius: 10px;
 }
 
+/* Toast styles */
+/* * Success */
+.Toastify__toast--success {
+  background: #1B2430 !important;
+  color: #D6D5A8 !important;
+  outline: 2px solid #D6D5A8 !important;
+  box-shadow: 0 0 10px #1B2430 !important;
+}
+
+/* ! Error */
+.Toastify__toast--error {
+  background: #1B2430 !important;
+  color: #D6D5A8 !important;
+  outline: 2px solid #D6D5A8 !important;
+  box-shadow: 0 0 10px #1B2430 !important;
+}
+
+/* ? Info */
+.Toastify__toast--info {
+  background: #1B2430 !important;
+  color: #D6D5A8 !important;
+  outline: 2px solid #D6D5A8 !important;
+  box-shadow: 0 0 10px #1B2430 !important;
+}
+
+/* ! Warning */
+.Toastify__toast--warning {
+  background: #1B2430 !important;
+  color: #D6D5A8 !important;
+  outline: 2px solid #D6D5A8 !important;
+  box-shadow: 0 0 10px #1B2430 !important;
+}
+
 /* Delete Toast Pop Up */
 .delete-toast {
   color: white !important;
