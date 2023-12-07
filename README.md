@@ -11,7 +11,7 @@ PAW Project - Frontend for InTask Web Application
 
    a. [How to Run Intask](#how-to-run)
 
-   b. [Screenshots](#screenshots)
+   b. [UI](#ui)
 8. [Project Status](#project-status)
 9. [Acknowledgements](#acknowledgement)
 10. [Copyright](#copyright)
@@ -84,9 +84,12 @@ Pengguna dapat membuat dan mengelola tugas-tugas individual dengan memberikan st
    http://localhost:3000/
    ````````````
 
-<a name="screenshots"></a>
-### Screenshots
+<a name="ui"></a>
+### UI
 <p float="left">
+   <img src="/public/Dashboard.png/" width=300>
+   <img src="/public/Project.png/" width=300>
+   <img src="/public/Task.png/" width=300>
 </p>
 
 <a name="project-status">
