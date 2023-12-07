@@ -50,9 +50,13 @@ export default function EditProjectModal({
         toast.success("Project deleted");
         router.replace("/dashboard");
       })
-      .catch(() => {
+      .catch((err) => {
         console.error("Error deleting project");
-        toast.error("An error occurred while deleting project");
+        if(err?.response?.status === 403) {
+          toast.error("Only owner can delete the project.");
+        } else {
+          toast.error(err.message ?? "An error occured");
+        }
       });
   }
 
@@ -94,7 +98,6 @@ export default function EditProjectModal({
               type="button"
             />
           </div>
-
         </form>
       </div>
     </Modal>
