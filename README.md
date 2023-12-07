@@ -31,10 +31,15 @@ Pengguna dapat membuat dan mengelola tugas-tugas individual dengan memberikan st
 # How to run InTask
 1. Go to InTask-Frontend directory
 2. Install the NPM package
-   ```npm install```
-3. Run the App
-  ```npm run dev```
-4. If u are not redirected to the landing page, u can open this link with your browser
-  ```http://localhost:3000/```
-
+   ````````````
+   npm install
+   ````````````   
+4. Run the App
+   ````````````
+   npm run dev
+   ````````````
+6. If u are not redirected to the landing page, u can open this link with your browser
+   ````````````
+   http://localhost:3000/
+   ````````````
 
