@@ -101,6 +101,7 @@ export default function Dashboard() {
                   <ProjectCardComponent
                     key={project._id}
                     id={project._id}
+                    index={id}
                     title={project.title}
                     description={project.description}
                     color={getColor(id)}
