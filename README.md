@@ -28,5 +28,13 @@ Pengguna dapat membuat serta mengelola project-project yang akan atau sedang dil
 Pengguna dapat membuat dan mengelola tugas-tugas individual dengan memberikan status tugas, seperti Todo, In Progress, dan Done.
 
 ## Documentation 📌
+# How to run InTask
+1. Go to InTask-Frontend directory
+2. Install the NPM package
+   ```npm install```
+3. Run the App
+  ```npm run dev```
+4. If u are not redirected to the landing page, u can open this link with your browser
+  ```http://localhost:3000/```
 
 
