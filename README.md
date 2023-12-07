@@ -65,7 +65,7 @@ Pengguna dapat membuat dan mengelola tugas-tugas individual dengan memberikan st
 
 <a name="how-to-run"></a>
 
-### How to run InTask
+### How to run InTask locally
 1. You need to clone this repository. Use the command below
    ````````````
    git clone https://github.com/ahmadzaki2975/InTask-Frontend.git
@@ -108,7 +108,7 @@ Status Proyek: _on finished_
 
 ## Copyright
 <h4 align="center">
-  Copyrights @2023
+  Copyrights Group 1 PAW @2023
 </h4>
 
 
