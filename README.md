@@ -29,8 +29,12 @@ Pengguna dapat membuat dan mengelola tugas-tugas individual dengan memberikan st
 
 ## Documentation 📌
 # How to run InTask
-1. Go to InTask-Frontend directory
-2. Install the NPM package
+1. You need to clone this repository. Use the command below
+   ````````````
+   git clone https://github.com/ahmadzaki2975/InTask-Frontend.git
+   ````````````
+2. Go to InTask-Frontend directory
+3. Install the NPM package
    ````````````
    npm install
    ````````````   
@@ -38,7 +42,7 @@ Pengguna dapat membuat dan mengelola tugas-tugas individual dengan memberikan st
    ````````````
    npm run dev
    ````````````
-6. If u are not redirected to the landing page, u can open this link with your browser
+5. If u are not redirected to the landing page, u can open this link with your browser
    ````````````
    http://localhost:3000/
    ````````````
