@@ -1,6 +1,11 @@
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserPlus, faUserXmark, faListUl, faBars } from "@fortawesome/free-solid-svg-icons";
+import {
+  faUserPlus,
+  faUserXmark,
+  faListUl,
+  faBars,
+} from "@fortawesome/free-solid-svg-icons";
 import { useState, useContext } from "react";
 import AddFriendModal from "./modals/AddFriendModal";
 import RemoveFriendModal from "./modals/RemoveFriendModal";
@@ -12,7 +17,12 @@ import EditProjectModal from "./modals/EditProject";
 import Cookies from "js-cookie";
 import { LoadingContext } from "@/context/LoadingContext";
 
-export default function ProjectNavbar({ project, onEdit }) {
+export default function ProjectNavbar({
+  project,
+  onEdit,
+  refetch,
+  setRefetch,
+}) {
   const [isAddFriendOpen, setIsAddFriendOpen] = useState(false);
   const [isRemoveFriendOpen, setIsRemoveFriendOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -26,10 +36,17 @@ export default function ProjectNavbar({ project, onEdit }) {
     setLoading(true);
     if (project.projectId !== undefined && project.projectId) {
       axios
-        .get(process.env.NEXT_PUBLIC_API_URL + "/project/" + project.projectId + "/contributors", {
-          withCredentials: true,
-        })
+        .get(
+          process.env.NEXT_PUBLIC_API_URL +
+            "/project/" +
+            project.projectId +
+            "/contributors",
+          {
+            withCredentials: true,
+          }
+        )
         .then((res) => {
+          console.log(res);
           setContributors(res.data.contributors);
           setLoading(false);
         })
@@ -51,14 +68,17 @@ export default function ProjectNavbar({ project, onEdit }) {
 
   const handleCloseAddFriendModal = () => {
     setIsAddFriendOpen(false);
-  };
-
-  const handleOpenRemoveFriendModal = () => {
-    setIsRemoveFriendOpen(true);
     loadProjectContributors();
   };
 
+  const handleOpenRemoveFriendModal = () => {
+    loadProjectContributors();
+    setIsRemoveFriendOpen(true);
+  };
+
   const handleCloseRemoveFriendModal = () => {
+    console.log(refetch);
+    setRefetch(!refetch);
     setIsRemoveFriendOpen(false);
     loadProjectContributors();
   };
@@ -87,7 +107,13 @@ export default function ProjectNavbar({ project, onEdit }) {
         isOpen={isEditProjectOpen}
         setOpenModal={setOpenEditProject}
         project={project}
-        onEdit={onEdit}
+        onEdit={() => {
+          setRefetch(!refetch);
+        }}
+        onClose={() => {
+          setRefetch(!refetch);
+          setOpenEditProject(false);
+        }}
       />
       <div className="float-left">
         <Link href="/dashboard">
@@ -100,14 +126,28 @@ export default function ProjectNavbar({ project, onEdit }) {
             <FontAwesomeIcon icon={faUserPlus} />
             <span className="ml-2">Add Contributor</span>
           </button>
-          <AddFriendModal isOpen={isAddFriendOpen} onClose={handleCloseAddFriendModal} setOpenModal={setIsAddFriendOpen} projectId={project?.projectId}/>
+          <AddFriendModal
+            isOpen={isAddFriendOpen}
+            setContributors={setContributors}
+            onClose={() => {
+              handleCloseAddFriendModal();
+              setRefetch(!refetch);
+            }}
+            setOpenModal={setIsAddFriendOpen}
+            projectId={project?.projectId}
+          />
         </li>
         <li className="hidden xl:block cursor-pointer hover:text-blue-500">
           <button type="button" onClick={handleOpenRemoveFriendModal}>
             <FontAwesomeIcon icon={faUserXmark} />
             <span className="ml-2">Remove Contributor</span>
           </button>
-          <RemoveFriendModal isOpen={isRemoveFriendOpen} onClose={handleCloseRemoveFriendModal} projectId={project?.projectId} projectContributor={contributors} />
+          <RemoveFriendModal
+            isOpen={isRemoveFriendOpen}
+            onClose={handleCloseRemoveFriendModal}
+            projectId={project?.projectId}
+            projectContributor={contributors}
+          />
         </li>
         <li className="hidden xl:block cursor-pointer hover:text-blue-500">
           <button onClick={() => setOpenEditProject(true)}>
@@ -115,13 +155,23 @@ export default function ProjectNavbar({ project, onEdit }) {
             <span className="ml-2">Project Settings</span>
           </button>
         </li>
-        <li className="xl:hidden cursor-pointer text-[18px]" onClick={handleToggleDropdown} ref={dropdownRef}>
-          <FontAwesomeIcon icon={faBars} className="text-[22px] xs:text-[16px]"/>
+        <li
+          className="xl:hidden cursor-pointer text-[18px]"
+          onClick={handleToggleDropdown}
+          ref={dropdownRef}
+        >
+          <FontAwesomeIcon
+            icon={faBars}
+            className="text-[22px] xs:text-[16px]"
+          />
           <span className="ml-2 hidden xs:inline">Menu</span>
         </li>
       </ul>
       {isDropdownOpen && (
-        <ul className="lg:hidden absolute mt-12 right-5 rounded-[20px] shadow-md font-extralight text-[#5F5858] bg-neutral p-5" ref={dropdownRef}>
+        <ul
+          className="lg:hidden absolute mt-12 right-5 rounded-[20px] shadow-md font-extralight text-[#5F5858] bg-neutral p-5"
+          ref={dropdownRef}
+        >
           <li className="block cursor-pointer hover:text-blue-500">
             <button type="button" onClick={handleOpenAddFriendModal}>
               <FontAwesomeIcon icon={faUserPlus} />

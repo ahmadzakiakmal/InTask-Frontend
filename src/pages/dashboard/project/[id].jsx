@@ -14,7 +14,14 @@ import Cookies from "js-cookie";
 import { useContext } from "react";
 import { LoadingContext } from "@/context/LoadingContext";
 
-function KanbanContainer({ status, tasks, id, initialStatus, setInitialStatus, openModal }) {
+function KanbanContainer({
+  status,
+  tasks,
+  id,
+  initialStatus,
+  setInitialStatus,
+  openModal,
+}) {
   const { setNodeRef } = useDroppable({ id: id });
   return (
     <section
@@ -31,10 +38,13 @@ function KanbanContainer({ status, tasks, id, initialStatus, setInitialStatus, o
           assignees={task.assignees}
         />
       ))}
-      <button className="flex items-center gap-2 p-[10px] hover:bg-yellow/10 w-full rounded-[10px] transition" onClick={() => {
-        setInitialStatus(initialStatus);
-        openModal();
-      }}>
+      <button
+        className="flex items-center gap-2 p-[10px] hover:bg-yellow/10 w-full rounded-[10px] transition"
+        onClick={() => {
+          setInitialStatus(initialStatus);
+          openModal();
+        }}
+      >
         <svg
           width="25"
           height="24"
@@ -77,11 +87,10 @@ export default function Project() {
         })
         .then((res) => {
           const assignees = res.data.assignees;
-          const tasks = res.data.tasks
-            .map((task, id)=>({
-              ...task, 
-              assignees: assignees[id]
-            }));
+          const tasks = res.data.tasks.map((task, id) => ({
+            ...task,
+            assignees: assignees[id],
+          }));
           setTasks(tasks);
         })
         .catch((err) => {
@@ -94,7 +103,7 @@ export default function Project() {
           toast.error("An error occurred!");
         })
         .finally(() => {
-          if(id === undefined || !id) return;
+          if (id === undefined || !id) return;
           setLoading(false);
         });
     }
@@ -118,7 +127,7 @@ export default function Project() {
       });
   };
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(loadProjectData, [id]);
+  useEffect(loadProjectData, [id, refetch]);
 
   const updateTaskStatus = ({ active, over }) => {
     if (over == null) return;
@@ -152,11 +161,17 @@ export default function Project() {
       />
       <main className="relative flex flex-col h-full min-h-[90vh]">
         <ProjectNavbar
-          onEdit={()=>loadProjectData()}
+          onEdit={() => {
+            loadProjectData();
+            setRefetch(!refetch);
+          }}
+          refetch={refetch}
+          setRefetch={setRefetch}
           project={{
             title: project.title,
             projectId: id,
-            description: project.description
+            description: project.description,
+            owner: project.owner,
           }}
         />
         <div className="flex items-center gap-3 mt-4 mb-2">
@@ -167,17 +182,15 @@ export default function Project() {
         <div className="mb-4">
           <h1>Project Contributors</h1>
           <div className="flex gap-2 flex-wrap">
-            {
-              project?.contributors?.map((c) => {
-                return (
-                  <div key={c} className="flex items-center gap-2">
-                    <div className="rounded-[5px] bg-purple-100 px-2 py-1 text-white">
-                      {c}
-                    </div>
+            {project?.contributors?.map((c) => {
+              return (
+                <div key={c} className="flex items-center gap-2">
+                  <div className="rounded-[5px] bg-purple-100 px-2 py-1 text-white">
+                    {c}
                   </div>
-                );
-              })
-            }
+                </div>
+              );
+            })}
           </div>
         </div>
         <section>

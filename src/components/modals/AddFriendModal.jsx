@@ -4,7 +4,13 @@ import Button from "../Button";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-export default function AddFriendModal ({ isOpen, onClose, projectId, setOpenModal }) {
+export default function AddFriendModal({
+  isOpen,
+  onClose,
+  projectId,
+  setOpenModal,
+  setContributors,
+}) {
   const [identifier, setIdentifier] = useState("");
   const [options, setOptions] = useState([]);
 
@@ -12,18 +18,24 @@ export default function AddFriendModal ({ isOpen, onClose, projectId, setOpenMod
     try {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/project/${projectId}/contributors`,
-        { identifier: identifier },  
+        { identifier: identifier },
         {
-          withCredentials: true
+          withCredentials: true,
         }
       );
       toast.success(response.data.message);
+
+      setContributors(() => response.data.contributor);
       setIdentifier("");
       setOptions([]);
       onClose();
     } catch (error) {
       // console.error(error);
-      if (error.response && error.response.data && error.response.data.message) {
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
         toast.error(error.response.data.message);
       } else {
         toast.error("An error occurred while adding a friend.");
@@ -32,14 +44,14 @@ export default function AddFriendModal ({ isOpen, onClose, projectId, setOpenMod
   };
 
   const searchOption = () => {
-    if(!identifier)
-      setOptions([]);
+    if (!identifier) setOptions([]);
     else
-      axios.get(process.env.NEXT_PUBLIC_API_URL + "/user/search/" + identifier)
-        .then(response =>{
-          setOptions(response.data.users);  
+      axios
+        .get(process.env.NEXT_PUBLIC_API_URL + "/user/search/" + identifier)
+        .then((response) => {
+          setOptions(response.data.users);
         })
-        .catch(err => toast.info(err.message));
+        .catch((err) => toast.info(err.message));
   };
   useEffect(searchOption, [identifier]);
 
@@ -63,24 +75,32 @@ export default function AddFriendModal ({ isOpen, onClose, projectId, setOpenMod
           onChange={(e) => setIdentifier(e.target.value)}
           list="users"
         />
-        {
-          options.length > 0 &&
+        {options.length > 0 && (
           <div className="text-yellow flex flex-col gap-2 absolute bg-navy p-3 shadow-yellow outline outline-1 outline-yellow rounded-[10px] min-w-[215px]">
-            {
-              options.map((user, index) => (
-                <div onClick={() => {
+            {options.map((user, index) => (
+              <div
+                onClick={() => {
                   setIdentifier(user.email);
                   setOptions([]);
-                }} className="bg-yellow/20 hover:bg-yellow/40 p-1 rounded-[5px] cursor-pointer" key={index} value={user.email}>{user.emoticon} {user.username}</div>
-              ))
-            }
+                }}
+                className="bg-yellow/20 hover:bg-yellow/40 p-1 rounded-[5px] cursor-pointer"
+                key={index}
+                value={user.email}
+              >
+                {user.emoticon} {user.username}
+              </div>
+            ))}
           </div>
-        }
+        )}
         <div className="flex gap-2 justify-end">
           <Button text="Add" onClick={handleAddFriend} className="!px-5" />
-          <Button text="Cancel" className="!bg-neutral/50 hover:!bg-neutral/30 text-purple-100" onClick={onClose} />
+          <Button
+            text="Cancel"
+            className="!bg-neutral/50 hover:!bg-neutral/30 text-purple-100"
+            onClick={onClose}
+          />
         </div>
       </main>
     </Modal>
   );
-};
+}
