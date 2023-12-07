@@ -4,10 +4,12 @@ import "react-toastify/dist/ReactToastify.css";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import { AuthProvider } from "@/components/AuthProvider";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LoadingContext } from "@/context/LoadingContext";
 import Head from "next/head";
 config.autoAddCss = false;
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 function Loading({ open }) {
   if(open) return(
@@ -19,6 +21,9 @@ function Loading({ open }) {
 
 export default function App({ Component, pageProps }) {
   const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    Aos.init({ duration: 1000, once: false });
+  });
   return (
     <>
       <Head>
