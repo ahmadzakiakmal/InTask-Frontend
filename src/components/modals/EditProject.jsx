@@ -3,6 +3,7 @@ import Button from "../Button";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
 export default function EditProjectModal({
   isOpen,
@@ -12,14 +13,15 @@ export default function EditProjectModal({
 }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const router = useRouter();
   Modal.setAppElement("#__next");
 
-  useEffect(()=>{
-    if(project){
+  useEffect(() => {
+    if (project) {
       setTitle(project.title);
-      setDescription(project.description); 
+      setDescription(project.description);
     }
-  },[project]);
+  }, [project]);
 
   function updateProject(e) {
     e.preventDefault();
@@ -37,7 +39,7 @@ export default function EditProjectModal({
         toast.error("An error occurred while updating project");
       });
   }
-  
+
   function deleteProject() {
     axios
       .delete(process.env.NEXT_PUBLIC_API_URL + "/project/" + project.projectId, {
@@ -46,12 +48,17 @@ export default function EditProjectModal({
       .then((res) => {
         setOpenModal(false);
         toast.success("Project deleted");
+        router.replace("/dashboard");
       })
       .catch((err) => {
-        console.error("Error deleting project:", err);
-        toast.error("An error occurred while deleting project");
+        console.error("Error deleting project");
+        if(err?.response?.status === 403) {
+          toast.error("Only owner can delete the project.");
+        } else {
+          toast.error(err.message ?? "An error occured");
+        }
       });
-  }  
+  }
 
   return (
     <Modal
@@ -63,8 +70,8 @@ export default function EditProjectModal({
         <h1 className="text-yellow text-[32px] font-semibold text-center">
           Edit Project
         </h1>
-        <form 
-          onSubmit={updateProject} 
+        <form
+          onSubmit={updateProject}
           className="bg-yellow p-8 rounded-[5px] text-[20px] flex flex-col gap-4">
           <label className="flex flex-col gap-2.5">
             Project Title
@@ -82,14 +89,15 @@ export default function EditProjectModal({
               onChange={(e) => setDescription(e.target.value)}
             />
           </label>
-          <div className="button-container">
-            <Button text="Update" 
-            type="submit" />
-            <Button text="Delete" 
-            className="bg-[#EC001E]" 
-            onClick={deleteProject} />
+          <div className="button-container flex gap-2">
+            <Button text="Update"
+              type="submit" />
+            <Button text="Delete"
+              className="!bg-[#EC001E] hover:!bg-red-800"
+              onClick={deleteProject}
+              type="button"
+            />
           </div>
-
         </form>
       </div>
     </Modal>
