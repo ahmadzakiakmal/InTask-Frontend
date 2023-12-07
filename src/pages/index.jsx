@@ -63,7 +63,9 @@ export default function Home() {
           <div
             className={
               "absolute sm:hidden bg-navy outline outline-yellow outline-1 shadow-[0_2px_10px_#000] top-[calc(100%+10px)] right-[5%] xs:right-[16px] rounded-[10px] grid transition-[grid-template-rows] px-10 " +
-              (openMobileMenu ? "grid-rows-[1fr]" : "grid-rows-[0fr] !shadow-none !outline-none")
+              (openMobileMenu
+                ? "grid-rows-[1fr]"
+                : "grid-rows-[0fr] !shadow-none !outline-none")
             }
           >
             <div
@@ -95,7 +97,7 @@ export default function Home() {
       </nav>
 
       <section className="pt-10 lg:pt-0 md:px-10 xl:px-auto flex flex-col-reverse w-full lg:flex-row justify-center lg:justify-evenly max-w-[1600px] items-center gap-10 xl:gap-0 min-h-screen">
-        <div className="flex flex-col gap-5 items-center lg:gap-10 px-[5%] sm:px-0 ">
+        <div data-aos="fade-right" className="flex flex-col gap-5 items-center lg:gap-10 px-[5%] sm:px-0 ">
           <h1 className="text-center lg:text-left w-full text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-medium">
             Infinite Task
           </h1>
@@ -106,7 +108,7 @@ export default function Home() {
           </p>
           <Link href="/auth/register" className="self-center lg:self-start">
             <button className="btn btn-sm lg:btn-lg bg-[#816797] text-white rounded-full border-[#5F4C6F] w-40 lg:w-44 capitalize py-2">
-            Get Started
+              Get Started
             </button>
           </Link>
         </div>
@@ -114,42 +116,64 @@ export default function Home() {
           src={InTaskLogoDark}
           alt="InTask Logo"
           className="w-[220px] md:w-[250px] lg:w-[300px] xl:w-[350px] flex-shrink-0"
+          data-aos="fade-left"
         />
       </section>
 
       {/* //? section fitur */}
       <section className="pt-10 mb-10 lg:pt-0 lg:mb-10 md:px-10 xl:px-auto flex flex-col-reverse w-full lg:flex-row justify-center lg:justify-evenly max-w-[1600px] items-center gap-10 xl:gap-0">
         <div className="container gap-5 lg:gap-10 px-8 mx-auto py-20">
-          <p className="text-3xl lg:text-5xl font-semibold text-navy" style={{ marginBottom: "-2rem" }}>Our Features</p>
+          <p
+            className="text-3xl lg:text-5xl font-semibold text-navy"
+            style={{ marginBottom: "-2rem" }}
+            data-aos="fade-right"
+          >
+            Our Features
+          </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-16 py-10 lg:py-20 mt-0">
-            <div className="flex flex-col gap-5 mt-0.1 ">
-              <Image src={DashboardPict} alt="Project Picture" className="shadow-[0_0_8px_rgba(0,0,0,.5)] rounded-[10px]" />
+            <div data-aos="fade-up" className="flex flex-col gap-5 mt-0.1 ">
+              <Image
+                src={DashboardPict}
+                alt="Project Picture"
+                className="shadow-[0_0_8px_rgba(0,0,0,.5)] rounded-[10px]"
+              />
               <p className="text-2xl font-semibold">Project</p>
               <div className="flex items-center gap-2">
                 <p className="text-base text-justify sm:text-lg text-gray-500 lg:text-[15px] mb-10">
-              Pada fitur project, pengguna dapat membuat dan mengelola 
-              project-project yang akan atau sedang dilakukan.
+                  Pada fitur project, pengguna dapat membuat dan mengelola
+                  project-project yang akan atau sedang dilakukan.
                 </p>
               </div>
             </div>
 
-            <div className="flex flex-col gap-5 ">
-              <Image src={ProjectPict} alt="Isi Project" className="shadow-[0_0_8px_rgba(0,0,0,.5)] rounded-[10px]"/>
+            <div data-aos="fade-up" data-aos-delay="200" className="flex flex-col gap-5 ">
+              <Image
+                src={ProjectPict}
+                alt="Isi Project"
+                className="shadow-[0_0_8px_rgba(0,0,0,.5)] rounded-[10px]"
+              />
               <p className="text-2xl font-semibold">Isi dari project</p>
-              <div className="flex items-center gap-2">            
+              <div className="flex items-center gap-2">
                 <p className="text-base text-justify sm:text-lg text-gray-500 lg:text-[15px] mb-10">
-            Pengguna dapat mengisi tugas-tugas atau task yang akan dilakukan (to do), 
-            yang sedang dikerjakan (doing), dan yang sudah selesai dikerjakan (done).
+                  Pengguna dapat mengisi tugas-tugas atau task yang akan
+                  dilakukan (to do), yang sedang dikerjakan (doing), dan yang
+                  sudah selesai dikerjakan (done).
                 </p>
               </div>
             </div>
-        
-            <div className="flex flex-col gap-5 ">
-              <Image src={TaskPict} alt="Fitur Task" className="shadow-[0_0_8px_rgba(0,0,0,.5)] rounded-[10px]"/>
+
+            <div data-aos="fade-up" data-aos-delay="400" className="flex flex-col gap-5 ">
+              <Image
+                src={TaskPict}
+                alt="Fitur Task"
+                className="shadow-[0_0_8px_rgba(0,0,0,.5)] rounded-[10px]"
+              />
               <p className="text-2xl font-semibold">Task</p>
               <div className="flex items-center gap-2">
                 <p className="text-base text-justify sm:text-lg text-gray-500 lg:text-[15px] mb-10">
-                Pada fitur Task, pengguna dapat membuat dan mengelola tugas-tugas individual dengan memberikan status tugas, seperti Todo, In Progress, dan Done. 
+                  Pada fitur Task, pengguna dapat membuat dan mengelola
+                  tugas-tugas individual dengan memberikan status tugas, seperti
+                  Todo, In Progress, dan Done.
                 </p>
               </div>
             </div>
@@ -160,38 +184,66 @@ export default function Home() {
       {/* //? section anggota */}
       <section className="pt-10 mb-10 lg:pt-0 lg:mb-10 md:px-10 xl:px-auto flex flex-col-reverse w-full lg:flex-row justify-center lg:justify-evenly max-w-[1600px] items-center gap-10 xl:gap-0 ">
         <div className="container mx-auto py-20 gap-5 lg:gap-10 px-8">
-          <p className="text-base lg:text-xl font-medium text-gray-500 uppercase" style={{ marginTop:"-9rem" }}>Kelompok 1</p>
-          <p className="text-3xl lg:text-5xl font-semibold text-navy mt-3"  style={{ marginBottom:"-2rem" }}>Meet our member!</p>
+          <p
+            className="text-base lg:text-xl font-medium text-gray-500 uppercase"
+            style={{ marginTop: "-9rem" }}
+            data-aos="fade-right"
+          >
+            Kelompok 1
+          </p>
+          <p
+            className="text-3xl lg:text-5xl font-semibold text-navy mt-3"
+            style={{ marginBottom: "-2rem" }}
+            data-aos="fade-right"
+          >
+            Meet our member!
+          </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-16 py-10 lg:py-20">
-            <div className="flex flex-col gap-5 ">
-              <Image src={Jaki} alt="Ahmad Zaki Akmal"/>
-              <p className="text-2xl font-semibold  text-center">Ahmad Zaki Akmal</p>
+            <div className="flex flex-col gap-5 " data-aos="fade-up">
+              <Image src={Jaki} alt="Ahmad Zaki Akmal" />
+              <p className="text-2xl font-semibold  text-center">
+                Ahmad Zaki Akmal
+              </p>
               <div className="flex items-center gap-2 justify-center">
-                <p className="text-gray-500" style={{ marginTop:"-1rem" }}>21/480179/TK/52981</p>
+                <p className="text-gray-500" style={{ marginTop: "-1rem" }}>
+                  21/480179/TK/52981
+                </p>
               </div>
             </div>
-              
-            <div className="flex flex-col gap-5 ">
+
+            <div className="flex flex-col gap-5 " data-aos="fade-up" data-aos-delay="200">
               <Image src={Salwa} alt="Salwa Maharani" />
-              <p className="text-2xl font-semibold text-center">Salwa Maharani</p>
+              <p className="text-2xl font-semibold text-center">
+                Salwa Maharani
+              </p>
               <div className="flex items-center justify-center gap-2 ">
-                <p className="text-gray-500 " style={{ marginTop:"-1rem" }}>21/481194/TK/53113</p>
+                <p className="text-gray-500 " style={{ marginTop: "-1rem" }}>
+                  21/481194/TK/53113
+                </p>
               </div>
             </div>
 
-            <div className="flex flex-col gap-5 ">
-              <Image src={Duta} alt="Duta Pradana"/>
-              <p className="text-2xl font-semibold  text-center">Diestra Pradana</p>
+            <div className="flex flex-col gap-5 " data-aos="fade-up" data-aos-delay="400">
+              <Image src={Duta} alt="Duta Pradana" />
+              <p className="text-2xl font-semibold  text-center">
+                Diestra Pradana
+              </p>
               <div className="flex items-center gap-2 justify-center">
-                <p className="text-gray-500" style={{ marginTop:"-1rem" }}>21/478179/TK/52693</p>
+                <p className="text-gray-500" style={{ marginTop: "-1rem" }}>
+                  21/478179/TK/52693
+                </p>
               </div>
             </div>
 
-            <div className="flex flex-col gap-5 ">
-              <Image src={Galih} alt="Nicholas Galih"/>
-              <p className="text-2xl font-semibold  text-center">Nicholas Galih</p>
+            <div className="flex flex-col gap-5 " data-aos="fade-up" data-aos-delay="600">
+              <Image src={Galih} alt="Nicholas Galih" />
+              <p className="text-2xl font-semibold  text-center">
+                Nicholas Galih
+              </p>
               <div className="flex items-center gap-2 justify-center">
-                <p className="text-gray-500" style={{ marginTop:"-1rem" }}>21/482747/TK/53361</p>
+                <p className="text-gray-500" style={{ marginTop: "-1rem" }}>
+                  21/482747/TK/53361
+                </p>
               </div>
             </div>
           </div>
@@ -200,19 +252,39 @@ export default function Home() {
 
       {/* //? footer */}
       <div id="section_footer" className="w-full bg-navy">
-        <div className="flex items-start justify-between px-[5%] xs:px-4 sm:px-7 py-10" >
+        <div className="flex items-start justify-between px-[5%] xs:px-4 sm:px-7 py-10">
           <Link href="#" className="flex items-center cursor-pointer">
-            <Image src={InTaskLogo} alt="InTask Logo" className="w-[50px] hidden xs:block" />
-            <Image src={textInTaskLogo} alt="TextInTask Logo" className="w-[80px] py-3" />
+            <Image
+              src={InTaskLogo}
+              alt="InTask Logo"
+              className="w-[50px] hidden xs:block"
+            />
+            <Image
+              src={textInTaskLogo}
+              alt="TextInTask Logo"
+              className="w-[80px] py-3"
+            />
           </Link>
           <div className="text-right text-yellow">
             <h1>Repositories</h1>
             <hr className="border-yellow mb-2" />
-            <Link href="https://github.com/ahmadzaki2975/InTask-Frontend.git" target="_blank" className="btn btn-link block">
-              <span className="hover:underline underline-offset-2 hover:text-blue-500 text-white">Frontend</span>
+            <Link
+              href="https://github.com/ahmadzaki2975/InTask-Frontend.git"
+              target="_blank"
+              className="btn btn-link block"
+            >
+              <span className="hover:underline underline-offset-2 hover:text-blue-500 text-white">
+                Frontend
+              </span>
             </Link>
-            <Link href="https://github.com/ahmadzaki2975/InTask-Backend.git" target="_blank" className="btn btn-link block">
-              <span className="hover:underline underline-offset-2 hover:text-blue-500 text-white">Backend</span>
+            <Link
+              href="https://github.com/ahmadzaki2975/InTask-Backend.git"
+              target="_blank"
+              className="btn btn-link block"
+            >
+              <span className="hover:underline underline-offset-2 hover:text-blue-500 text-white">
+                Backend
+              </span>
             </Link>
           </div>
         </div>
@@ -220,7 +292,6 @@ export default function Home() {
           &copy;2023 InTask by Group 1 PAW.
         </div>
       </div>
-
     </main>
   );
 }
