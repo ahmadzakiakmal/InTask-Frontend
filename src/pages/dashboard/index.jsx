@@ -18,11 +18,12 @@ export default function Dashboard() {
   const { setLoading } = useContext(LoadingContext);
 
   useEffect(() => {
-    if (!Cookies.get("Authorization")) {
-      router.replace("/");
-      return;
-    }
     setLoading(true);
+    if (!Cookies.get("Authorization")) {
+      router.replace("/auth/login");
+      toast.error("Please login first!");
+      setLoading(false);
+    }
     setUsername(localStorage.getItem("username"));
     if (localStorage.getItem("username")) {
       axios
@@ -83,9 +84,13 @@ export default function Dashboard() {
         <CreateNewProjectModal isOpen={openModal} setOpenModal={setOpenModal} />
         <section className="shadow-md p-4 font-semibold rounded-[20px] w-full border-2 border-gray-300 gap-4 flex items-center">
           <div>
-            <span className="text-3xl">{`${toCamelCase(
-              username
-            )}'s Projects`}</span>
+            {
+              username && (
+                <span className="text-3xl">{`${toCamelCase(
+                  username
+                )}'s Projects`}</span>
+              )
+            }
           </div>
         </section>
         {projects?.length > 0 && (

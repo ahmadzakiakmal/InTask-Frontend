@@ -40,8 +40,13 @@ export default function UserPage() {
         });
         setEmoji(res.data.emoticon);
       })
-      .catch(() => {
+      .catch((err) => {
         toast.error("Error fetching profile data");
+        if(err.response.status === 401) {
+          router.replace("/auth/login");
+          toast.error("Session Expired! Please login again.");
+          router.replace("/auth/login");
+        }
       })
       .finally(() => {
         setLoading(false);

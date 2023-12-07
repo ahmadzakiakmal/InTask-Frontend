@@ -34,13 +34,13 @@ export default function ProjectNavbar({ project, onEdit }) {
           setLoading(false);
         })
         .catch((err) => {
-           if (err?.response?.status === 401) {
-             localStorage.clear();
-             Cookies.remove("Authorization");
-             toast.error("Session Expired! Please login again.");
-           }
-           toast.error("An error occurred!");
-           router.push("/auth/login");
+          if (err?.response?.status === 401) {
+            router.replace("/auth/login");
+            localStorage.clear();
+            Cookies.remove("Authorization");
+            toast.error("Session Expired! Please login again.");
+          }
+          toast.error("An error occurred!");
         });
     }
   };
