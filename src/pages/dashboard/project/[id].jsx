@@ -100,10 +100,10 @@ export default function Project() {
      }
   };
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(loadTaskData, [router, refetch]);
+  useEffect(loadTaskData, [router, refetch, id]);
 
   const loadProjectData = () => {
-    setLoading(true);
+    // setLoading(true);
     if (id === undefined || !id) return;
     axios
       .get(process.env.NEXT_PUBLIC_API_URL + "/project/id/" + id, {
