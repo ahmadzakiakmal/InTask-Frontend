@@ -94,12 +94,12 @@ export default function Home() {
         </div>
       </nav>
 
-      <section className="pt-10 mb-10 lg:pt-0 lg:mb-10 md:px-10 xl:px-auto flex flex-col-reverse w-full lg:flex-row justify-center lg:justify-evenly max-w-[1600px] items-center gap-10 xl:gap-0 min-h-screen">
+      <section className="pt-10 lg:pt-0 md:px-10 xl:px-auto flex flex-col-reverse w-full lg:flex-row justify-center lg:justify-evenly max-w-[1600px] items-center gap-10 xl:gap-0 min-h-screen">
         <div className="flex flex-col gap-5 items-center lg:gap-10 px-[5%] sm:px-0 ">
           <h1 className="text-center lg:text-left w-full text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-medium">
             Infinite Task
           </h1>
-          <p className="text-base text-justify sm:text-lg lg:text-[20px] text-gray-500 w-full xs:max-w-[400px] sm:max-w-[500px] md:max-w-[600px] lg:max-w-[700px]">
+          <p className="text-base text-justify sm:text-lg lg:text-[20px] text-gray-500 w-full xs:max-w-[400px] sm:max-w-[500px]">
             InTask (Infinite Task) merupakan aplikasi web manajemen tugas yang
             membantu pengguna untuk membuat, mengelola, dan memonitor project
             atau tugas dengan lebih efisien.
@@ -118,15 +118,15 @@ export default function Home() {
       </section>
 
       {/* //? section fitur */}
-      <section className="pt-10 mb-10 lg:pt-0 lg:mb-10 md:px-10 xl:px-auto flex flex-col-reverse w-full lg:flex-row justify-center lg:justify-evenly max-w-[1600px] items-center gap-10 xl:gap-0 min-h-screen">
+      <section className="pt-10 mb-10 lg:pt-0 lg:mb-10 md:px-10 xl:px-auto flex flex-col-reverse w-full lg:flex-row justify-center lg:justify-evenly max-w-[1600px] items-center gap-10 xl:gap-0">
         <div className="container gap-5 lg:gap-10 px-8 mx-auto py-20">
-          <p className="text-3xl lg:text-5xl font-semibold text-navy" style={{ marginBottom: "-2rem", marginTop:"-3rem" }}>Our Fitur</p>
+          <p className="text-3xl lg:text-5xl font-semibold text-navy" style={{ marginBottom: "-2rem" }}>Our Features</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-16 py-10 lg:py-20 mt-0">
             <div className="flex flex-col gap-5 mt-0.1 ">
               <Image src={DashboardPict} alt="Project Picture" className="shadow-[0_0_8px_rgba(0,0,0,.5)] rounded-[10px]" />
               <p className="text-2xl font-semibold">Project</p>
               <div className="flex items-center gap-2">
-                <p className="text-base text-justify sm:text-lg text-gray-500 text-center lg:text-[15px] mb-10">
+                <p className="text-base text-justify sm:text-lg text-gray-500 lg:text-[15px] mb-10">
               Pada fitur project, pengguna dapat membuat dan mengelola 
               project-project yang akan atau sedang dilakukan.
                 </p>
@@ -137,7 +137,7 @@ export default function Home() {
               <Image src={ProjectPict} alt="Isi Project" className="shadow-[0_0_8px_rgba(0,0,0,.5)] rounded-[10px]"/>
               <p className="text-2xl font-semibold">Isi dari project</p>
               <div className="flex items-center gap-2">            
-                <p className="text-base text-justify sm:text-lg text-gray-500 text-center lg:text-[15px] mb-10">
+                <p className="text-base text-justify sm:text-lg text-gray-500 lg:text-[15px] mb-10">
             Pengguna dapat mengisi tugas-tugas atau task yang akan dilakukan (to do), 
             yang sedang dikerjakan (doing), dan yang sudah selesai dikerjakan (done).
                 </p>
@@ -148,7 +148,7 @@ export default function Home() {
               <Image src={TaskPict} alt="Fitur Task" className="shadow-[0_0_8px_rgba(0,0,0,.5)] rounded-[10px]"/>
               <p className="text-2xl font-semibold">Task</p>
               <div className="flex items-center gap-2">
-                <p className="text-base text-justify sm:text-lg text-gray-500 text-center lg:text-[15px] mb-10">
+                <p className="text-base text-justify sm:text-lg text-gray-500 lg:text-[15px] mb-10">
                 Pada fitur Task, pengguna dapat membuat dan mengelola tugas-tugas individual dengan memberikan status tugas, seperti Todo, In Progress, dan Done. 
                 </p>
               </div>
@@ -158,7 +158,7 @@ export default function Home() {
       </section>
 
       {/* //? section anggota */}
-      <section className="pt-10 mb-10 lg:pt-0 lg:mb-10 md:px-10 xl:px-auto flex flex-col-reverse w-full lg:flex-row justify-center lg:justify-evenly max-w-[1600px] items-center gap-10 xl:gap-0 min-h-screen">
+      <section className="pt-10 mb-10 lg:pt-0 lg:mb-10 md:px-10 xl:px-auto flex flex-col-reverse w-full lg:flex-row justify-center lg:justify-evenly max-w-[1600px] items-center gap-10 xl:gap-0 ">
         <div className="container mx-auto py-20 gap-5 lg:gap-10 px-8">
           <p className="text-base lg:text-xl font-medium text-gray-500 uppercase" style={{ marginTop:"-9rem" }}>Kelompok 1</p>
           <p className="text-3xl lg:text-5xl font-semibold text-navy mt-3"  style={{ marginBottom:"-2rem" }}>Meet our member!</p>
@@ -199,20 +199,25 @@ export default function Home() {
       </section>
 
       {/* //? footer */}
-      <div id="section_footer" style={{ marginTop: "-7rem"}} className="w-full bg-navy">
-        <div className="flex items-center justify-between py-4 px-[5%] xs:px-4 sm:px-7" style={{ marginBottom: "0rem", marginTop:"-1rem" }}>
-          <div className="flex items-center cursor-pointer">
-            <Image src={InTaskLogo} alt="InTask Logo" className="w-[50px] py-2 hidden xs:block" />
+      <div id="section_footer" className="w-full bg-navy">
+        <div className="flex items-start justify-between px-[5%] xs:px-4 sm:px-7 py-10" >
+          <Link href="#" className="flex items-center cursor-pointer">
+            <Image src={InTaskLogo} alt="InTask Logo" className="w-[50px] hidden xs:block" />
             <Image src={textInTaskLogo} alt="TextInTask Logo" className="w-[80px] py-3" />
-          </div>
-          <div className="text-center">
-            <Link href="https://github.com/ahmadzaki2975/InTask-Frontend.git" target="_blank" className="btn btn-link">
-              <span className="font-bold hover:text-blue-500 text-white">Our Github repository</span>
+          </Link>
+          <div className="text-right text-yellow">
+            <h1>Repositories</h1>
+            <hr className="border-yellow mb-2" />
+            <Link href="https://github.com/ahmadzaki2975/InTask-Frontend.git" target="_blank" className="btn btn-link block">
+              <span className="hover:underline underline-offset-2 hover:text-blue-500 text-white">Frontend</span>
             </Link>
-            <p className="text-white">
-              Infinite Task | Kelompok 1
-            </p>
+            <Link href="https://github.com/ahmadzaki2975/InTask-Backend.git" target="_blank" className="btn btn-link block">
+              <span className="hover:underline underline-offset-2 hover:text-blue-500 text-white">Backend</span>
+            </Link>
           </div>
+        </div>
+        <div className="bg-yellow text-center py-2 font-semibold">
+          &copy;2023 InTask by Group 1 PAW.
         </div>
       </div>
 
