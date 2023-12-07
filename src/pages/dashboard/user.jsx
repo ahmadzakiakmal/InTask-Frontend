@@ -144,7 +144,7 @@ export default function UserPage() {
                 emojiStyle="facebook"
                 theme="dark"
                 skinTonesDisabled={true}
-                onEmojiClick={() => {
+                onEmojiClick={(e) => {
                   setEmoji(e.emoji);
                 }}
               />
